@@ -1,0 +1,41 @@
+<svg id="logo_animate" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px"
+	 height="40px" viewBox="0 0 40 40" enable-background="new 0 0 40 40" xml:space="preserve">
+    <g id="trgl_2">
+        <polygon fill="#C7B0B6" stroke="#C7B0B6" stroke-miterlimit="10" points="31,10 9,20 31,30"/>
+    </g>
+    <g id="trgl_1">
+        <polygon fill="#C7B0B6" stroke="#C7B0B6" stroke-miterlimit="10" points="9,10 31,20 9,30"/>
+    </g>
+    <g id="round">
+        <path fill="#EFEFEF" d="M31.389,20c0,6.616-5.007,12-11.173,12c-6.168,0-11.172-5.384-11.172-12c0-6.629,5.004-12,11.172-12
+            C26.382,8,31.389,13.371,31.389,20z"/>
+    </g>
+    <g id="lttr_x">
+        <g id="X">
+            <polygon fill="none" stroke="#E46264" stroke-width="0.5" stroke-miterlimit="10" points="14.082,13.485 17.169,13.485
+                20.347,17.211 22.936,13.485 25.523,13.485 26.348,14.575 21.875,20.037 26.348,26.541 22.523,26.541 19.964,22.315
+                17.406,26.541 14.084,26.541 14.084,25.111 18.495,19.567"/>
+            <polyline fill="none" stroke="#E46264" stroke-width="0.5" stroke-linejoin="round" stroke-miterlimit="10" points="
+                17.169,13.458 17.819,18.619 18.494,19.553 20.347,17.185 14.082,13.458"/>
+            <polyline fill="none" stroke="#E46264" stroke-width="0.5" stroke-linejoin="round" stroke-miterlimit="10" points="
+                22.936,13.458 19.964,22.299 21.875,20.025 26.348,14.562 18.494,19.553 17.406,26.537"/>
+            <polyline fill="none" stroke="#E46264" stroke-width="0.5" stroke-linejoin="round" stroke-miterlimit="10" points="
+                14.082,25.111 19.964,22.299 18.494,19.553"/>
+            <polygon fill="none" stroke="#E46264" stroke-width="0.5" stroke-linejoin="round" stroke-miterlimit="10" points="22.523,26.537
+                25.005,24.587 19.964,22.299 21.875,20.025"/>
+        </g>
+    </g>
+    <g id="lttr_c">
+        <g id="C">
+            <polygon fill="none" stroke="#E46264" stroke-width="0.5" points="23.061,16.764 24.813,15.118 23.57,13.912 21.846,13.5
+                17.949,14.158 15.04,17.313 14.813,21.344 15.435,23.284 17.469,25.567 21.168,26.5 24.105,25.458 24.813,24.142 23.967,23.284
+                22.186,23.895 19.192,23.62 17.695,21.234 17.751,18.08 20.258,15.272"/>
+            <polyline fill="none" stroke="#E46264" stroke-width="0.5" stroke-linejoin="round" points="24.105,25.458 23.967,23.284
+                21.168,26.5 15.04,17.313 23.57,13.912 23.061,16.764 21.846,13.5 20.208,15.31 17.949,14.158 17.469,25.567 15.04,17.313"/>
+            <polyline fill="none" stroke="#E46264" stroke-width="0.5" stroke-linejoin="round" points="21.846,13.5 14.813,21.344
+                21.168,26.5"/>
+
+                <line fill="none" stroke="#E46264" stroke-width="0.5" stroke-linejoin="round" x1="17.469" y1="25.567" x2="23.967" y2="23.284"/>
+        </g>
+    </g>
+</svg>

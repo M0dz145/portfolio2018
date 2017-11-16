@@ -1,0 +1,12 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="38px"
+	 height="38px" viewBox="0 0 38 38" enable-background="new 0 0 38 38" xml:space="preserve">
+    <g id="bottom">
+        <rect y="24.928" fill="#454545" width="38" height="8.145"/>
+    </g>
+    <g id="middle">
+        <path fill="#454545" d="M0,13.856h38V22H0V13.856z"/>
+    </g>
+    <g id="top">
+        <rect y="2.929" fill="#454545" width="38" height="8.143"/>
+    </g>
+</svg>
