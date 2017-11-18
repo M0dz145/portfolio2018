@@ -8,9 +8,9 @@
 
     <title>| Xavier Chevalier Portfolio |</title>
 </head>
-<body id="app">
+<body>
+    <section id="app"></section>
 
-    <example-component></example-component>
     <div id="container">
         <!--  BIRDS  -->
         <div id="birds"></div>

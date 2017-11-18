@@ -7,8 +7,12 @@ const gulp         = require('gulp'),
       addSrc       = require('gulp-add-src'),
       uglify       = require('gulp-uglifyjs'),
       babel        = require('gulp-babel'),
+      babelify     = require('babelify'),
       size         = require('gulp-size'),
-      imagemin     = require('gulp-imagemin')
+      imagemin     = require('gulp-imagemin'),
+      browserify   = require('browserify'),
+      source       = require('vinyl-source-stream'),
+      buffer       = require('vinyl-buffer')
 
 // Plugins
 const cssPlugins = [
@@ -59,7 +63,7 @@ const configs = {
             cascade: true // On souhaite conserver les cascades (tabs) pour mieux s'y retrouver lors des debugs CSS
         },
         babel: {
-            presets: ['typescript'] // Babel convertit ES6 en JS compatible pour tous les browsers
+            presets: ['env'] // Babel convertit ES6 en JS compatible pour tous les browsers
         },
         size: {
             showFiles: true, // Affiche la taille des fichiers dans la console
@@ -75,7 +79,8 @@ const configs = {
                     {cleanupIDs: false}
                 ]
             })
-        ]
+        ],
+        browserify: {}
     },
     // Configuration en mode prod
     prod: {
@@ -111,7 +116,7 @@ const configs = {
             cascade: false
         },
         babel: {
-            presets: ['typescript']
+            presets: ['env']
         },
         size: {
             showFiles: true, // Affiche la taille des fichiers dans la console
@@ -127,7 +132,8 @@ const configs = {
                     {cleanupIDs: false}
                 ]
             })
-        ]
+        ],
+        browserify: {}
     }
 }
 
@@ -188,13 +194,24 @@ gulp.task('sass-back', () => {
         .pipe(gulp.dest('public/css'))
 })
 
-/** TASKS JS **/
-gulp.task('js-front', () => {
-    let gulpSteps = gulp.src(watches.js.front)
-    // Initialise un sourcemap
-        .pipe(sourcemaps.init())
-        // Convertit l'ES6 en JS compatible pour tous les navigateurs
-        .pipe(babel(configSelected.babel))
+function taskJS(entry, output) {
+    let gulpSteps = browserify(`./resources/assets/js/${entry}`, {debug: true})
+    // Convertit l'ES6 en JS compatible pour tous les navigateurs
+        .transform(babelify.configure({
+            presets: ["env"],
+            compact: false
+        }))
+        .bundle()
+        .on('error', function(err) {
+            console.error(err);
+            this.emit('end');
+        })
+        .pipe(source(output))
+        .pipe(buffer())
+        // Initialise un sourcemap
+        .pipe(sourcemaps.init({loadMaps: true}))
+        // Écrit le sourcemap
+        .pipe(sourcemaps.write('.'))
 
     if(!isDev) {
         // Si nous ne sommes pas en dev, compresse les fichiers JS
@@ -202,38 +219,17 @@ gulp.task('js-front', () => {
     }
 
     return gulpSteps
-    // Ajoute les fichiers CSS des plugins
-        .pipe(addSrc.prepend(jsPlugins))
-        // Concat le tout pour faire un fichier 'frontend.css'
-        .pipe(concat('frontend.js'))
-        // Écrit le sourcemap 'frontend.js.map'
-        .pipe(sourcemaps.write('.'))
-        // Affiche la taille des fichiers dans la console
+    // Affiche la taille des fichiers dans la console
         .pipe(size(configSelected.size))
         // Envoie les fichiers 'bundle.js' et 'bundle.js.map' dans le dossier 'public/js'
         .pipe(gulp.dest('public/js'))
-})
+}
 
-gulp.task('js-back', () => {
-    let gulpSteps = gulp.src(watches.js.back)
-    // Convertit l'ES6 en JS compatible pour tous les navigateurs
-        .pipe(babel(configSelected.babel))
 
-    if(!isDev) {
-        // Si nous ne sommes pas en dev, compresse les fichiers JS
-        gulpSteps = gulpSteps.pipe(uglify(configSelected.uglify))
-    }
+/** TASKS JS **/
+gulp.task('js-front', () => taskJS('frontend/app.js', 'frontend.js'))
 
-    return gulpSteps
-    // Concat le tout pour faire un fichier 'backend.css'
-        .pipe(concat('backend.js'))
-        // Écrit le sourcemap 'backend.js.map'
-        .pipe(sourcemaps.write('.'))
-        // Affiche la taille des fichiers dans la console
-        .pipe(size(configSelected.size))
-        // Envoie les fichiers dans le dossier 'public/js'
-        .pipe(gulp.dest('public/js/'))
-})
+gulp.task('js-back', () => taskJS('backend/app.js', 'backend.js'))
 
 gulp.task('copy-static-files', () => {
     gulp.src(watches.img)
