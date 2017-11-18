@@ -7,7 +7,8 @@ const gulp         = require('gulp'),
       addSrc       = require('gulp-add-src'),
       uglify       = require('gulp-uglifyjs'),
       babel        = require('gulp-babel'),
-      size         = require('gulp-size')
+      size         = require('gulp-size'),
+      imagemin     = require('gulp-imagemin')
 
 // Plugins
 const cssPlugins = [
@@ -18,7 +19,7 @@ const cssPlugins = [
       ]
 
 // Toutes les taches Gulp
-const allTasksGulp = ['sass-front', 'sass-back', 'js-front', 'js-back']
+const allTasksGulp = ['sass-front', 'sass-back', 'js-front', 'js-back', 'copy-static-files']
 
 // Les fichiers à watcher
 const watches = {
@@ -41,7 +42,11 @@ const watches = {
         back: [
             './resources/assets/js/backend/**/*.js'
         ]
-    }
+    },
+    img: [
+        // Toutes les images
+        ...['jpg', 'png', 'svg'].map((extension) => './resources/assets/img/**/*.' + extension)
+    ]
 }
 
 // Les configurations prod et dev des plugins
@@ -54,12 +59,23 @@ const configs = {
             cascade: true // On souhaite conserver les cascades (tabs) pour mieux s'y retrouver lors des debugs CSS
         },
         babel: {
-            presets: ['env'] // Babel convertit ES6 en JS compatible pour tous les browsers
+            presets: ['typescript'] // Babel convertit ES6 en JS compatible pour tous les browsers
         },
         size: {
             showFiles: true, // Affiche la taille des fichiers dans la console
             showTotal: false // N'affiche pas le poids total de tous les fichiers
-        }
+        },
+        imagemin: [
+            imagemin.gifsicle({interlaced: true}),
+            imagemin.jpegtran({progressive: true}),
+            imagemin.optipng({optimizationLevel: 5}),
+            imagemin.svgo({
+                plugins: [
+                    {removeViewBox: true},
+                    {cleanupIDs: false}
+                ]
+            })
+        ]
     },
     // Configuration en mode prod
     prod: {
@@ -95,12 +111,23 @@ const configs = {
             cascade: false
         },
         babel: {
-            presets: ['env']
+            presets: ['typescript']
         },
         size: {
             showFiles: true, // Affiche la taille des fichiers dans la console
             showTotal: false // N'affiche pas le poids total de tous les fichiers
-        }
+        },
+        imagemin: [
+            imagemin.gifsicle({interlaced: true}),
+            imagemin.jpegtran({progressive: true}),
+            imagemin.optipng({optimizationLevel: 5}),
+            imagemin.svgo({
+                plugins: [
+                    {removeViewBox: true},
+                    {cleanupIDs: false}
+                ]
+            })
+        ]
     }
 }
 
@@ -208,6 +235,20 @@ gulp.task('js-back', () => {
         .pipe(gulp.dest('public/js/'))
 })
 
+gulp.task('copy-static-files', () => {
+    gulp.src(watches.img)
+    // Envoie les images dans le dossier 'public/img'
+        .pipe(gulp.dest('public/img/'))
+
+    if(!isDev) {
+        gulp.src('public/img/')
+        // Optimise les images
+            .pipe(imagemin(configSelected.imagemin))
+    }
+
+    return true
+})
+
 /** WATCHES **/
 gulp.task('watch', () => {
     // Lance toutes les tasks gulp une première fois
@@ -217,4 +258,5 @@ gulp.task('watch', () => {
     gulp.watch(watches.css.back, ['sass-back'])
     gulp.watch(watches.js.front, ['js-front'])
     gulp.watch(watches.js.back, ['js-back'])
+    gulp.watch(watches.img, ['copy-static-files'])
 })
