@@ -13,3 +13,13 @@ yarn-error.log
 .gitignore
 img/
 js/
+
+.DS_Store
+node_modules/
+dist/
+
+# Editor directories and files
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
