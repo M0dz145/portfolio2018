@@ -1,0 +1,8 @@
+@mixin island($width, $height) {
+    .island__svg {
+        pattern, image {
+            width: #{$width}px;
+            height: #{$height}px;
+        }
+    }
+}

@@ -5,7 +5,7 @@ module.exports = {
     entry: './resources/assets/js/app.js',
     output: {
         path: path.resolve(__dirname, './public/dist'),
-        publicPath: '/public/dist/',
+        publicPath: '/dist/',
         filename: 'build.js'
     },
     watch: true,
@@ -62,7 +62,21 @@ module.exports = {
                 exclude: /node_modules/
             },
             {
-                test: /\.(png|jpg|gif|svg)$/,
+                test: /\.svg$/,
+                loader: 'vue-svg-loader', // `vue-svg` for webpack 1.x
+                options: {
+                    // optional [svgo](https://github.com/svg/svgo) options
+                    svgo: {
+                        plugins: [
+                            {cleanupIDs: false},
+                            {removeDoctype: true},
+                            {removeComments: true}
+                        ]
+                    }
+                }
+            },
+            {
+                test: /\.(png|jpg|gif)$/,
                 loader: 'file-loader',
                 options: {
                     name: '[name].[ext]?[hash]'

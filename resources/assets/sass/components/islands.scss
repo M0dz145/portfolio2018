@@ -1,0 +1,93 @@
+.island {
+    position: absolute;
+    transition: all 1s cubic-bezier(.165, .84, .44, 1);
+
+    .island__svg {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        stroke-dasharray: 100;
+        stroke-dashoffset: 1000;
+        animation: dash 5s linear infinite;
+
+        path {
+            cursor: pointer;
+            stroke-width: 0;
+            transition: fill 1s, opacity .8s, stroke-width .4s;
+
+            &:hover {
+                stroke-width: 4;
+                transition: fill 1s, opacity .4s, stroke-width .7s;
+            }
+        }
+
+        &:hover {
+            & + .info {
+                transform: translateY(0);
+                transition: transform .4s;
+            }
+        }
+    }
+
+    .island__info {
+        z-index: 0;
+        position: absolute;
+        top: -155px;
+        left: 55%;
+        width: 0;
+        opacity: 0;
+        overflow: hidden;
+        font-family: "Aventura-Bold", Arial, sans-serif;
+        font-size: 1.4em;
+        transition: transform .8s, opacity .5s, width .1s;
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            opacity: 0;
+            border-radius: 100px;
+            transform: translateX(-50%);
+            transition: opacity .3s;
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: -155px;
+            right: 50%;
+            height: 125px;
+            border-left: 2px solid rgba(0, 0, 0, 0.4);
+            opacity: 0;
+            transform: translateX(50%);
+            transition: opacity .5s;
+        }
+
+    }
+}
+
+.island.hover::before {
+    transition: opacity .5s;
+}
+
+.island.hover .info::after {
+    transition: opacity .5s, width 1s .3s;
+}
+
+.island.hover::before,
+.island.hover .info::after,
+.island.hover .info::before {
+    opacity: 1;
+}
+
+@keyframes dash {
+    from {
+        stroke-dashoffset: 1000;
+    }
+    to {
+        stroke-dashoffset: 0;
+    }
+}
