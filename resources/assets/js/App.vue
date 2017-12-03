@@ -1,13 +1,16 @@
 <template>
     <div id="app__container">
-        <div class="layer" data-depth="0.70">
+        <div>
+            <background></background>
+        </div>
+        <div class="layer" data-position-x="50%" data-position-y="63%" data-depth="0.70">
             <AboutIsland></AboutIsland>
         </div>
-        <div class="layer" data-depth="0.70">
-            <ContactIsland></ContactIsland>
-        </div>
-        <div class="layer" data-depth="0.70">
+        <div class="layer" data-position-x="70%" data-position-y="47%" data-depth="0.70">
             <WorkIsland></WorkIsland>
+        </div>
+        <div class="layer" data-position-x="33%" data-position-y="20%" data-depth="0.70">
+            <ContactIsland></ContactIsland>
         </div>
     </div>
 </template>
@@ -16,19 +19,30 @@
     import AboutIsland from './components/AboutIsland.vue'
     import ContactIsland from './components/ContactIsland.vue'
     import WorkIsland from './components/WorkIsland.vue'
+    import background from './../img/background.svg'
+    import Parallax from 'parallax-js'
 
     export default {
+        mounted() {
+            let appContainer = document.getElementById('app__container');
+            new Parallax(appContainer);
+
+            appContainer.style.pointerEvents = 'auto';
+            [].forEach.call(document.getElementsByClassName('layer'), (layer) => {
+                layer.style.top = layer.getAttribute('data-position-y')
+                layer.style.left = layer.getAttribute('data-position-x')
+            });
+        },
         components: {
             AboutIsland,
             ContactIsland,
-            WorkIsland
+            WorkIsland,
+            background
         }
     }
 </script>
 
 <style lang="scss">
     #app__container {
-        background: url('../img/background.png') no-repeat center;
-        background-size: cover;
     }
 </style>

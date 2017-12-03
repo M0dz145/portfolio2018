@@ -4,5 +4,9 @@
 // Reset
 @import "reset";
 
+// Global style
+@import "components/global";
+
 // Components
+@import "components/background";
 @import "components/islands";
