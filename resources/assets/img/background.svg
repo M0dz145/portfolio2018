@@ -1,4 +1,4 @@
-<svg id="background" width="1920" height="974">
+<svg width="1920" height="974">
     <polygon points="0 0 0 253.45 315.08 282.25" fill="rgba(0,0,0,0.2)"></polygon>
     <!--<polygon points="0 0 276.233 0 315.08 282.25" fill="rgba(0,0,0,0.0)"></polygon>-->
     <polygon points="276.233 0 315.08 282.25 610.517 0" fill="rgba(0,0,0,0.3)"></polygon>

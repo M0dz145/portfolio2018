@@ -1,3 +1,7 @@
 #background {
-    opacity: .3;
+    z-index: -1;
+
+    svg {
+        opacity: .3;
+    }
 }
