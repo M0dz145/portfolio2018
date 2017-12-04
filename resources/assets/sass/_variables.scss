@@ -1,16 +1,17 @@
+@import "~awesome-sass-easing/sass-easing";
+
 // Body
 $body-bg: #fff;
 
-// Media
 $breakpoints: (
-        sm: 420px,
-        md: 720px,
-        lg: 960px
+        'phone': 320px,
+        'tablet': 768px,
+        'desktop': 1024px,
+        'large-desktop': 1300px
 );
 
-// _config.scss
 $z-layers: (
-        bottomless-pit: -9999,
+        bottomless: -1,
         default: 1,
         dropdown: 3000,
         overlay: 4000,

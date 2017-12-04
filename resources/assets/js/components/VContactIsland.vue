@@ -49,7 +49,16 @@
         width: 460px;
 
         @include island(742, 745);
-        @include respond-to(md) {
+
+        @include media('>desktop', '<large-desktop') {
+            width: 350px;
+        }
+
+        @include media('>tablet', '<=desktop') {
+            width: 250px;
+        }
+
+        @include media('<tablet') {
             width: 200px;
         }
     }

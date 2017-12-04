@@ -1,5 +1,6 @@
-var path = require('path')
-var webpack = require('webpack')
+const path    = require('path'),
+      webpack = require('webpack'),
+      multi   = require('multi-loader')
 
 module.exports = {
     entry: './resources/assets/js/app.js',
@@ -76,11 +77,11 @@ module.exports = {
                 }
             },
             {
-                test: /\.(png|jpg|gif)$/,
-                loader: 'file-loader',
-                options: {
-                    name: '[name].[ext]?[hash]'
-                }
+                test: /\.(png|jpe?g|gif)$/,
+                loader: multi(
+                    'file-loader?name=[name].webp?[hash]!webp-loader?{quality: 80}',
+                    'responsive-loader?name=[name].[ext]?[hash]'
+                )
             }
         ]
     },

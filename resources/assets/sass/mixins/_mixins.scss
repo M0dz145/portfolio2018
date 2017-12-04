@@ -1,3 +1,5 @@
+@import "~@kickoff/utils.scss/scss/index";
+@import "~include-media/dist/include-media";
 @import "./../variables";
 
 @mixin island($width, $height) {
@@ -9,13 +11,46 @@
     }
 }
 
-@mixin respond-to($breakpoint) {
-    @if map-has-key($breakpoints, $breakpoint) {
-        @media (max-width: #{map-get($breakpoints, $breakpoint)}) {
-            @content;
-        }
-    } @else {
-        @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. Please make sure it is defined in `$breakpoints` map.";
+// @include center-block
+@mixin center-block() {
+    display: block;
+    margin: 0 auto;
+}
+
+@mixin clearfix() {
+    &::after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+}
+
+// @include font-face(proxima-nova, /css/fonts/proxima-nova, normal, italic, false);
+@mixin font-face($family-name, $font-path, $font-weight: normal, $font-style: normal) {
+    @font-face {
+        font-family: $family-name;
+        src: url('#{$font-path}.eot');
+        src: url('#{$font-path}.eot?#iefix') format('embedded-opentype'),
+        url('#{$font-path}.woff') format('woff'),
+        url('#{$font-path}.ttf') format('truetype'),
+        url('#{$font-path}.svg##{$family-name}') format('svg');
+        font-weight: $font-weight;
+        font-style: $font-style;
+    }
+}
+
+// Input placeholder text
+@mixin placeholder($color: lighten(#000, 70%)) {
+    :-ms-input-placeholder {
+        color: $color;
+    }
+
+    :-moz-placeholder {
+        color: $color;
+    }
+
+    ::-webkit-input-placeholder {
+        color: $color;
     }
 }
 
