@@ -54,6 +54,7 @@
     }
 }
 
+// z-index function
 @function z($key) {
     @if map-has-key($z-layers, $key) {
         @return map-get($z-layers, $key);
@@ -61,4 +62,12 @@
 
     @warn "Unknown `#{$key}` in $z-layers.";
     @return null;
+}
+
+// user-select mixin
+@mixin no-user-select() {
+    user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
 }

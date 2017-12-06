@@ -1,3 +1,23 @@
+<script>
+    import imageUrl from '../../img/aboutIsland.jpg'
+
+    export default {
+        data() {
+            let svgProperties = {
+                width: 827,
+                height: 1052
+            }
+
+            return {
+                imageUrl,
+                svgProperties,
+                svgViewBox: `0 0 ${svgProperties.width} ${svgProperties.height}`,
+                svgEnableBackground: `new 0 0 ${svgProperties.width} ${svgProperties.height}`
+            }
+        }
+    }
+</script>
+
 <template>
     <div class="island">
         <svg class="island__svg" xmlns="http://www.w3.org/2000/svg"
@@ -18,26 +38,6 @@
         <span class="island__info">A propos</span>
     </div>
 </template>
-
-<script>
-    import imageUrl from '../../img/aboutIsland.jpg'
-
-    export default {
-        data() {
-            let svgProperties = {
-                width: 827,
-                height: 1052
-            }
-
-            return {
-                imageUrl,
-                svgProperties,
-                svgViewBox: `0 0 ${svgProperties.width} ${svgProperties.height}`,
-                svgEnableBackground: `new 0 0 ${svgProperties.width} ${svgProperties.height}`
-            }
-        }
-    }
-</script>
 
 <style lang="scss" scoped>
     @import "../../sass/variables";

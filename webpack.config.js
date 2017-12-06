@@ -79,8 +79,8 @@ module.exports = {
             {
                 test: /\.(png|jpe?g|gif)$/,
                 loader: multi(
-                    'file-loader?name=[name].webp?[hash]!webp-loader?{quality: 80}',
-                    'responsive-loader?name=[name].[ext]?[hash]'
+                    'responsive-loader?name=[name].[hash].webp!webp-loader?{quality: 80}',
+                    'responsive-loader?name=[name].[hash].[ext]'
                 )
             }
         ]

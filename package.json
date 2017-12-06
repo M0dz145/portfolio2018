@@ -12,6 +12,7 @@
   "dependencies": {
     "multi-loader": "^0.1.0",
     "parallax-js": "latest",
+    "three": "^0.88.0",
     "vue": "^2.5.9"
   },
   "browserslist": [
