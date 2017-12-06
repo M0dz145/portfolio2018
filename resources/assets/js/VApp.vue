@@ -2,7 +2,7 @@
     import AboutIsland from './components/VAboutIsland.vue'
     import ContactIsland from './components/VContactIsland.vue'
     import WorkIsland from './components/VWorkIsland.vue'
-    import background from './../img/background.svg'
+    import Background from './../img/background.svg'
     import Parallax from 'parallax-js'
     import VImage from './components/VImage'
     import VBirds from './components/VBirds'
@@ -81,7 +81,7 @@
             AboutIsland,
             ContactIsland,
             WorkIsland,
-            background,
+            Background,
             VImage,
             VBirds
         }
@@ -91,7 +91,11 @@
 <template>
     <div id="app__container">
         <div id="background">
-            <background></background>
+            <Background></Background>
+        </div>
+
+        <div id="copyright">
+            <span class="copyright__text">© chevalier-xavier.fr</span>
         </div>
 
         <VBirds></VBirds>
@@ -119,10 +123,22 @@
     </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
     @import "../sass/mixins/mixins";
 
     #background, .layer {
         @include no-user-select()
+    }
+
+    #copyright {
+        z-index: z(copyright);
+        .copyright__text {
+            position: absolute;
+            top: 30px;
+            left: 45px;
+            min-width: 300px;
+            color: rgba(0, 0, 0, 0.2);
+            text-transform: uppercase;
+        }
     }
 </style>

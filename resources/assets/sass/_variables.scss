@@ -1,7 +1,9 @@
 @import "~awesome-sass-easing/sass-easing";
 
-// Body
 $body-bg: #fff;
+$fonts: (
+        'base': 'Bariol, Arial, sans-serif'
+);
 
 $breakpoints: (
         'phone': 320px,
@@ -13,7 +15,8 @@ $breakpoints: (
 $z-layers: (
         bottomless: -1,
         default: 1,
-        dropdown: 3000,
-        overlay: 4000,
-        modal: 4001
+        copyright: 10,
+        dropdown: 300,
+        overlay: 400,
+        modal: 401
 );

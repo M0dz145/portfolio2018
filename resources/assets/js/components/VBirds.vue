@@ -12,3 +12,9 @@
 <template>
     <div id="birds"></div>
 </template>
+
+<style lang="scss" scoped>
+    #birds {
+        background: transparent radial-gradient(ellipse at center center, transparent 59%, rgba(0, 0, 0, 0.25) 100%) no-repeat scroll 0 0;
+    }
+</style>

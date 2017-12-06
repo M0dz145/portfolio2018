@@ -25,35 +25,6 @@
     }
 }
 
-// @include font-face(proxima-nova, /css/fonts/proxima-nova, normal, italic, false);
-@mixin font-face($family-name, $font-path, $font-weight: normal, $font-style: normal) {
-    @font-face {
-        font-family: $family-name;
-        src: url('#{$font-path}.eot');
-        src: url('#{$font-path}.eot?#iefix') format('embedded-opentype'),
-        url('#{$font-path}.woff') format('woff'),
-        url('#{$font-path}.ttf') format('truetype'),
-        url('#{$font-path}.svg##{$family-name}') format('svg');
-        font-weight: $font-weight;
-        font-style: $font-style;
-    }
-}
-
-// Input placeholder text
-@mixin placeholder($color: lighten(#000, 70%)) {
-    :-ms-input-placeholder {
-        color: $color;
-    }
-
-    :-moz-placeholder {
-        color: $color;
-    }
-
-    ::-webkit-input-placeholder {
-        color: $color;
-    }
-}
-
 // z-index function
 @function z($key) {
     @if map-has-key($z-layers, $key) {
@@ -61,6 +32,16 @@
     }
 
     @warn "Unknown `#{$key}` in $z-layers.";
+    @return null;
+}
+
+// font-family function
+@function font-family($key) {
+    @if map-has-key($fonts, $key) {
+        @return map-get($fonts, $key);
+    }
+
+    @warn "Unknown `#{$key}` in $fonts.";
     @return null;
 }
 

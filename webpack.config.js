@@ -63,6 +63,13 @@ module.exports = {
                 exclude: /node_modules/
             },
             {
+                test: /\.(ttf|eot|woff2?)$/,
+                loader: 'file-loader',
+                options: {
+                    name: 'fonts/[name].[ext]',
+                },
+            },
+            {
                 test: /\.svg$/,
                 loader: 'vue-svg-loader', // `vue-svg` for webpack 1.x
                 options: {
@@ -79,8 +86,8 @@ module.exports = {
             {
                 test: /\.(png|jpe?g|gif)$/,
                 loader: multi(
-                    'responsive-loader?name=[name].[hash].webp!webp-loader?{quality: 80}',
-                    'responsive-loader?name=[name].[hash].[ext]'
+                    'responsive-loader?name=img/[name].[hash].webp!webp-loader?{quality: 80}',
+                    'responsive-loader?name=img/[name].[hash].[ext]'
                 )
             }
         ]
