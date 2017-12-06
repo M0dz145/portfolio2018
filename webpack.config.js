@@ -63,8 +63,11 @@ module.exports = {
                 exclude: /node_modules/
             },
             {
-                test: /\.(ttf|eot|woff2?)$/,
+                test: /\.(ttf|eot|woff2?|svg)$/,
                 loader: 'file-loader',
+                include: [
+                    path.resolve(__dirname, "./resources/assets/font")
+                ],
                 options: {
                     name: 'fonts/[name].[ext]',
                 },
@@ -72,6 +75,9 @@ module.exports = {
             {
                 test: /\.svg$/,
                 loader: 'vue-svg-loader', // `vue-svg` for webpack 1.x
+                exclude: [
+                    path.resolve(__dirname, "./resources/assets/font")
+                ],
                 options: {
                     // optional [svgo](https://github.com/svg/svgo) options
                     svgo: {
