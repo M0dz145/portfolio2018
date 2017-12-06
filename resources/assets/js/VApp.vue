@@ -17,8 +17,8 @@
             parallaxInstance.enable();
 
             [].forEach.call(document.getElementsByClassName('layer'), (layer) => {
-                layer.style.top = layer.getAttribute('data-position-y') || 0
-                layer.style.left = layer.getAttribute('data-position-x') || 0
+                layer.style.top = layer.getAttribute('data-position-y') || 0;
+                layer.style.left = layer.getAttribute('data-position-x') || 0;
             });
         },
         data() {

@@ -1,9 +1,7 @@
-import * as THREEJS from "three";
-import CanvasRenderer from './../../threejs/CanvasRenderer'
 import Boid from "./Boid";
 import Bird from "./Bird";
 
-const THREE = {...THREEJS, CanvasRenderer};
+const THREE = require('three-js')(['Projector', 'CanvasRenderer']);
 
 export default class BirdsProvider {
     constructor(element) {
@@ -23,12 +21,8 @@ export default class BirdsProvider {
 
         for(var i = 0; i < 9; i++) {
             this.boid = this.boids[i] = new Boid();
-            this.boid.position.x = Math.random() * 400 - 200;
-            this.boid.position.y = Math.random() * 400 - 200;
-            this.boid.position.z = Math.random() * 400 - 200;
-            this.boid.velocity.x = Math.random() * 2 - 1;
-            this.boid.velocity.y = Math.random() * 2 - 1;
-            this.boid.velocity.z = Math.random() * 2 - 1;
+            this.boid.position.set(Math.random() * 400 - 200, Math.random() * 400 - 200, Math.random() * 400 - 200);
+            this.boid.velocity.set(Math.random() * 2 - 1, Math.random() * 2 - 1, Math.random() * 2 - 1);
             this.boid.setAvoidWalls(true);
             this.boid.setWorldSize(500, 500, 400);
 
@@ -38,12 +32,13 @@ export default class BirdsProvider {
             }));
 
             this.bird.phase = Math.floor(Math.random() * 62.83);
-            this.bird.position.set(this.boids[i].position);
+            this.bird.position.set(this.boids[i].position.x, this.boids[i].position.y, this.boids[i].position.z);
 
             this.scene.add(this.bird);
         }
 
         this.renderer = new THREE.CanvasRenderer();
+        this.renderer.setClearColor(0xffffff, 0);
         this.renderer.setSize(this.SCREEN_WIDTH, this.SCREEN_HEIGHT);
 
         this.element.appendChild(this.renderer.domElement);
@@ -61,12 +56,12 @@ export default class BirdsProvider {
     }
 
     animate() {
-        requestAnimationFrame(this.animate);
-        render();
+        requestAnimationFrame(this.animate.bind(this));
+        this.render();
     }
 
     render() {
-        for(var i = 0, il = this.birds.length; i < il; i++) {
+        for(let i = 0, il = this.birds.length; i < il; i++) {
             this.boid = this.boids[i];
             this.boid.run(this.boids);
 
@@ -82,6 +77,6 @@ export default class BirdsProvider {
             this.bird.geometry.vertices[5].y = this.bird.geometry.vertices[4].y = Math.sin(this.bird.phase) * 5;
         }
 
-        this.renderer.render(scene, camera);
+        this.renderer.render(this.scene, this.camera);
     }
 }

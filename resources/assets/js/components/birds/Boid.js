@@ -1,8 +1,8 @@
-import {Vector3} from 'three';
+const THREE = require('three-js')(['Projector', 'CanvasRenderer']);
 
 export default class Boid {
     constructor() {
-        this.vector = new Vector3();
+        this.vector = new THREE.Vector3();
         this._width = 300;
         this._height = 300;
         this._depth = 200;
@@ -11,9 +11,9 @@ export default class Boid {
         this._maxSteerForce = 0.1;
         this._avoidWalls = false;
 
-        this.position = new Vector3();
-        this.velocity = new Vector3();
-        this._acceleration = new Vector3();
+        this.position = new THREE.Vector3();
+        this.velocity = new THREE.Vector3();
+        this._acceleration = new THREE.Vector3();
     }
 
     setGoal(target) {
@@ -84,7 +84,6 @@ export default class Boid {
         this.velocity.add(this._acceleration);
 
         let l = this.velocity.length();
-
         if(l > this._maxSpeed) {
             this.velocity.divideScalar(l / this._maxSpeed);
         }
@@ -94,7 +93,7 @@ export default class Boid {
     }
 
     avoid(target) {
-        let steer = new Vector3();
+        let steer = new THREE.Vector3();
 
         steer.copy(this.position);
         steer.sub(target);
@@ -105,7 +104,7 @@ export default class Boid {
     }
 
     reach(target, amount) {
-        var steer = new Vector3();
+        var steer = new THREE.Vector3();
 
         steer.subVectors(target, this.position);
         steer.multiplyScalar(amount);
@@ -115,7 +114,7 @@ export default class Boid {
 
     alignment(boids) {
         var boid,
-            velSum = new Vector3(),
+            velSum = new THREE.Vector3(),
             count  = 0;
 
         for(var i = 0, il = boids.length; i < il; i++) {
@@ -123,8 +122,7 @@ export default class Boid {
 
             boid = boids[i];
 
-            this.distance = boid.position.distanceTo(this.position);
-
+            let distance = boid.position.distanceTo(this.position);
             if(distance > 0 && distance <= this._neighborhoodRadius) {
                 velSum.add(boid.velocity);
                 count++;
@@ -136,9 +134,7 @@ export default class Boid {
 
             let l = velSum.length();
             if(l > this._maxSteerForce) {
-
                 velSum.divideScalar(l / this._maxSteerForce);
-
             }
         }
 
@@ -147,8 +143,8 @@ export default class Boid {
 
     cohesion(boids) {
         var boid, distance,
-            posSum = new Vector3(),
-            steer  = new Vector3(),
+            posSum = new THREE.Vector3(),
+            steer  = new THREE.Vector3(),
             count  = 0;
 
         for(var i = 0, il = boids.length; i < il; i++) {
@@ -174,13 +170,12 @@ export default class Boid {
         }
 
         return steer;
-
     }
 
     separation(boids) {
         var boid, distance,
-            posSum  = new Vector3(),
-            repulse = new Vector3();
+            posSum  = new THREE.Vector3(),
+            repulse = new THREE.Vector3();
 
         for(var i = 0, il = boids.length; i < il; i++) {
             if(Math.random() > 0.6) continue;

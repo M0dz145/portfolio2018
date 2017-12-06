@@ -1,6 +1,6 @@
-import {Vector3, Face3, Geometry} from 'three';
+const THREE = require('three-js')(['Projector', 'CanvasRenderer']);
 
-export default class Bird extends Geometry {
+export default class Bird extends THREE.Geometry {
     constructor() {
         super();
 
@@ -24,10 +24,10 @@ export default class Bird extends Geometry {
     }
 
     v(x, y, z) {
-        this.vertices.push(new Vector3(x, y, z));
+        this.vertices.push(new THREE.Vector3(x, y, z));
     }
 
     f3(a, b, c) {
-        this.faces.push(new Face3(a, b, c));
+        this.faces.push(new THREE.Face3(a, b, c));
     }
 }
