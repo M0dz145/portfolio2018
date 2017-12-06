@@ -66,6 +66,7 @@ export default class BirdsProvider {
             this.boid.run(this.boids);
 
             this.bird = this.birds[i];
+            this.bird.position.copy(this.boids[i].position);
 
             let color = this.bird.material.color;
             color.r = color.g = color.b = (500 - this.bird.position.z) / 1000;
