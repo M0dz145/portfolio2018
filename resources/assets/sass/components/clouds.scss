@@ -3,7 +3,32 @@
 .cloud {
     z-index: z(cloud);
 
-    &.cloud--top {
-        z-index: z(birds) + 1;
+    @for $i from 1 through 5 {
+        &.cloud-#{$i} {
+            @if ($i == 1) {
+                .cloud__image {
+                    animation: upAndDownMove 4s infinite;
+                }
+            } @else if ($i == 2) {
+                .cloud__image {
+                    animation: upAndDownMove 6.2s infinite;
+                }
+            } @else if ($i == 3) {
+                z-index: z(birds) + 1;
+                .cloud__image {
+                    animation: upAndDownMove 4.9s infinite;
+                }
+            } @else if ($i == 4) {
+                z-index: z(birds) + 1;
+                .cloud__image {
+                    animation: upAndDownMove 7.4s infinite;
+                }
+            } @else {
+                z-index: z(birds) + 1;
+                .cloud__image {
+                    animation: upAndDownMove 3.9s infinite;
+                }
+            }
+        }
     }
 }

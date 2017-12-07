@@ -1,20 +1,25 @@
 <script>
-    import imageUrl from '../../img/workIsland.jpg'
+    import imageUrl from '../../img/workIsland.jpg';
+    import VImage from './../components/VImage';
 
     export default {
         data() {
             const svgProperties = {
                 width: 1663,
                 height: 636
-            }
+            };
 
             return {
                 imageUrl,
                 svgProperties,
                 svgViewBox: `0 0 ${svgProperties.width} ${svgProperties.height}`,
                 svgEnableBackground: `new 0 0 ${svgProperties.width} ${svgProperties.height}`,
+                littleIsland: require('./../../img/little_island.png?sizes[]=20,sizes[]=45'),
                 hover: false
             }
+        },
+        components: {
+            VImage
         }
     }
 </script>
@@ -24,6 +29,9 @@
         <div class="island__info">
             <span class="island__info__text">Mes realisations</span>
         </div>
+
+        <VImage class="island__littleIsland" :src="littleIsland.src" :srcSet="littleIsland.srcSet" sizes="45px" alt="little island"></VImage>
+
         <svg class="island__svg" xmlns="http://www.w3.org/2000/svg"
              x="0px" y="0px" :viewBox="svgViewBox"
              :enable-background="svgEnableBackground"
@@ -51,6 +59,14 @@
         top: 47%;
         left: 70%;
         width: 672px;
+        animation: upAndDownMoveCenter 17s infinite;
+
+        .island__littleIsland {
+            position: absolute;
+            top: -70px;
+            right: -20px;
+            animation: upAndDownMoveCenter 4s infinite;
+        }
 
         .island__info::before {
             border: 1px solid #8d3030;

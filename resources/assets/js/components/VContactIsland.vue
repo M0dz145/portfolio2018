@@ -52,6 +52,7 @@
         top: 20%;
         left: 33%;
         width: 460px;
+        animation: upAndDownMoveCenter 14s infinite;
 
         .island__info::before {
             border: 1px solid #408d39;

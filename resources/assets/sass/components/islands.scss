@@ -4,7 +4,7 @@
 .island {
     position: absolute;
     transform: translate3d(-50%, 0, 0);
-    transition: all 1s $easeOutQuart;
+    transition: transform 1s $easeOutQuart;
 
     &.hover {
         &::before {
@@ -13,12 +13,26 @@
         }
 
         .island__info {
-            .island__info__text, &::after, &::before {
+            .island__info__text, &::before, &::after {
                 opacity: 1;
             }
 
+            // Section text
             .island__info__text {
                 transform: translate3d(0, 0, 0);
+                transition: opacity .3s $easeOutCubic .2s, transform .3s $easeOutCubic .2s;
+            }
+
+            // Point
+            &::before {
+                transform: translate3d(-50%, 0, 0);
+                transition: opacity .3s $easeOutCubic .2s, transform .3s $easeOutCubic .2s;
+            }
+
+            // Barre
+            &::after {
+                transform: translate3d(50%, 0, 0);
+                transition: opacity .3s $easeOutCubic, transform .3s $easeOutCubic;
             }
         }
     }
@@ -30,17 +44,18 @@
         font-size: 1.4em;
         font-family: font-family(Aventura);
         text-transform: uppercase;
-        transition: transform .8s;
 
+        // Section text
         .island__info__text {
             position: absolute;
             top: -150px;
             left: 15px;
             opacity: 0;
             transform: translate3d(0, 25px, 0);
-            transition: opacity .6s $easeOutCubic, transform .6s $easeOutCubic;
+            transition: opacity .25s $easeOutCubic, transform .25s $easeOutCubic;
         }
 
+        // Point
         &::before {
             content: '';
             position: absolute;
@@ -48,22 +63,23 @@
             left: 50%;
             width: 5px;
             height: 5px;
-            opacity: 1;
+            opacity: 0;
             border-radius: 100px;
-            transform: translateX(-50%);
-            transition: opacity .3s;
+            transform: translate3d(-50%, 100%, 0);
+            transition: opacity .2s $easeOutCubic, transform .2s $easeOutCubic;
         }
 
+        // Barre
         &::after {
             content: '';
             position: absolute;
             top: -155px;
             right: 50%;
             height: 125px;
+            opacity: 0;
             border-left: 2px solid rgba(0, 0, 0, 0.4);
-            opacity: 1;
-            transform: translateX(50%);
-            transition: opacity .5s;
+            transform: translate3d(50%, 100%, 0);
+            transition: opacity .2s $easeOutCubic, transform .6s $easeOutSine;
         }
     }
 
@@ -85,14 +101,5 @@
                 transition: fill 1s, opacity .4s, stroke-width .7s;
             }
         }
-    }
-}
-
-@keyframes dash {
-    from {
-        stroke-dashoffset: 1000;
-    }
-    to {
-        stroke-dashoffset: 0;
     }
 }

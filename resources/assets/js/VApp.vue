@@ -54,8 +54,7 @@
                             x: '20%',
                             y: '70%'
                         },
-                        depth: 0.45,
-                        class: 'cloud--top'
+                        depth: 0.45
                     },
                     {
                         // 4
@@ -64,8 +63,7 @@
                             x: '5%',
                             y: '9%'
                         },
-                        depth: 0.85,
-                        class: 'cloud--top'
+                        depth: 0.85
                     },
                     {
                         // 5
@@ -74,8 +72,7 @@
                             x: '87%',
                             y: '90%'
                         },
-                        depth: 0.65,
-                        class: 'cloud--top'
+                        depth: 0.65
                     }
                 ]
             }
@@ -103,13 +100,16 @@
 
         <VBirds></VBirds>
 
-        <div v-for="cloud in clouds" :class="`layer cloud ${cloud.class || ''}`"
+        <div v-for="(cloud, index) in clouds"
+             class="layer cloud"
+             :class="`cloud-${index + 1}`"
              :data-position-x="cloud.position.x"
              :data-position-y="cloud.position.y"
              :data-depth="cloud.depth">
             <VImage :src="cloud.image.src"
                     :srcSet="cloud.image.srcSet"
                     :sizes="cloud.image.sizes"
+                    classes="cloud__image"
                     alt="cloud">
             </VImage>
         </div>
