@@ -1,7 +1,8 @@
 import Boid from "./Boid";
 import Bird from "./Bird";
+import three_js from "three-js";
 
-const THREE = require('three-js')(['Projector', 'CanvasRenderer']);
+const THREE = three_js(['Projector', 'CanvasRenderer']);
 
 export default class BirdsProvider {
     constructor(element) {
@@ -43,7 +44,7 @@ export default class BirdsProvider {
 
         this.element.appendChild(this.renderer.domElement);
 
-        window.addEventListener('resize', this.onWindowResize, false);
+        window.addEventListener('resize', () => this.onWindowResize.call(this), false);
 
         this.animate();
     }

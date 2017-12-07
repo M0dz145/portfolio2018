@@ -2,7 +2,9 @@
 
 $body-bg: #fff;
 $fonts: (
-        'base': 'Bariol, Arial, sans-serif'
+        'Base': 'Nunito, Arial, sans-serif',
+        'Bariol': 'Bariol, Arial, sans-serif',
+        'Nunito': 'Nunito, Arial, sans-serif'
 );
 
 $breakpoints: (
@@ -13,7 +15,7 @@ $breakpoints: (
 );
 
 $z-layers: (
-        bottomless: -1,
+        bottom: -1,
         default: 1,
         copyright: 10,
         dropdown: 300,

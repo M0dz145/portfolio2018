@@ -63,7 +63,8 @@
                             x: '5%',
                             y: '9%'
                         },
-                        depth: 0.85
+                        depth: 0.85,
+                        class: 'cloud--top'
                     },
                     {
                         // 5
@@ -72,7 +73,8 @@
                             x: '87%',
                             y: '90%'
                         },
-                        depth: 0.65
+                        depth: 0.65,
+                        class: 'cloud--top'
                     }
                 ]
             }
@@ -100,7 +102,7 @@
 
         <VBirds></VBirds>
 
-        <div v-for="cloud in clouds" class="layer cloud"
+        <div v-for="cloud in clouds" :class="`layer cloud ${cloud.class || ''}`"
              :data-position-x="cloud.position.x"
              :data-position-y="cloud.position.y"
              :data-depth="cloud.depth">

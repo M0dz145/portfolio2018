@@ -1,8 +1,6 @@
 @import "./../mixins/mixins";
 
-@include ko-font-face('Bariol', './../font/bariol/bariol_regular-webfont');
-
 html, body {
     overflow: hidden;
-    font-family: 'Bariol', Arial, sans-serif;
+    font-family: font-family(Base);
 }

@@ -1,7 +1,9 @@
-.cloud {
-    z-index: -1;
+@import "./../mixins/mixins";
 
-    &:nth-of-type(5) {
-        z-index: 15;
+.cloud {
+    z-index: z(bottom);
+
+    &.cloud--top {
+        z-index: z(default);
     }
 }

@@ -19,3 +19,9 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>
+
+<IfModule mod_deflate.c>
+    <FilesMatch "\.(ico|jpe?g|png|gif|js|css|html|php|txt|xml)$">
+        SetOutputFilter DEFLATE
+    </FilesMatch>
+</IfModule>
