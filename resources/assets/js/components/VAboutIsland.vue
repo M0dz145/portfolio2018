@@ -50,8 +50,6 @@
 
     .island {
         z-index: 20;
-        top: 63%;
-        left: 50%;
         width: 457px;
         animation: upAndDownMoveCenter 10s infinite;
 
@@ -62,7 +60,7 @@
 
         @include island(827, 1052);
 
-        @include media('>desktop', '<large-desktop') {
+        @include media('>desktop', '<=large-desktop') {
             width: 350px;
         }
 
@@ -70,8 +68,12 @@
             width: 250px;
         }
 
-        @include media('<tablet') {
+        @include media('>phone', '<=tablet') {
             width: 150px;
+        }
+
+        @include media('<=phone') {
+            width: 100px;
         }
     }
 </style>

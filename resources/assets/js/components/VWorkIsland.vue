@@ -30,7 +30,8 @@
             <span class="island__info__text">Mes realisations</span>
         </div>
 
-        <VImage class="island__littleIsland" :src="littleIsland.src" :srcSet="littleIsland.srcSet" sizes="45px" alt="little island"></VImage>
+        <VImage class="island__littleIsland" :src="littleIsland.src" :srcSet="littleIsland.srcSet" sizes="45px"
+                alt="little island"></VImage>
 
         <svg class="island__svg" xmlns="http://www.w3.org/2000/svg"
              x="0px" y="0px" :viewBox="svgViewBox"
@@ -56,8 +57,6 @@
     @import "../../sass/mixins/mixins";
 
     .island {
-        top: 47%;
-        left: 70%;
         width: 672px;
         animation: upAndDownMoveCenter 17s infinite;
 
@@ -75,7 +74,7 @@
 
         @include island(1663, 636);
 
-        @include media('>desktop', '<large-desktop') {
+        @include media('>desktop', '<=large-desktop') {
             width: 550px;
         }
 
@@ -83,8 +82,16 @@
             width: 450px;
         }
 
-        @include media('<tablet') {
+        @include media('>phone', '<=tablet') {
             width: 350px;
+        }
+
+        @include media('<=phone') {
+            width: 200px;
+
+            .island__littleIsland {
+                display: none;
+            }
         }
     }
 </style>

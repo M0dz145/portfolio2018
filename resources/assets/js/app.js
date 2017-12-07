@@ -8,6 +8,6 @@ require('../sass/app.scss')
 require('../img/logo.png')
 
 new Vue({
-  el: '#app',
-  render: h => h(VApp)
+    el: '#app',
+    render: h => h(VApp)
 })

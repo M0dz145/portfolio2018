@@ -49,8 +49,6 @@
     @import "../../sass/mixins/mixins";
 
     .island {
-        top: 20%;
-        left: 33%;
         width: 460px;
         animation: upAndDownMoveCenter 14s infinite;
 
@@ -61,7 +59,7 @@
 
         @include island(742, 745);
 
-        @include media('>desktop', '<large-desktop') {
+        @include media('>desktop', '<=large-desktop') {
             width: 350px;
         }
 
@@ -69,7 +67,11 @@
             width: 250px;
         }
 
-        @include media('<tablet') {
+        @include media('>phone', '<=tablet') {
+            width: 200px;
+        }
+
+        @include media('<=phone') {
             width: 200px;
         }
     }

@@ -1,16 +1,17 @@
 <script>
-    import AboutIsland from './components/VAboutIsland.vue'
-    import ContactIsland from './components/VContactIsland.vue'
-    import WorkIsland from './components/VWorkIsland.vue'
-    import Background from './../img/background.svg'
-    import Parallax from 'parallax-js'
-    import VImage from './components/VImage'
-    import VBirds from './components/VBirds'
+    import AboutIsland from './components/VAboutIsland.vue';
+    import ContactIsland from './components/VContactIsland.vue';
+    import WorkIsland from './components/VWorkIsland.vue';
+    import Background from './../img/background.svg';
+    import Parallax from 'parallax-js';
+    import VImage from './components/VImage';
+    import VBirds from './components/VBirds';
+    import MobileDetect from './components/mobileDetect/MobileDetect';
 
     export default {
         mounted() {
-            const appContainer          = document.getElementById('app__container'),
-                  parallaxInstance      = new Parallax(appContainer, {
+            const appContainer     = document.getElementById('app__container'),
+                  parallaxInstance = new Parallax(appContainer, {
                       pointerEvents: true
                   });
 
@@ -28,6 +29,7 @@
                   cloud5 = require('./../img/lowCloud5.png?sizes[]=100,sizes[]=200,sizes[]=400')
 
             return {
+                MobileDetect,
                 clouds: [
                     {
                         // 1
@@ -94,13 +96,14 @@
             <Background></Background>
         </div>
 
-        <div id="copyright">
+        <div id="copyright" v-if="!MobileDetect.phone()">
             <span class="copyright__text">© chevalier-xavier.fr</span>
         </div>
 
-        <VBirds></VBirds>
+        <VBirds v-if="!MobileDetect.phone()"></VBirds>
 
         <div v-for="(cloud, index) in clouds"
+             v-if="!MobileDetect.phone()"
              class="layer cloud"
              :class="`cloud-${index + 1}`"
              :data-position-x="cloud.position.x"
@@ -114,13 +117,16 @@
             </VImage>
         </div>
 
-        <div class="layer island__container" data-position-x="70%" data-position-y="47%" data-depth="0.40">
+        <div class="layer island__container" data-position-x="70%" data-position-y="47%"
+             data-depth="0.40">
             <WorkIsland></WorkIsland>
         </div>
-        <div class="layer island__container" data-position-x="50%" data-position-y="63%" data-depth="0.70">
+        <div class="layer island__container" data-position-x="50%" data-position-y="63%"
+             data-depth="0.70">
             <AboutIsland></AboutIsland>
         </div>
-        <div class="layer island__container island__container--bottom" data-position-x="33%" data-position-y="20%" data-depth="0.25">
+        <div class="layer island__container island__container--bottom" data-position-x="33%" data-position-y="20%"
+             data-depth="0.25">
             <ContactIsland></ContactIsland>
         </div>
     </div>

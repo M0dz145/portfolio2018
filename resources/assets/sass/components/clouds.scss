@@ -5,6 +5,10 @@
 
     @for $i from 1 through 5 {
         &.cloud-#{$i} {
+            @include media('<=phone') {
+                display: none !important; // Important to override parallax
+            }
+
             @if ($i == 1) {
                 .cloud__image {
                     animation: upAndDownMove 4s infinite;
