@@ -2,6 +2,13 @@
 
 @include ko-font-face('Bariol', './../font/bariol/bariol_regular-webfont');
 
+@font-face {
+    font-family: 'Aventura';
+    src: url('./../font/aventura/Aventura-Bold.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+
 /* vietnamese */
 @font-face {
     font-family: 'Nunito';

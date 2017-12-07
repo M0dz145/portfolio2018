@@ -1,9 +1,9 @@
 @import "./../mixins/mixins";
 
 .cloud {
-    z-index: z(bottom);
+    z-index: z(cloud);
 
     &.cloud--top {
-        z-index: z(default);
+        z-index: z(birds) + 1;
     }
 }

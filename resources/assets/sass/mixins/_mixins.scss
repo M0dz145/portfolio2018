@@ -38,7 +38,7 @@
 // font-family function
 @function font-family($key) {
     @if map-has-key($fonts, $key) {
-        @return map-get($fonts, $key);
+        @return map-get($fonts, $key) + ', Arial, sans-serif';
     }
 
     @warn "Unknown `#{$key}` in $fonts.";

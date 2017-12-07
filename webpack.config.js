@@ -63,7 +63,7 @@ module.exports = {
                 exclude: /node_modules/
             },
             {
-                test: /\.(ttf|eot|woff2?|svg)$/,
+                test: /\.(ttf|eot|otf|woff2?|svg)$/,
                 loader: 'file-loader',
                 include: [
                     path.resolve(__dirname, "./resources/assets/font")

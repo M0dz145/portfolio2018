@@ -54,7 +54,8 @@
                             x: '20%',
                             y: '70%'
                         },
-                        depth: 0.45
+                        depth: 0.45,
+                        class: 'cloud--top'
                     },
                     {
                         // 4
@@ -113,13 +114,13 @@
             </VImage>
         </div>
 
-        <div class="layer" data-position-x="70%" data-position-y="47%" data-depth="0.40">
+        <div class="layer island__container" data-position-x="70%" data-position-y="47%" data-depth="0.40">
             <WorkIsland></WorkIsland>
         </div>
-        <div class="layer" data-position-x="50%" data-position-y="63%" data-depth="0.70">
+        <div class="layer island__container" data-position-x="50%" data-position-y="63%" data-depth="0.70">
             <AboutIsland></AboutIsland>
         </div>
-        <div class="layer" data-position-x="33%" data-position-y="20%" data-depth="0.25">
+        <div class="layer island__container island__container--bottom" data-position-x="33%" data-position-y="20%" data-depth="0.25">
             <ContactIsland></ContactIsland>
         </div>
     </div>
@@ -130,6 +131,14 @@
 
     #background, .layer {
         @include no-user-select()
+    }
+
+    .island__container {
+        z-index: z(island);
+
+        &.island__container--bottom {
+            z-index: z(birds);
+        }
     }
 
     #copyright {
