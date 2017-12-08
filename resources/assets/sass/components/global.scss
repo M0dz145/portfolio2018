@@ -2,5 +2,10 @@
 
 html, body {
     overflow: hidden;
+}
+
+body {
     font-family: font-family(Base);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
