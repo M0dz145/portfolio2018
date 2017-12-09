@@ -100,7 +100,12 @@ module.exports = {
     },
     resolve: {
         alias: {
-            'vue$': 'vue/dist/vue.esm.js'
+            'vue$': 'vue/dist/vue.esm.js',
+            '@js': path.resolve(__dirname, './resources/assets/js/'),
+            '@img': path.resolve(__dirname, './resources/assets/img/'),
+            '@font': path.resolve(__dirname, './resources/assets/font/'),
+            '@sass': path.resolve(__dirname, './resources/assets/sass/'),
+            '@mixins': path.resolve(__dirname, './resources/assets/sass/mixins/_mixins.scss'),
         },
         extensions: ['*', '.js', '.vue', '.json']
     },

@@ -1,12 +1,12 @@
 <script>
-    import AboutIsland from './components/VAboutIsland.vue';
-    import ContactIsland from './components/VContactIsland.vue';
-    import WorkIsland from './components/VWorkIsland.vue';
-    import Background from './../img/background.svg';
+    import AboutIsland from '@js/components/VAboutIsland.vue';
+    import ContactIsland from '@js/components/VContactIsland.vue';
+    import WorkIsland from '@js/components/VWorkIsland.vue';
+    import Background from '@img/background.svg';
+    import VImage from '@js/components/VImage';
+    import VBirds from '@js/components/VBirds';
+    import MobileDetect from '@js/components/mobileDetect/MobileDetect';
     import Parallax from 'parallax-js';
-    import VImage from './components/VImage';
-    import VBirds from './components/VBirds';
-    import MobileDetect from './components/mobileDetect/MobileDetect';
 
     export default {
         mounted() {
@@ -15,7 +15,9 @@
                       pointerEvents: true
                   });
 
-            parallaxInstance.enable();
+            if(MobileDetect.phone()) {
+                parallaxInstance.disable();
+            }
 
             [].forEach.call(document.getElementsByClassName('layer'), (layer) => {
                 layer.style.top = layer.getAttribute('data-position-y') || 0;
@@ -92,9 +94,7 @@
 
 <template>
     <div id="app__container">
-        <div id="background">
-            <Background></Background>
-        </div>
+        <Background id="background"></Background>
 
         <div id="copyright" v-if="!MobileDetect.phone()">
             <span class="copyright__text">© chevalier-xavier.fr</span>
@@ -134,6 +134,11 @@
 
 <style lang="scss" scoped>
     @import "../sass/mixins/mixins";
+
+    #app__container {
+        width: 100%;
+        height: 100%;
+    }
 
     #background, .layer {
         @include no-user-select()

@@ -64,15 +64,11 @@
         }
 
         @include media('>tablet', '<=desktop') {
-            width: 250px;
+            width: 300px;
         }
 
-        @include media('>phone', '<=tablet') {
-            width: 200px;
-        }
-
-        @include media('<=phone') {
-            width: 200px;
+        @include media('<=tablet') {
+            width: 150px;
         }
     }
 </style>

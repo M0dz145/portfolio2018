@@ -69,7 +69,7 @@
         }
 
         @include media('>phone', '<=tablet') {
-            width: 150px;
+            width: 230px;
         }
 
         @include media('<=phone') {
