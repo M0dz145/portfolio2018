@@ -2,15 +2,6 @@
 @import "~include-media/dist/include-media";
 @import "./../variables";
 
-@mixin island($width, $height) {
-    .island__svg {
-        pattern, image {
-            width: #{$width}px;
-            height: #{$height}px;
-        }
-    }
-}
-
 // @include center-block
 @mixin center-block() {
     display: block;
@@ -42,6 +33,16 @@
     }
 
     @warn "Unknown `#{$key}` in $fonts.";
+    @return null;
+}
+
+// get-island-width function
+@function get-island-width($key) {
+    @if map-has-key($island-width, $key) {
+        @return map-get($island-width, $key);
+    }
+
+    @warn "Unknown `#{$key}` in $island-width.";
     @return null;
 }
 

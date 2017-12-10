@@ -1,14 +1,16 @@
 <script>
-    import imageUrl from '../../img/aboutIsland.jpg'
+    import imageUrl from '@img/aboutIsland.jpg';
+    import MobileDetect from '@js/components/mobileDetect/MobileDetect';
 
     export default {
         data() {
             const svgProperties = {
                 width: 827,
                 height: 1052
-            }
+            };
 
             return {
+                MobileDetect,
                 imageUrl,
                 svgProperties,
                 svgViewBox: `0 0 ${svgProperties.width} ${svgProperties.height}`,
@@ -32,7 +34,7 @@
                 <pattern id="i1" patternUnits="userSpaceOnUse"
                          :width="svgProperties.width"
                          :height="svgProperties.height">
-                    <image :xlink:href="imageUrl" x="0px" y="0px"/>
+                    <image :xlink:href="imageUrl" x="0px" y="0px"></image>
                 </pattern>
             </defs>
             <path fill-rule="evenodd" clip-rule="evenodd" fill="url(#i1)" stroke="#7A6752" stroke-width="3"
@@ -50,7 +52,7 @@
 
     .island {
         z-index: 20;
-        width: 457px;
+        width: get-island-width(about);
         animation: upAndDownMoveCenter 10s infinite;
 
         .island__info::before {
@@ -58,22 +60,45 @@
             background-color: #34495e;
         }
 
-        @include island(827, 1052);
-
-        @include media('>desktop', '<=large-desktop') {
-            width: 350px;
+        .island__svg {
+            pattern, image {
+                width: 827px;
+                height: 1052px;
+            }
         }
 
-        @include media('>tablet', '<=desktop') {
-            width: 250px;
+        @include media('>laptop', '<=laptop-l') {
+            width: get-island-width(about) / 1.2;
         }
 
-        @include media('>phone', '<=tablet') {
-            width: 230px;
+        @include media('>tablet', '<=laptop') {
+            width: get-island-width(about) / 1.5;
         }
 
-        @include media('<=phone') {
-            width: 100px;
+        @include media('>mobile-l', '<=tablet') {
+            width: get-island-width(about) / 2;
+        }
+
+        @include media('<=mobile-l') {
+            width: 100%;
+            height: 100%;
+            animation: none;
+
+            .island__info {
+                text-align: right;
+                padding-right: 20px;
+            }
+
+            .island__svg {
+                z-index: z(bottom);
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: auto;
+                max-width: 45%;
+                height: 100%;
+                padding: 10px 20px;
+            }
         }
     }
 </style>

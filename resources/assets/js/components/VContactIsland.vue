@@ -1,12 +1,12 @@
 <script>
-    import imageUrl from '../../img/contactIsland.jpg'
+    import imageUrl from '@img/contactIsland.jpg'
 
     export default {
         data() {
             const svgProperties = {
                 width: 742,
                 height: 745
-            }
+            };
 
             return {
                 imageUrl,
@@ -32,7 +32,7 @@
                 <pattern id="i3" patternUnits="userSpaceOnUse"
                          :width="svgProperties.width"
                          :height="svgProperties.height">
-                    <image :xlink:href="imageUrl" x="0px" y="0px"/>
+                    <image :xlink:href="imageUrl" x="0px" y="0px"></image>
                 </pattern>
             </defs>
             <path fill-rule="evenodd" clip-rule="evenodd"
@@ -49,7 +49,7 @@
     @import "../../sass/mixins/mixins";
 
     .island {
-        width: 460px;
+        width: get-island-width(contact);
         animation: upAndDownMoveCenter 14s infinite;
 
         .island__info::before {
@@ -57,18 +57,45 @@
             background-color: #07680b;
         }
 
-        @include island(742, 745);
-
-        @include media('>desktop', '<=large-desktop') {
-            width: 350px;
+        .island__svg {
+            pattern, image {
+                width: 742px;
+                height: 745px;
+            }
         }
 
-        @include media('>tablet', '<=desktop') {
-            width: 300px;
+        @include media('>laptop', '<=laptop-l') {
+            width: get-island-width(contact) / 1.2;
         }
 
-        @include media('<=tablet') {
-            width: 150px;
+        @include media('>tablet', '<=laptop') {
+            width: get-island-width(contact) / 1.5;
+        }
+
+        @include media('>mobile-l', '<=tablet') {
+            width: get-island-width(contact) / 2;
+        }
+
+        @include media('<=mobile-l') {
+            width: 100%;
+            height: 100%;
+            animation: none;
+
+            .island__info {
+                text-align: left;
+                padding-left: 20px;
+            }
+
+            .island__svg {
+                z-index: z(bottom);
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: auto;
+                max-width: 40%;
+                height: calc(100% - 20px);
+                padding: 10px 20px;
+            }
         }
     }
 </style>

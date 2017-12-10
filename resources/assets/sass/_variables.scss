@@ -9,10 +9,13 @@ $fonts: (
 );
 
 $breakpoints: (
-        phone: 320px,
+        mobile-s: 320px,
+        mobile-m: 375px,
+        mobile-l: 425px,
         tablet: 768px,
-        desktop: 1024px,
-        large-desktop: 1300px
+        laptop: 1024px,
+        laptop-l: 1440px,
+        '4k': 2560px
 );
 
 $z-layers: (
@@ -22,4 +25,10 @@ $z-layers: (
         birds: 0,
         island: 3,
         copyright: 10
+);
+
+$island-width: (
+        about: 425px,
+        work: 635px,
+        contact: 400px
 );

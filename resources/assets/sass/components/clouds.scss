@@ -5,30 +5,46 @@
 
     @for $i from 1 through 5 {
         &.cloud-#{$i} {
-            @include media('<=phone') {
+
+            @include media('<=mobile-l') {
                 display: none !important; // Important to override parallax
             }
 
             @if ($i == 1) {
+                top: 60% !important; // Important to override parallax
+                left: 13% !important; // Important to override parallax
+
                 .cloud__image {
                     animation: upAndDownMove 4s infinite;
                 }
             } @else if ($i == 2) {
+                top: 35% !important; // Important to override parallax
+                left: 60% !important; // Important to override parallax
+
                 .cloud__image {
                     animation: upAndDownMove 6.2s infinite;
                 }
             } @else if ($i == 3) {
                 z-index: z(birds) + 1;
+                top: 70% !important; // Important to override parallax
+                left: 20% !important; // Important to override parallax
+
                 .cloud__image {
                     animation: upAndDownMove 4.9s infinite;
                 }
             } @else if ($i == 4) {
                 z-index: z(birds) + 1;
+                top: 9% !important; // Important to override parallax
+                left: 5% !important; // Important to override parallax
+
                 .cloud__image {
                     animation: upAndDownMove 7.4s infinite;
                 }
             } @else {
                 z-index: z(birds) + 1;
+                top: 90% !important; // Important to override parallax
+                left: 87% !important; // Important to override parallax
+
                 .cloud__image {
                     animation: upAndDownMove 3.9s infinite;
                 }

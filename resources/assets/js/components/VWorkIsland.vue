@@ -1,6 +1,6 @@
 <script>
-    import imageUrl from '../../img/workIsland.jpg';
-    import VImage from './../components/VImage';
+    import imageUrl from '@img/workIsland.jpg';
+    import VImage from '@js/components/VImage';
 
     export default {
         data() {
@@ -31,7 +31,8 @@
         </div>
 
         <VImage class="island__littleIsland" :src="littleIsland.src" :srcSet="littleIsland.srcSet" sizes="45px"
-                alt="little island"></VImage>
+                alt="little island">
+        </VImage>
 
         <svg class="island__svg" xmlns="http://www.w3.org/2000/svg"
              x="0px" y="0px" :viewBox="svgViewBox"
@@ -41,7 +42,7 @@
                 <pattern id="i2" patternUnits="userSpaceOnUse"
                          :width="svgProperties.width"
                          :height="svgProperties.height">
-                    <image :xlink:href="imageUrl" x="0px" y="0px"/>
+                    <image :xlink:href="imageUrl" x="0px" y="0px"></image>
                 </pattern>
             </defs>
             <path fill-rule="evenodd" clip-rule="evenodd" fill="url(#i2)" stroke="#7A6752" stroke-width="3"
@@ -57,7 +58,7 @@
     @import "../../sass/mixins/mixins";
 
     .island {
-        width: 672px;
+        width: get-island-width(work);
         animation: upAndDownMoveCenter 17s infinite;
 
         .island__littleIsland {
@@ -72,25 +73,46 @@
             background-color: #680e24;
         }
 
-        @include island(1663, 636);
-
-        @include media('>desktop', '<=large-desktop') {
-            width: 550px;
+        .island__svg {
+            pattern, image {
+                width: 1663px;
+                height: 636px;
+            }
         }
 
-        @include media('>tablet', '<=desktop') {
-            width: 450px;
+        @include media('>laptop', '<=laptop-l') {
+            width: get-island-width(work) / 1.2;
         }
 
-        @include media('>phone', '<=tablet') {
-            width: 350px;
+        @include media('>tablet', '<=laptop') {
+            width: get-island-width(work) / 1.5;
         }
 
-        @include media('<=phone') {
-            width: 200px;
+        @include media('>mobile-l', '<=tablet') {
+            width: get-island-width(work) / 2;
+        }
+
+        @include media('<=mobile-l') {
+            width: 100%;
+            height: 100%;
+            animation: none;
 
             .island__littleIsland {
                 display: none;
+            }
+
+            .island__info {
+                color: white;
+            }
+
+            .island__svg {
+                z-index: z(bottom);
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: calc(100% - 40px);
+                max-height: 100%;
+                padding: 10px 20px;
             }
         }
     }
