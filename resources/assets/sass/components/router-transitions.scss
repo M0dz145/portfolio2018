@@ -1,18 +1,32 @@
 @import "./../variables";
 
-$time: .4;
-$numberLayers: 10;
+$time: .3;
+$numberLayers: 8;
 
 .works {
-    &-leave-active {
+    &-leave-active, &-enter {
         .layer {
-            transform: translate3d(-100vw, 0, 0) !important; // Important to override parallax
+            transform: translate3d(0, 40px, 0) !important; // Important to override parallax
             animation: none;
-            transition: transform #{$time}s $easeOutQuint;
 
             @for $i from 1 through $numberLayers {
                 &:nth-child(#{$i}) {
-                    transition: transform #{$time}s $easeInCirc ($i - 1) / 10 + s;
+                    opacity: 0;
+                    transition: opacity #{$time}s $easeInCirc ($i - 1) / 10 + s, transform #{$time}s $easeInCirc ($i - 1) / 10 + s;
+                }
+            }
+        }
+    }
+
+    &-enter-active {
+        .layer {
+            transform: translate3d(0, 0, 0) !important; // Important to override parallax
+            animation: none;
+
+            @for $i from 1 through $numberLayers {
+                &:nth-child(#{$i}) {
+                    opacity: 1;
+                    transition: opacity #{$time}s $easeInCirc ($i - 1) / 10 + s, transform #{$time}s $easeInCirc ($i - 1) / 10 + s;
                 }
             }
         }

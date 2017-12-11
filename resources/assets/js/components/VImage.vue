@@ -1,6 +1,6 @@
 <script>
     export default {
-        props: ['alt', 'sizes', 'srcSet', 'src', 'placeholder', 'classes']
+        props: ['alt', 'sizes', 'srcSet', 'src', 'classes', 'styles']
     }
 </script>
 
@@ -12,9 +12,9 @@
                 :srcset="srcSet.replace(/\.(png|jpe?g|gif)/gi, '.webp')"
                 :sizes="sizes"
                 :alt="alt"
-                :style="placeholder ? {'background-image': `url(${placeholder})`} : null">
+                :style="styles">
         <img :src="src" :srcSet="srcSet" :sizes="sizes" :alt="alt"
              :class="classes"
-             :style="placeholder ? {'background-image': `url(${placeholder})`} : null">
+             :style="styles">
     </picture>
 </template>

@@ -4,18 +4,22 @@
     import VBirds from '@components/VBirds';
 
     export default {
-        components: {
-            Background,
-            VBirds
-        },
         data() {
             return {
                 transitionName: 'router-transition',
                 MobileDetect
             }
         },
+        components: {
+            Background,
+            VBirds
+        },
         watch: {
             '$route'(to, from) {
+                if(from.name === 'works' && to.name === 'home') {
+                    return this.transitionName = from.name;
+                }
+
                 this.transitionName = to.name || 'router-transition';
             }
         }
@@ -26,12 +30,13 @@
     <div id="app__container">
         <Background id="background"></Background>
 
+        <VBirds v-if="!MobileDetect.phone()"></VBirds>
+
         <div id="copyright" v-if="!MobileDetect.phone()">
             <span class="copyright__text">© chevalier-xavier.fr</span>
         </div>
 
-        <VBirds v-if="!MobileDetect.phone()"></VBirds>
-        <transition :name="transitionName" mode="out-in">
+        <transition :name="transitionName" mode="out-in" appear>
             <router-view></router-view>
         </transition>
     </div>

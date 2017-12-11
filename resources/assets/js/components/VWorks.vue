@@ -1,10 +1,16 @@
 <script>
-    export default {}
+    import VSlide from '@components/VSlide';
+
+    export default {
+        components: {
+            VSlide
+        }
+    }
 </script>
 
 <template>
     <div>
-        <p>Coucou</p>
+        <VSlide></VSlide>
     </div>
 </template>
 
