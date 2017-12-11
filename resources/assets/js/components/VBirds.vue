@@ -1,5 +1,5 @@
 <script>
-    import BirdsProvider from "./../components/birds/BirdsProvider";
+    import BirdsProvider from "@components/birds/BirdsProvider";
 
     export default {
         mounted() {
@@ -18,6 +18,8 @@
 
     #birds {
         z-index: z(birds);
+        position: absolute;
+        top: 0;
         background: transparent radial-gradient(ellipse at center center, transparent 59%, rgba(0, 0, 0, 0.25) 100%) no-repeat scroll 0 0;
     }
 </style>

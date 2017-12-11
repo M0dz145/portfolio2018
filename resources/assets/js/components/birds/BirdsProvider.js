@@ -38,8 +38,9 @@ export default class BirdsProvider {
             this.scene.add(this.bird);
         }
 
-        this.renderer = new THREE.CanvasRenderer();
-        this.renderer.setClearColor(0xffffff, 0);
+        this.renderer = new THREE.CanvasRenderer({
+            alpha: true
+        });
         this.renderer.setSize(this.SCREEN_WIDTH, this.SCREEN_HEIGHT);
 
         this.element.appendChild(this.renderer.domElement);
