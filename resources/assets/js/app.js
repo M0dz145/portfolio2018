@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import routes from "@js/routes";
-import VApp from "@js/VApp";
+import routes from '@js/routes';
+import VApp from '@js/VApp';
 
 Vue.use(VueRouter);
 

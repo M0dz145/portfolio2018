@@ -1,126 +1,18 @@
 <script>
     import VImage from '@components/VImage';
-    import Anime from 'animejs';
+    import TiltFx from "@components/TiltFx";
 
     export default {
         data() {
             return {
-                ElkyosImage: require('@img/works/elkyos.jpg?sizes[]=200,sizes[]=600,sizes[]=800'),
-                panelContainerImage: null,
-                panelContent: null,
-                panel: null
-            }
+                ElkyosImage: require('@img/works/nicolasChevalier.jpg?sizes[]=200,sizes[]=600,sizes[]=800')
+            };
         },
         mounted() {
-            this.panelContainerImage = document.getElementsByClassName('panelContainer__img')[0];
-            this.panelContent = document.getElementsByClassName('panel__content')[0];
-            this.panel = document.getElementsByClassName('panel')[0];
+            new TiltFx(document.getElementsByClassName('slide')[0]);
         },
         methods: {
-            setRange(obj) {
-                for(let k in obj) {
-                    if(typeof obj[k] === 'undefined') {
-                        obj[k] = [0, 0];
-                    } else if(typeof obj[k] === 'number') {
-                        obj[k] = [-1 * obj[k], obj[k]];
-                    }
-                }
 
-                return obj;
-            },
-            transform(event, elements) {
-                // Mouse position relative to the document.
-                const mousepos = this.getMousePosition(event);
-
-                // Movement settings for the animatable elements.
-                for(var key in elements) {
-                    if(this.DOM.animatable[key] == undefined || this.options.movement[key] == undefined) {
-                        continue;
-                    }
-
-                    const reinitialisePosition = {
-                        x: 0,
-                        y: 0,
-                        z: 0
-                    };
-
-                    let t = this.options.movement[key] != undefined ? this.options.movement[key].translation || reinitialisePosition : reinitialisePosition,
-                        r = this.options.movement[key] != undefined ? this.options.movement[key].rotation || reinitialisePosition : reinitialisePosition;
-
-                    t = this.setRange(t);
-                    r = this.setRange(r);
-
-                    let transforms = {
-                        translation: {
-                            x: (t.x[1] - t.x[0]) / bounds.width * mousepos.x + t.x[0],
-                            y: (t.y[1] - t.y[0]) / bounds.height * mousepos.y + t.y[0],
-                            z: (t.z[1] - t.z[0]) / bounds.height * mousepos.y + t.z[0],
-                        },
-                        rotation: {
-                            x: (r.x[1] - r.x[0]) / bounds.height * mousepos.y + r.x[0],
-                            y: (r.y[1] - r.y[0]) / bounds.width * mousepos.x + r.y[0],
-                            z: (r.z[1] - r.z[0]) / bounds.width * mousepos.x + r.z[0]
-                        }
-                    };
-
-                    this.DOM.animatable[key].style.WebkitTransform = this.DOM.animatable[key].style.transform = 'translateX(' + transforms.translation.x + 'px) translateY(' + transforms.translation.y + 'px) translateZ(' + transforms.translation.z + 'px) rotateX(' + transforms.rotation.x + 'deg) rotateY(' + transforms.rotation.y + 'deg) rotateZ(' + transforms.rotation.z + 'deg)';
-                }
-            },
-            move(e) {
-                const mousePosition = this.getMousePosition(e);
-                const sxPos = mousePosition.x / this.panel.offsetWidth * 100 - 100;
-                const syPos = mousePosition.y / this.panel.offsetHeight * 100 - 100;
-
-                this.panelContent.style.transform = `rotateX(${-.03 * sxPos}deg) rotateY(${.03 * syPos}deg) rotateZ(1deg)`;
-                this.panelContainerImage.style.transform = `rotateX(${-.03 * sxPos}deg) rotateY(${.03 * syPos}deg) rotateZ(1deg)`;
-
-                let animate = Anime({
-                    targets: this.panelContent,
-                    scaleX: 1,
-                    scaleY: 1,
-                    scaleZ: 1,
-                    rotationX: -.03 * sxPos,
-                    rotationY: .03 * syPos,
-                    rotationZ: 1,
-                    elasticity: 600,
-                    duration: 200,
-                    loop: false,
-                    easing: 'easeInOutQuad'
-                });
-
-                Anime({
-                    targets: this.panelContainerImage,
-                    scaleX: 1,
-                    scaleY: 1,
-                    scaleZ: 1,
-                    rotationX: -.03 * sxPos,
-                    rotationY: .03 * syPos,
-                    rotationZ: 1,
-                    elasticity: 600,
-                    duration: 200,
-                    loop: false,
-                    easing: 'easeInOutQuad'
-                })
-
-                console.log(animate);
-            },
-            getMousePosition(e) {
-                let posX = 0,
-                    posY = 0;
-
-                if(e.pageX || e.pageY) {
-                    posX = e.pageX;
-                    posY = e.pageY;
-                } else if(e.clientX || e.clientY) {
-                    posX = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
-                    posY = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
-                }
-
-                return {
-                    x: posX,
-                    y: posY
-                };
-            }
         },
         components: {
             VImage
@@ -129,7 +21,7 @@
 </script>
 
 <template>
-    <div class="slide" @mousemove="move">
+    <div class="slide">
         <div class="panel">
             <div class="panelContainer__content">
                 <div class="panel__content">
