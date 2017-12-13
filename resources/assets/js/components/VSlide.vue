@@ -1,12 +1,19 @@
 <script>
     import VImage from '@components/VImage';
-    import TiltFx from "@components/TiltFx";
 
     export default {
+        props: ['currentSlide'],
         data() {
             return {
-                ElkyosImage: require('@img/works/nicolasChevalier.jpg?placeholder=true&sizes[]=200,sizes[]=600,sizes[]=800')
+                previousSlide: null,
+                nextSlide: null
             };
+        },
+        watch: {
+            currentSlide(newSlide, oldSlide) {
+                this.previousSlide = oldSlide;
+                this.nextSlide = newSlide;
+            }
         },
         components: {
             VImage
@@ -19,9 +26,9 @@
         <div class="panelContainer__content">
             <div class="panel__content">
                 <div class="panel__text">
-                    <h2 class="panel__title">Elkyos</h2>
+                    <h2 class="panel__title">{{ currentSlide.name }}</h2>
                     <p class="panel__info">
-                        MMORPG médiéval fantastique, 2014
+                        {{ currentSlide.description }}
                     </p>
                 </div>
                 <div class="panel__line"></div>
@@ -31,9 +38,13 @@
             </div>
         </div>
         <div class="panelContainer__img">
-            <VImage class="panel__img" :src="ElkyosImage.src" :srcSet="ElkyosImage.srcSet"
+            <VImage class="panel__img" :src="currentSlide.image.src" :srcSet="currentSlide.image.srcSet"
                     sizes="500px"
-                    :styles="{backgroundImage: `url(${ElkyosImage.placeholder})`, minWidth: '100%', minHeight: '100%'}"
+                    :styles="{backgroundImage: `url(${currentSlide.image.placeholder})`, minWidth: '100%', minHeight: '100%'}"
+                    alt="Description"></VImage>
+            <VImage class="panel__img" :src="currentSlide.image.src" :srcSet="currentSlide.image.srcSet"
+                    sizes="500px"
+                    :styles="{backgroundImage: `url(${currentSlide.image.placeholder})`, minWidth: '100%', minHeight: '100%'}"
                     alt="Description"></VImage>
         </div>
     </div>

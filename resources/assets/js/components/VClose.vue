@@ -15,6 +15,7 @@
         position: absolute;
         top: 20px;
         right: 40px;
+        padding: 20px;
         cursor: pointer;
         color: #2a2a2a;
         font-size: 2em;

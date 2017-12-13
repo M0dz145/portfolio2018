@@ -7,7 +7,17 @@
         mounted() {
             this.slideMouseContainer = document.getElementById('slideControlContainer__mouse');
             this.slideMouse = this.slideMouseContainer.querySelector('.slideControl__mouse');
-            console.log(this.slideMouse)
+
+            if(typeof this.$route.query.v !== 'undefined') {
+                const sliders = this.sliders(this.$route);
+
+                this.slideLeft = sliders.left.name;
+                this.slideRight = sliders.right.name;
+                this.currentSlide = sliders.current;
+            } else {
+                console.error('??')
+            }
+
 
             const TiltFxInstance = new TiltFx(document.getElementById('slide__container'), {
                 mouseLeave: false
@@ -39,13 +49,69 @@
                     }
                 });
         },
+        data() {
+            return {
+                works: [
+                    {
+                        name: '1',
+                        description: 'MMORPG médiéval fantastique, 2014',
+                        image: require('@img/works/elkyos.jpg?placeholder=true&sizes[]=200,sizes[]=600,sizes[]=800')
+                    },
+                    {
+                        name: '2',
+                        description: 'testnsuerhuser, 4455',
+                        image: require('@img/works/nicolasChevalier.jpg?placeholder=true&sizes[]=200,sizes[]=600,sizes[]=800')
+                    },
+                    {
+                        name: '3',
+                        description: 'testnsuerhuser, 4455',
+                        image: require('@img/works/nicolasChevalier.jpg?placeholder=true&sizes[]=200,sizes[]=600,sizes[]=800')
+                    }
+                ],
+                currentSlide: null,
+                slideLeft: null,
+                slideRight: null
+            };
+        },
+        beforeRouteUpdate(to, from, next) {
+            if(to.name === 'works' && typeof to.query.v !== 'undefined') {
+                const sliders = this.sliders(to)
+
+                this.slideLeft = sliders.left.name;
+                this.slideRight = sliders.right.name;
+                this.currentSlide = sliders.current;
+            }
+
+            next();
+        },
         components: {
             VSlide,
             VClose
         },
         methods: {
-            slideTo(direction) {
-                console.log(arguments)
+            sliders(to) {
+                const toIndex = this.works.findIndex(work => to.query.v === work.name);
+
+                if(toIndex === -1) {
+                    console.error(`Route ${to.query.v} doesn't exist`);
+                    return;
+                }
+
+                let leftIndex = toIndex - 1;
+                if(leftIndex < 0) {
+                    leftIndex = this.works.length - 1
+                }
+
+                let rightIndex = toIndex + 1;
+                if(rightIndex >= this.works.length) {
+                    rightIndex = 0;
+                }
+
+                return {
+                    left: this.works[leftIndex],
+                    right: this.works[rightIndex],
+                    current: this.works[toIndex]
+                }
             },
             mousemove(ev) {
                 const x      = ev.clientX,
@@ -65,21 +131,24 @@
 
 <template>
     <div id="slide__container">
-        <div class="slide__control slide__control--left"
-             @click="slideTo('left')"
-             @mousemove="mousemove"
-             @mouseleave="mouseleave"
-             data-direction="left">
-        </div>
-        <div class="slide__control slide__control--right"
-             @click="slideTo('right')"
-             @mousemove="mousemove"
-             @mouseleave="mouseleave"
-             data-direction="right">
-        </div>
+        <router-link class="slide__control slide__control--left"
+                     :to="{name: 'works', query: {v: slideLeft}}"
+                     tag="div"
+                     @mousemove.native="mousemove"
+                     @mouseleave.native="mouseleave"
+                     data-direction="left">
+        </router-link>
+        <router-link class="slide__control slide__control--right"
+                     :to="{name: 'works', query: {v: slideRight}}"
+                     tag="div"
+                     @mousemove.native="mousemove"
+                     @mouseleave.native="mouseleave"
+                     data-direction="right">
+        </router-link>
 
         <VClose :to="{name: 'home'}"></VClose>
-        <VSlide></VSlide>
+
+        <VSlide v-if="currentSlide" :current-slide="currentSlide"></VSlide>
 
         <div id="slideControlContainer__mouse">
             <span class="slideControl__mouse"><</span>
