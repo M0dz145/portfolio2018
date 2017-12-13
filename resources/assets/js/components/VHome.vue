@@ -64,10 +64,12 @@
             if(typeof this !== 'undefined') {
                 this.parallaxInstance.enable();
             }
+
             next();
         },
         beforeRouteLeave(to, from, next) {
             this.parallaxInstance.disable();
+
             next();
         }
     }

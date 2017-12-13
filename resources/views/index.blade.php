@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" href="dist/logo.png"/>
+    <link rel="icon" type="image/png" href="{{ url('dist/logo.png') }}"/>
     <title>| Xavier Chevalier Portfolio |</title>
 </head>
 <body>
     <div id="app"></div>
 
-    <script src="dist/build.js"></script>
+    <script src="{{ url('dist/build.js') }}"></script>
 </body>
 </html>

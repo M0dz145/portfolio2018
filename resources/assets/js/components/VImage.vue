@@ -15,6 +15,7 @@
                 :style="styles">
         <img :src="src" :srcSet="srcSet" :sizes="sizes" :alt="alt"
              :class="classes"
+             style="background-size: cover"
              :style="styles">
     </picture>
 </template>

@@ -1,5 +1,6 @@
 import VHome from '@components/VHome';
 import VWorks from '@components/VWorks';
+import VSlide from '@components/VSlide';
 
 export default [
     {
@@ -9,8 +10,14 @@ export default [
     },
     {
         name: 'works',
-        path: '/works',
-        component: VWorks
+        path: '/works/:name',
+        component: VWorks,
+        children: [
+            {
+                path: '',
+                component: VSlide
+            }
+        ]
     },
     {
         path: '*',

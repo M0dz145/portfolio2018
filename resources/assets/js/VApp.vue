@@ -14,14 +14,14 @@
             Background,
             VBirds
         },
-        watch: {
-            '$route'(to, from) {
-                if(from.name === 'works' && to.name === 'home') {
-                    return this.transitionName = from.name;
-                }
-
-                this.transitionName = to.name || 'router-transition';
+        beforeRouteUpdate(to, from, next) {
+            if(from.name === 'works' && to.name === 'home') {
+                return this.transitionName = from.name;
             }
+
+            this.transitionName = to.name || 'router-transition';
+
+            next();
         }
     }
 </script>

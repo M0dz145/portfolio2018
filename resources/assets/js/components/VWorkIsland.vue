@@ -59,7 +59,7 @@
             <router-link fill-rule="evenodd" clip-rule="evenodd" fill="url(#i2)" stroke="#7A6752" stroke-width="3"
                          stroke-miterlimit="10"
                          tag="path"
-                         :to="{name: 'works'}"
+                         :to="{name: 'works', params: {name: 'Elkyos'}}"
                          @click.native="click"
                          @mouseenter.native="mouseenter"
                          @mouseleave.native="mouseleave"

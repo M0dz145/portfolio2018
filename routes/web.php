@@ -11,6 +11,11 @@
 |
 */
 
-Route::get('/{vue_capture?}', function () {
+
+Route::get('/works/{any?}', function () {
+    return view('index');
+});
+
+Route::get('/{any?}', function () {
     return view('index');
 });

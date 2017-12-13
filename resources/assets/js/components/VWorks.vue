@@ -5,19 +5,19 @@
 
     export default {
         mounted() {
-            this.slideMouseContainer = document.getElementById('slideControlContainer__mouse');
-            this.slideMouse = this.slideMouseContainer.querySelector('.slideControl__mouse');
-
-            if(typeof this.$route.query.v !== 'undefined') {
-                const sliders = this.sliders(this.$route);
-
-                this.slideLeft = sliders.left.name;
-                this.slideRight = sliders.right.name;
-                this.currentSlide = sliders.current;
+            let sliders = null;
+            if(typeof this.$route.params.name !== 'undefined') {
+                sliders = this.sliders(this.$route.params.name);
             } else {
-                console.error('??')
+                sliders = this.sliders(this.works[0].name);
             }
 
+            this.slideLeft = sliders.left.name;
+            this.slideRight = sliders.right.name;
+            this.currentSlide = sliders.current;
+
+            this.slideMouseContainer = document.getElementById('slideControlContainer__mouse');
+            this.slideMouse = this.slideMouseContainer.querySelector('.slideControl__mouse');
 
             const TiltFxInstance = new TiltFx(document.getElementById('slide__container'), {
                 mouseLeave: false
@@ -53,7 +53,7 @@
             return {
                 works: [
                     {
-                        name: '1',
+                        name: 'Elkyos',
                         description: 'MMORPG médiéval fantastique, 2014',
                         image: require('@img/works/elkyos.jpg?placeholder=true&sizes[]=200,sizes[]=600,sizes[]=800')
                     },
@@ -64,8 +64,8 @@
                     },
                     {
                         name: '3',
-                        description: 'testnsuerhuser, 4455',
-                        image: require('@img/works/nicolasChevalier.jpg?placeholder=true&sizes[]=200,sizes[]=600,sizes[]=800')
+                        description: 'azeazeaze, 5605640',
+                        image: require('@img/works/immobilis.jpg?placeholder=true&sizes[]=200,sizes[]=600,sizes[]=800')
                     }
                 ],
                 currentSlide: null,
@@ -74,8 +74,8 @@
             };
         },
         beforeRouteUpdate(to, from, next) {
-            if(to.name === 'works' && typeof to.query.v !== 'undefined') {
-                const sliders = this.sliders(to)
+            if(to.name === 'works' && typeof to.params.name !== 'undefined') {
+                const sliders = this.sliders(to.params.name);
 
                 this.slideLeft = sliders.left.name;
                 this.slideRight = sliders.right.name;
@@ -90,10 +90,10 @@
         },
         methods: {
             sliders(to) {
-                const toIndex = this.works.findIndex(work => to.query.v === work.name);
+                const toIndex = this.works.findIndex(work => to === work.name);
 
                 if(toIndex === -1) {
-                    console.error(`Route ${to.query.v} doesn't exist`);
+                    console.error(`Route ${to} doesn't exist`);
                     return;
                 }
 
@@ -132,14 +132,14 @@
 <template>
     <div id="slide__container">
         <router-link class="slide__control slide__control--left"
-                     :to="{name: 'works', query: {v: slideLeft}}"
+                     :to="{name: 'works', params: {name: slideLeft}}"
                      tag="div"
                      @mousemove.native="mousemove"
                      @mouseleave.native="mouseleave"
                      data-direction="left">
         </router-link>
         <router-link class="slide__control slide__control--right"
-                     :to="{name: 'works', query: {v: slideRight}}"
+                     :to="{name: 'works', params: {name: slideRight}}"
                      tag="div"
                      @mousemove.native="mousemove"
                      @mouseleave.native="mouseleave"
@@ -148,7 +148,9 @@
 
         <VClose :to="{name: 'home'}"></VClose>
 
-        <VSlide v-if="currentSlide" :current-slide="currentSlide"></VSlide>
+        <!--<transition name="router-transition" mode="out-in" appear>-->
+            <router-view></router-view>
+        <!--</transition>-->
 
         <div id="slideControlContainer__mouse">
             <span class="slideControl__mouse"><</span>

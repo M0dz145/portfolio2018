@@ -1,19 +1,19 @@
 <script>
     import VImage from '@components/VImage';
+    import Anime from 'animejs';
 
     export default {
-        props: ['currentSlide'],
+        mounted() {
+
+        },
         data() {
             return {
-                previousSlide: null,
-                nextSlide: null
+                slide: {
+                    name: 'Elkyos',
+                    description: 'MMORPG médiéval fantastique, 2014',
+                    image: require('@img/works/elkyos.jpg?placeholder=true&sizes[]=200,sizes[]=600,sizes[]=800')
+                }
             };
-        },
-        watch: {
-            currentSlide(newSlide, oldSlide) {
-                this.previousSlide = oldSlide;
-                this.nextSlide = newSlide;
-            }
         },
         components: {
             VImage
@@ -26,9 +26,9 @@
         <div class="panelContainer__content">
             <div class="panel__content">
                 <div class="panel__text">
-                    <h2 class="panel__title">{{ currentSlide.name }}</h2>
+                    <h2 class="panel__title">{{ slide.name }}</h2>
                     <p class="panel__info">
-                        {{ currentSlide.description }}
+                        {{ slide.description }}
                     </p>
                 </div>
                 <div class="panel__line"></div>
@@ -38,13 +38,11 @@
             </div>
         </div>
         <div class="panelContainer__img">
-            <VImage class="panel__img" :src="currentSlide.image.src" :srcSet="currentSlide.image.srcSet"
+            <VImage class="panel__img" :src="slide.image.src"
+                    v-if="slide"
+                    :srcSet="slide.image.srcSet"
                     sizes="500px"
-                    :styles="{backgroundImage: `url(${currentSlide.image.placeholder})`, minWidth: '100%', minHeight: '100%'}"
-                    alt="Description"></VImage>
-            <VImage class="panel__img" :src="currentSlide.image.src" :srcSet="currentSlide.image.srcSet"
-                    sizes="500px"
-                    :styles="{backgroundImage: `url(${currentSlide.image.placeholder})`, minWidth: '100%', minHeight: '100%'}"
+                    :styles="{backgroundImage: `url(${slide.image.placeholder})`, minWidth: '100%', minHeight: '100%'}"
                     alt="Description"></VImage>
         </div>
     </div>
@@ -173,6 +171,9 @@
             box-shadow: 0px 20px 100.28px 8.72px rgba(0, 0, 0, .35);
 
             .panel__img {
+                display: block;
+                width: 100%;
+                height: 100%;
                 @include no-pointer-events();
             }
         }
