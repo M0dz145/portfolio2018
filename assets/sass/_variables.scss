@@ -1,0 +1,35 @@
+@import "~awesome-sass-easing/sass-easing";
+
+$body-bg: #fff;
+$fonts: (
+        Base: Nunito,
+        Bariol: Bariol,
+        Nunito: Nunito,
+        Aventura: Aventura
+);
+
+$breakpoints: (
+        mobile-s: 320px,
+        mobile-m: 375px,
+        mobile-l: 425px,
+        tablet: 768px,
+        laptop: 1024px,
+        laptop-l: 1440px,
+        '4k': 2560px
+);
+
+$z-layers: (
+        bottom: -1,
+        default: 1,
+        cloud: -1,
+        birds: -1,
+        slidePanelContent: 1,
+        island: 3,
+        copyright: 10
+);
+
+$island-width: (
+        about: 425px,
+        work: 635px,
+        contact: 400px
+);

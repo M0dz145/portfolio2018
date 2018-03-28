@@ -1,0 +1,61 @@
+@import "~mixins";
+
+.island {
+    width: get-island-width(work);
+    animation: upAndDownMoveCenter 17s infinite;
+
+    .island__littleIsland {
+        position: absolute;
+        top: -70px;
+        right: -20px;
+        animation: upAndDownMoveCenter 4s infinite;
+    }
+
+    .island__info::before {
+        border: 1px solid #8d3030;
+        background-color: #680e24;
+    }
+
+    .island__svg {
+        pattern, image {
+            width: 1663px;
+            height: 636px;
+        }
+    }
+
+    @include media('>laptop', '<=laptop-l') {
+        width: get-island-width(work) / 1.2;
+    }
+
+    @include media('>tablet', '<=laptop') {
+        width: get-island-width(work) / 1.5;
+    }
+
+    @include media('>mobile-l', '<=tablet') {
+        width: get-island-width(work) / 2;
+    }
+
+    @include media('<=mobile-l') {
+        width: 100%;
+        height: 100%;
+        animation: none;
+
+        .island__littleIsland {
+            display: none;
+        }
+
+        .island__info {
+            color: white;
+        }
+
+        .island__svg {
+            z-index: z(bottom);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: calc(100% - 40px);
+            max-height: 100%;
+            padding: 10px 20px;
+        }
+    }
+}
