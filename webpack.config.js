@@ -1,8 +1,8 @@
-const path    = require('path'),
-      multi   = require('multi-loader')
+const path  = require('path'),
+      multi = require('multi-loader');
 
 module.exports = {
-    entry: './resources/assets/js/app.js',
+    entry: './assets/js/app.js',
     output: {
         path: path.resolve(__dirname, './public/dist'),
         publicPath: '/dist/',
@@ -64,7 +64,7 @@ module.exports = {
                 test: /\.(ttf|eot|otf|woff2?|svg)$/,
                 loader: 'file-loader',
                 include: [
-                    path.resolve(__dirname, "./resources/assets/font")
+                    path.resolve(__dirname, "./assets/font")
                 ],
                 options: {
                     name: 'fonts/[name].[ext]',
@@ -74,7 +74,7 @@ module.exports = {
                 test: /\.svg$/,
                 loader: 'vue-svg-loader', // `vue-svg` for webpack 1.x
                 exclude: [
-                    path.resolve(__dirname, "./resources/assets/font")
+                    path.resolve(__dirname, "./assets/font")
                 ],
                 options: {
                     // optional [svgo](https://github.com/svg/svgo) options
@@ -99,20 +99,21 @@ module.exports = {
     resolve: {
         alias: {
             'vue$': 'vue/dist/vue.esm.js',
-            '@js': path.resolve(__dirname, './resources/assets/js/'),
-            '@img': path.resolve(__dirname, './resources/assets/img/'),
-            '@font': path.resolve(__dirname, './resources/assets/font/'),
-            '@sass': path.resolve(__dirname, './resources/assets/sass/'),
-            '@components': path.resolve(__dirname, './resources/assets/js/components/'),
-            '@mixins': path.resolve(__dirname, './resources/assets/sass/mixins/_mixins.scss'),
+            '@js': path.resolve(__dirname, './assets/js/'),
+            '@img': path.resolve(__dirname, './assets/img/'),
+            '@font': path.resolve(__dirname, './assets/font/'),
+            '@sass': path.resolve(__dirname, './assets/sass/'),
+            '@components': path.resolve(__dirname, './assets/js/components/'),
+            '@modules': path.resolve(__dirname, './assets/js/modules/'),
+            'sass': path.resolve(__dirname, './assets/sass/'),
+            'mixins': path.resolve(__dirname, './assets/sass/mixins/_mixins.scss'),
+            'variables': path.resolve(__dirname, './assets/sass/_variables.scss'),
         },
         extensions: ['*', '.js', '.vue', '.json']
     },
     devServer: {
         contentBase: path.resolve(__dirname, './public'),
-        historyApiFallback: true,
-        noInfo: true,
-        overlay: true
+        port: 9000
     },
     performance: {
         hints: false
