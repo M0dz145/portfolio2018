@@ -1,7 +1,7 @@
 <script>
-    import AboutIsland from '@components/VAboutIsland.vue';
-    import ContactIsland from '@components/VContactIsland.vue';
-    import WorkIsland from '@components/VWorkIsland.vue';
+    import AboutIsland from '@components/VAboutIsland';
+    import ContactIsland from '@components/VContactIsland';
+    import WorkIsland from '@components/VWorkIsland';
     import VImage from '@components/VImage';
     import MobileDetect from '@modules/responsive/MobileDetect';
     import Parallax from 'parallax-js';
