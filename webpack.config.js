@@ -1,5 +1,4 @@
 const path    = require('path'),
-      webpack = require('webpack'),
       multi   = require('multi-loader')
 
 module.exports = {
@@ -9,7 +8,6 @@ module.exports = {
         publicPath: '/dist/',
         filename: 'build.js'
     },
-    watch: process.env.NODE_ENV === 'development',
     module: {
         rules: [
             {
@@ -118,27 +116,5 @@ module.exports = {
     },
     performance: {
         hints: false
-    },
-    devtool: '#eval-source-map'
-}
-
-if(process.env.NODE_ENV === 'production') {
-    module.exports.devtool = '#source-map'
-    // http://vue-loader.vuejs.org/en/workflow/production.html
-    module.exports.plugins = (module.exports.plugins || []).concat([
-        new webpack.DefinePlugin({
-            'process.env': {
-                NODE_ENV: '"production"'
-            }
-        }),
-        new webpack.optimize.UglifyJsPlugin({
-            sourceMap: true,
-            compress: {
-                warnings: false
-            }
-        }),
-        new webpack.LoaderOptionsPlugin({
-            minimize: true
-        })
-    ])
+    }
 }

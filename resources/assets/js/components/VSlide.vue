@@ -1,6 +1,5 @@
 <script>
     import VImage from '@components/VImage';
-    import Anime from 'animejs';
 
     export default {
         mounted() {
