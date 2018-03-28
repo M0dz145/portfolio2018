@@ -1,10 +1,10 @@
 @import "~mixins";
 
-@include ko-font-face('Bariol', './../font/bariol/bariol_regular-webfont');
+@include ko-font-face('Bariol', './../fonts/bariol/bariol_regular-webfont');
 
 @font-face {
     font-family: 'Aventura';
-    src: url('./../font/aventura/Aventura-Bold.otf');
+    src: url('./../fonts/aventura/Aventura-Bold.otf');
     font-weight: normal;
     font-style: normal;
 }
