@@ -412,7 +412,7 @@ Pieces.prototype = {
             } else if(!item.hidden) {
                 angle = normalizeAngle(item.angle);
                 rotate = normalizeAngle(item.rotate);
-                item.pieces.forEach((p) => {
+                item.pieces.forEach(p => {
                     ctx.save();
 
                     t.translate(item.x, item.y);
@@ -617,10 +617,6 @@ Pieces.prototype = {
         cancelAnimationFrame(this.frame);
         anime.remove(this.items);
         anime.remove(this.pieces);
-    },
-
-    isMouseIn(event, item) {
-        return (event.clientX >= item.x && event.clientX <= item.x + item.width) && (event.clientY >= item.y && event.clientY <= item.y + item.height);
     },
 
     getPieces(items) {

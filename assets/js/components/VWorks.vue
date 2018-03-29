@@ -10,15 +10,13 @@
                 [].slice.call(this.$el.querySelectorAll('.pieces-slider__image')),
                 [].slice.call(this.$el.querySelectorAll('.pieces-slider__text'))
             );
-
-            // Select prev or next slide using arrow keys
-            document.addEventListener('keydown', e => {
-                if(e.keyCode === 37) { // left
-                    this.piecesSlider.prevItem();
-                } else if(e.keyCode === 39) { // right
-                    this.piecesSlider.nextItem();
-                }
-            });
+        },
+        components: {
+            VClose,
+            VImage
+        },
+        beforeDestroy() {
+            this.piecesSlider.destroyEvents();
         },
         data() {
             return {
@@ -38,35 +36,8 @@
                         description: 'azeazeaze, 5605640',
                         image: require('@img/works/immobilis.jpg?placeholder=true&sizes[]=600,sizes[]=800')
                     }
-                ],
-                currentSlide: null,
-                slideLeft: null,
-                slideRight: null
+                ]
             };
-        },
-        components: {
-            VClose,
-            VImage
-        },
-        methods: {
-            prevSlide() {
-                this.piecesSlider.prevItem();
-            },
-
-            nextSlide() {
-                this.piecesSlider.nextItem();
-            }
-        },
-        computed: {
-            sliderHeight: () => {
-                console.log(window.innerHeight);
-                return window.innerHeight;
-            },
-
-            sliderWidth: () => {
-                console.log(window.innerWidth);
-                return window.innerWidth;
-            }
         }
     }
 </script>
