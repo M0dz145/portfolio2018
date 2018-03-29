@@ -4,39 +4,22 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    background-color: rgba(42, 42, 42, .2);
     @include no-user-select();
+}
 
-    #slideControlContainer__mouse {
+.pieces-slider {
+    position: relative;
+    text-align: center;
+    height: 100%;
+
+    .pieces-slider__slide {
         display: none;
-        position: absolute;
-        top: 0;
-        left: 0;
-        cursor: none;
-        @include no-pointer-events();
-
-        .slideControl__mouse {
-            display: block;
-            color: #2a2a2a;
-            font-size: 5em;
-            transition: transform .4s $easeInOutQuint;
-            @include no-pointer-events();
-        }
     }
 
-    .slide__control {
-        position: absolute;
-        top: 0;
-        height: 100%;
-        width: 50%;
-        cursor: none;
-
-        &--left {
-            left: 0;
-        }
-
-        &--right {
-            left: 50%;
-        }
+    /* Class for when we resize */
+    .pieces-slider__canvas--hidden {
+        opacity: 0;
+        transition-duration: 0.3s;
     }
 }
+

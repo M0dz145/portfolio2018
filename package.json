@@ -23,6 +23,7 @@
   },
   "devDependencies": {
     "@kickoff/utils.scss": "^3.0.2",
+    "@types/animejs": "^2.0.0",
     "@types/node": "^9.6.0",
     "awesome-sass-easing": "^1.1.2",
     "babel-core": "^6.26.0",

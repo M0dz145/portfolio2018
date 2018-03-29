@@ -99,21 +99,24 @@ module.exports = {
     resolve: {
         alias: {
             'vue$': 'vue/dist/vue.esm.js',
-            '@js': path.resolve(__dirname, './assets/js/'),
-            '@img': path.resolve(__dirname, './assets/img/'),
-            '@fonts': path.resolve(__dirname, './assets/fonts/'),
-            '@sass': path.resolve(__dirname, './assets/sass/'),
+
             '@components': path.resolve(__dirname, './assets/js/components/'),
             '@modules': path.resolve(__dirname, './assets/js/modules/'),
-            'sass': path.resolve(__dirname, './assets/sass/'),
+            '@fonts': path.resolve(__dirname, './assets/fonts/'),
+            '@sass': path.resolve(__dirname, './assets/sass/'),
+            '@img': path.resolve(__dirname, './assets/img/'),
+            '@js': path.resolve(__dirname, './assets/js/'),
+
             'mixins': path.resolve(__dirname, './assets/sass/mixins/_mixins.scss'),
             'variables': path.resolve(__dirname, './assets/sass/_variables.scss'),
+            'sass': path.resolve(__dirname, './assets/sass/'),
         },
         extensions: ['*', '.js', '.vue', '.json']
     },
     devServer: {
         contentBase: path.resolve(__dirname, './public'),
-        port: 9000
+        port: 9000,
+        historyApiFallback: true
     },
     performance: {
         hints: false
