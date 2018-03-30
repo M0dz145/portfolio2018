@@ -51,6 +51,7 @@
 
         // Section text
         .island__info__text {
+            @include no-pointer-events();
             position: absolute;
             top: -150px;
             left: 15px;
@@ -96,7 +97,6 @@
         animation: dash 5s linear infinite;
 
         path {
-            cursor: pointer;
             stroke-width: 0;
             transition: fill 1s, opacity .8s, stroke-width .4s;
 

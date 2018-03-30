@@ -1,6 +1,7 @@
 import Pieces from './Pieces';
 import Position from '@modules/event/Position';
 import anime from 'animejs';
+import RoundCursor from "@modules/animation/cursor/RoundCursor";
 
 export default class PiecesSlider {
     constructor(canvas, images, texts) {
@@ -166,19 +167,19 @@ export default class PiecesSlider {
     // Init Event Listeners
     initEvents() {
         this.resizeStart = this.resizeStart.bind(this);
-        this.onMouseEnter = this.onMouseEnter.bind(this);
+        this.onMouseMove = this.onMouseMove.bind(this);
         this.onKeydown = this.onKeydown.bind(this);
 
-        window.addEventListener('resize', this.resizeStart, true);
-        window.addEventListener('click', this.onMouseEnter, true);
         window.addEventListener('keydown', this.onKeydown, true);
+        window.addEventListener('resize', this.resizeStart, true);
+        window.addEventListener('mousemove', this.onMouseMove, true);
     }
 
     // Destroy Event Listeners
     destroyEvents() {
-        window.removeEventListener('resize', this.resizeStart, true);
-        window.removeEventListener('click', this.onMouseEnter, true);
         window.removeEventListener('keydown', this.onKeydown, true);
+        window.removeEventListener('resize', this.resizeStart, true);
+        window.removeEventListener('mousemove', this.onMouseMove, true);
     }
 
     // Select prev or next slide using arrow keys
@@ -190,63 +191,32 @@ export default class PiecesSlider {
         }
     }
 
-    onMouseEnter(e) {
-        console.log('click');
+    onMouseMove(e) {
         const image = this.piecesSlider.getItems(this.imageIndexes[this.currentIndex]);
 
-        // anime({
-        //     targets: this.piecesSlider.getItems(this.imageIndexes),
-        //     duration: p => {
-        //         console.log(p.duration);
-        //         return p.duration
-        //     },
-        //     delay: 1000,
-        //     opacity: .4,
-        //     update: (anim) => {
-        //         console.warn(anim);
-        //         console.log(anim.animatables);
-        //         for (var i = 0; i < anim.animatables.length; i++) {
-        //             anim.animatables[i].target.draw();
-        //         }
-        //     }
-        // })
-
         if(Position.elementIsInEvent(e, image)) {
-            this.piecesSlider.showPieces({
-                items: this.currentImageIndex,
-                ignore: ['tx'],
-                singly: true,
-                x: p => p.s_x * 1.05,
-                y: p => p.s_y * 1.05,
-                opacity: .4,
-                update: (anim) => {
-                    // Stop the pieces animation at 60%, and run a new indefinitely animation of `ty` for each piece
-                    if(anim.progress > 60) {
-                        const piece = anim.animatables[0].target;
-                        const ty = piece.ty;
-                        anime.remove(piece);
-                        anime({
-                            targets: piece,
-                            ty: piece.h_ty < 300
-                                ? [
-                                    {value: ty + 10, duration: 1000},
-                                    {value: ty - 10, duration: 2000},
-                                    {value: ty, duration: 1000}
-                                ]
-                                : [
-                                    {value: ty - 10, duration: 1000},
-                                    {value: ty + 10, duration: 2000},
-                                    {value: ty, duration: 1000}
-                                ],
-                            duration: 2000,
-                            easing: 'linear',
-                            loop: true
-                        });
-                    }
-                }
-            });
+            if(!this.mouseIsHoverImage) {
+                this.mouseIsHoverImage = true;
+                this.itemShowAfterHoverImage = false;
 
-            setTimeout(() => this.showItems(), 2000);
+                new RoundCursor().onMouseEnterClickableElement();
+
+                this.piecesSlider.showPieces({
+                    items: this.currentImageIndex,
+                    ignore: ['tx'],
+                    singly: true,
+                    x: p => p.s_x * 1.2,
+                    y: p => p.s_y * 1.2,
+                    opacity: .7
+                });
+            }
+        } else {
+            this.mouseIsHoverImage = false;
+            if(!this.itemShowAfterHoverImage) {
+                this.itemShowAfterHoverImage = true;
+                new RoundCursor().onMouseLeaveClickableElement();
+                this.showItems();
+            }
         }
     }
 
@@ -258,6 +228,8 @@ export default class PiecesSlider {
             ignore: ['tx'],
             singly: true,
             opacity: 1,
+            x: p => p.s_x * 1.03,
+            y: p => p.s_y * 1.03,
             update: (anim) => {
                 // Stop the pieces animation at 60%, and run a new indefinitely animation of `ty` for each piece
                 if(anim.progress > 60) {

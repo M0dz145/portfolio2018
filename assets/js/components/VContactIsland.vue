@@ -1,5 +1,6 @@
 <script>
     import imageUrl from '@img/contactIsland.jpg'
+    import Clickable from '@directives/Clickable';
 
     export default {
         data() {
@@ -27,6 +28,9 @@
                 this.hover = false;
             }
         },
+        directives: {
+            Clickable
+        }
     }
 </script>
 
@@ -50,6 +54,7 @@
                          fill="url(#i3)" stroke="#7B6753" stroke-width="3"
                          stroke-miterlimit="10"
                          tag="path"
+                         v-clickable
                          :to="{name: 'home'}"
                          @click.native="click"
                          @mouseenter.native="mouseenter"

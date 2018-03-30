@@ -2,6 +2,7 @@
     import Background from '@img/background.svg';
     import MobileDetect from '@modules/responsive/MobileDetect';
     import VBirds from '@components/VBirds';
+    import VCursor from '@components/VCursor';
 
     export default {
         data() {
@@ -11,7 +12,8 @@
         },
         components: {
             Background,
-            VBirds
+            VBirds,
+            VCursor
         }
     }
 </script>
@@ -29,6 +31,8 @@
         <transition mode="out-in" appear>
             <router-view/>
         </transition>
+
+        <VCursor/>
     </div>
 </template>
 

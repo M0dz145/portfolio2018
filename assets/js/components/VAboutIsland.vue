@@ -1,6 +1,7 @@
 <script>
     import imageUrl from '@img/aboutIsland.jpg';
     import MobileDetect from '@modules/responsive/MobileDetect';
+    import Clickable from '@directives/Clickable';
 
     export default {
         data() {
@@ -29,6 +30,9 @@
                 this.hover = false;
             }
         },
+        directives: {
+            Clickable
+        }
     }
 </script>
 
@@ -51,6 +55,7 @@
             <router-link fill-rule="evenodd" clip-rule="evenodd" fill="url(#i1)" stroke="#7A6752" stroke-width="3"
                          stroke-miterlimit="10"
                          tag="path"
+                         v-clickable
                          :to="{name: 'home'}"
                          @click.native="click"
                          @mouseenter.native="mouseenter"

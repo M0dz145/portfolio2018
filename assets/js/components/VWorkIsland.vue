@@ -1,6 +1,7 @@
 <script>
     import imageUrl from '@img/workIsland.jpg';
     import VImage from '@components/VImage';
+    import Clickable from '@directives/Clickable';
 
     export default {
         data() {
@@ -31,6 +32,9 @@
         },
         components: {
             VImage
+        },
+        directives: {
+            Clickable
         }
     }
 </script>
@@ -59,6 +63,7 @@
             <router-link fill-rule="evenodd" clip-rule="evenodd" fill="url(#i2)" stroke="#7A6752" stroke-width="3"
                          stroke-miterlimit="10"
                          tag="path"
+                         v-clickable
                          :to="{name: 'works', params: {name: 'Elkyos'}}"
                          @click.native="click"
                          @mouseenter.native="mouseenter"

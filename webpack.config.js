@@ -101,6 +101,7 @@ module.exports = {
             'vue$': 'vue/dist/vue.esm.js',
 
             '@components': path.resolve(__dirname, './assets/js/components/'),
+            '@directives': path.resolve(__dirname, './assets/js/directives/'),
             '@modules': path.resolve(__dirname, './assets/js/modules/'),
             '@fonts': path.resolve(__dirname, './assets/fonts/'),
             '@sass': path.resolve(__dirname, './assets/sass/'),

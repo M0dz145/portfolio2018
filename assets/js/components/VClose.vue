@@ -1,11 +1,16 @@
 <script>
+    import Clickable from '@directives/Clickable'
+
     export default {
-        props: ['to']
+        props: ['to'],
+        directives: {
+            Clickable
+        }
     }
 </script>
 
 <template>
-    <router-link :to="to" class="close">x</router-link>
+    <router-link v-clickable :to="to" class="close">x</router-link>
 </template>
 
 <style lang="scss">
