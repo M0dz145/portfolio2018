@@ -65,5 +65,5 @@
 </template>
 
 <style lang="scss" scoped>
-    @import "~sass/components/ContactIsland.scss";
+    @import "./ContactIsland";
 </style>

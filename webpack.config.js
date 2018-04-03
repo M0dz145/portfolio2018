@@ -64,7 +64,8 @@ module.exports = {
                 test: /\.(ttf|eot|otf|woff2?|svg)$/,
                 loader: 'file-loader',
                 include: [
-                    path.resolve(__dirname, "./assets/fonts")
+                    path.resolve(__dirname, "./assets/fonts"),
+                    /node_modules/
                 ],
                 options: {
                     name: 'fonts/[name].[ext]',
@@ -112,14 +113,17 @@ module.exports = {
             'variables': path.resolve(__dirname, './assets/sass/_variables.scss'),
             'sass': path.resolve(__dirname, './assets/sass/'),
         },
-        extensions: ['*', '.js', '.vue', '.json']
+        extensions: ['*', '.js', '.vue', '.json', '.scss']
     },
     devServer: {
         contentBase: path.resolve(__dirname, './public'),
         port: 9000,
-        historyApiFallback: true
+        historyApiFallback: true,
+        stats: {
+            modules: false
+        }
     },
     performance: {
         hints: false
     }
-}
+};

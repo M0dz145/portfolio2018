@@ -1,8 +1,9 @@
 <script>
-    import AboutIsland from '@components/VAboutIsland';
-    import ContactIsland from '@components/VContactIsland';
-    import WorkIsland from '@components/VWorkIsland';
-    import VImage from '@components/VImage';
+    import VAboutIsland from '@components/about/VAboutIsland';
+    import VContactIsland from '@components/contact/VContactIsland';
+    import VWorkIsland from '@components/works/VWorkIsland';
+    import VSectionText from '@components/home/VSectionText';
+    import VImage from '@components/common/image/VImage';
     import MobileDetect from '@modules/responsive/MobileDetect';
     import Parallax from 'parallax-js';
 
@@ -17,10 +18,10 @@
             }
         },
         data() {
-            const cloud2 = require('@img/lowCloud2.png?sizes[]=100,sizes[]=200,sizes[]=400'),
-                  cloud3 = require('@img/lowCloud3.png?sizes[]=100,sizes[]=200,sizes[]=400'),
-                  cloud4 = require('@img/lowCloud4.png?sizes[]=100,sizes[]=200,sizes[]=400'),
-                  cloud5 = require('@img/lowCloud5.png?sizes[]=100,sizes[]=200,sizes[]=400');
+            const cloud2 = require('@img/lowCloud2.png'),
+                  cloud3 = require('@img/lowCloud3.png'),
+                  cloud4 = require('@img/lowCloud4.png'),
+                  cloud5 = require('@img/lowCloud5.png');
 
             return {
                 MobileDetect,
@@ -55,10 +56,11 @@
             }
         },
         components: {
-            AboutIsland,
-            ContactIsland,
-            WorkIsland,
-            VImage
+            VAboutIsland,
+            VContactIsland,
+            VWorkIsland,
+            VImage,
+            VSectionText
         },
         beforeRouteEnter(to, from, next) {
             if(typeof this !== 'undefined') {
@@ -77,6 +79,8 @@
 
 <template>
     <div id="parallax__container">
+        <VSectionText/>
+
         <div v-for="(cloud, index) in clouds"
              v-if="!MobileDetect.phone()"
              class="layer cloud"
@@ -92,19 +96,19 @@
 
         <div class="layer island__container island__container--work"
              :data-depth="!MobileDetect.phone() ? 0.40 : null">
-            <WorkIsland/>
+            <VWorkIsland/>
         </div>
         <div class="layer island__container island__container--about"
              :data-depth="!MobileDetect.phone() ? 0.70 : null">
-            <AboutIsland/>
+            <VAboutIsland/>
         </div>
         <div class="layer island__container island__container--contact"
              :data-depth="!MobileDetect.phone() ? 0.25 : null">
-            <ContactIsland/>
+            <VContactIsland/>
         </div>
     </div>
 </template>
 
 <style lang="scss" scoped>
-    @import "~sass/components/Home.scss";
+    @import "./Home";
 </style>

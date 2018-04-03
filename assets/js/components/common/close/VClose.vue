@@ -14,5 +14,5 @@
 </template>
 
 <style lang="scss">
-    @import "~sass/components/Close.scss";
+    @import "Close";
 </style>

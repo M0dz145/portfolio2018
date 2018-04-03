@@ -42,7 +42,8 @@
         top: 0;
         left: 50%;
         font-size: 1.4em;
-        font-family: font-family(Aventura);
+        font-family: font-family(Nunito);
+        font-weight: bolder;
         text-transform: uppercase;
 
         @include media('<=mobile-s') {

@@ -1,6 +1,6 @@
 <script>
     import imageUrl from '@img/workIsland.jpg';
-    import VImage from '@components/VImage';
+    import VImage from '@components/common/image/VImage';
     import Clickable from '@directives/Clickable';
 
     export default {
@@ -15,7 +15,7 @@
                 svgProperties,
                 svgViewBox: `0 0 ${svgProperties.width} ${svgProperties.height}`,
                 svgEnableBackground: `new 0 0 ${svgProperties.width} ${svgProperties.height}`,
-                littleIsland: require('@img/little_island.png?sizes[]=20,sizes[]=45'),
+                littleIsland: require('@img/little_island.png'),
                 hover: false
             }
         },
@@ -74,5 +74,5 @@
 </template>
 
 <style lang="scss" scoped>
-    @import "~sass/components/WorkIsland.scss";
+    @import "./WorkIsland";
 </style>

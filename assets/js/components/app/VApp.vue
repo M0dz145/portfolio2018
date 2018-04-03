@@ -1,8 +1,8 @@
 <script>
     import Background from '@img/background.svg';
     import MobileDetect from '@modules/responsive/MobileDetect';
-    import VBirds from '@components/VBirds';
-    import VCursor from '@components/VCursor';
+    import VBirds from '@components/common/birds/VBirds';
+    import VCursor from '@components/common/cursor/VCursor';
 
     export default {
         data() {
@@ -36,6 +36,6 @@
     </div>
 </template>
 
-<style lang="scss" scoped>
-    @import "~sass/components/App.scss";
+<style lang="scss">
+    @import "./App";
 </style>

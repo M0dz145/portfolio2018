@@ -1,6 +1,6 @@
 <script>
-    import VClose from '@components/VClose';
-    import VImage from '@components/VImage';
+    import VClose from '@components/common/close/VClose';
+    import VImage from '@components/common/image/VImage';
     import PiecesSlider from "@modules/animation/pieces/PiecesSlider";
 
     export default {
@@ -24,17 +24,17 @@
                     {
                         name: 'Elkyos',
                         description: 'MMORPG médiéval fantastique, 2014',
-                        image: require('@img/works/elkyos.jpg?placeholder=true&sizes[]=600,sizes[]=800')
+                        image: require('@img/works/elkyos.jpg')
                     },
                     {
                         name: '2',
                         description: 'testnsuerhuser, 4455',
-                        image: require('@img/works/nicolasChevalier.jpg?placeholder=true&sizes[]=600,sizes[]=800')
+                        image: require('@img/works/nicolasChevalier.jpg')
                     },
                     {
                         name: '3',
                         description: 'azeazeaze, 5605640',
-                        image: require('@img/works/immobilis.jpg?placeholder=true&sizes[]=600,sizes[]=800')
+                        image: require('@img/works/immobilis.jpg')
                     }
                 ]
             };
@@ -59,5 +59,5 @@
 </template>
 
 <style lang="scss" scoped>
-    @import "~sass/components/Works.scss";
+    @import "./Works";
 </style>

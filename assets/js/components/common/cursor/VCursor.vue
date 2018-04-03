@@ -13,5 +13,5 @@
 </template>
 
 <style lang="scss">
-    @import "~sass/components/Cursor.scss";
+    @import "Cursor";
 </style>

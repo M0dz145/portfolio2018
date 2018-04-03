@@ -14,5 +14,5 @@
 </template>
 
 <style lang="scss" scoped>
-    @import "~sass/components/Birds.scss";
+    @import "Birds";
 </style>

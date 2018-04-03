@@ -1,5 +1,5 @@
-import VHome from '@components/VHome';
-import VWorks from '@components/VWorks';
+import VHome from '@components/home/VHome';
+import VWorks from '@components/works/VWorks';
 
 export default [
     {
