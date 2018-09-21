@@ -10,22 +10,12 @@
     "dev server": "webpack-dev-server --mode=\"development\" --progress --hot",
     "build": "webpack --mode=\"production\""
   },
-  "dependencies": {
-    "animejs": "^2.2.0",
-    "mobile-detect": "^1.4.1",
-    "multi-loader": "^0.1.0",
-    "parallax-js": "^3.1.0",
-    "raleway-webfont": "^3.0.1",
-    "three-js": "^79.0.0",
-    "vue": "^2.5.16",
-    "vue-router": "^3.0.1",
-    "webpack": "^4.3.0",
-    "webpack-cli": "^2.0.13"
-  },
   "devDependencies": {
-    "@kickoff/utils.scss": "^3.0.2",
     "@types/animejs": "^2.0.0",
     "@types/node": "^9.6.0",
+    "webpack-dev-server": "^3.1.1"
+  },
+  "dependencies": {
     "awesome-sass-easing": "^1.1.2",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.4",
@@ -42,7 +32,17 @@
     "vue-svg-loader": "^0.5.0",
     "vue-template-compiler": "^2.5.16",
     "webp-loader": "^0.4.0",
-    "webpack-dev-server": "^3.1.1"
+    "@kickoff/utils.scss": "^3.0.2",
+    "animejs": "^2.2.0",
+    "mobile-detect": "^1.4.1",
+    "multi-loader": "^0.1.0",
+    "parallax-js": "^3.1.0",
+    "raleway-webfont": "^3.0.1",
+    "three-js": "^79.0.0",
+    "vue": "^2.5.16",
+    "vue-router": "^3.0.1",
+    "webpack": "^4.3.0",
+    "webpack-cli": "^2.0.13"
   },
   "browserslist": [
     "> 1%",
