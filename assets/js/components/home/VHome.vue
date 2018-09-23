@@ -1,27 +1,34 @@
-<script>
-    import VAboutIsland from '@components/about/VAboutIsland';
-    import VContactIsland from '@components/contact/VContactIsland';
-    import VWorkIsland from '@components/works/VWorkIsland';
-    import VSectionText from '@components/home/VSectionText';
-    import VImage from '@components/common/image/VImage';
+<script lang="ts">
     import MobileDetect from '@modules/responsive/MobileDetect';
+    import VAboutIsland from '@components/about/VAboutIsland.vue';
+    import VWorkIsland from '@components/works/VWorkIsland.vue';
+    import VContactIsland from '@components/contact/VContactIsland.vue';
+    import VImage from '@components/common/image/VImage.vue';
     import Parallax from 'parallax-js';
+    import Component from 'vue-class-component';
+    import Vue from 'vue';
 
-    export default {
+    @Component({
+        components: {
+            VContactIsland,
+            VAboutIsland,
+            VWorkIsland,
+            VImage,
+        },
         mounted() {
-            this.parallaxInstance = new Parallax(document.getElementById('parallax__container'), {
+            this.parallaxInstance = new Parallax(this.$refs.parallaxContainer, {
                 pointerEvents: true
             });
 
-            if(MobileDetect.phone()) {
+            if (MobileDetect.phone()) {
                 this.parallaxInstance.disable();
             }
         },
         data() {
             const cloud2 = require('@img/lowCloud2.png'),
-                  cloud3 = require('@img/lowCloud3.png'),
-                  cloud4 = require('@img/lowCloud4.png'),
-                  cloud5 = require('@img/lowCloud5.png');
+                cloud3 = require('@img/lowCloud3.png'),
+                cloud4 = require('@img/lowCloud4.png'),
+                cloud5 = require('@img/lowCloud5.png');
 
             return {
                 MobileDetect,
@@ -54,21 +61,19 @@
                     }
                 ]
             }
-        },
-        components: {
-            VAboutIsland,
-            VContactIsland,
-            VWorkIsland,
-            VImage,
-            VSectionText
-        },
+        }
+    })
+    export default class VHome extends Vue {
+        private parallaxInstance: Parallax;
+
         beforeRouteEnter(to, from, next) {
-            if(typeof this !== 'undefined') {
+            if (typeof this !== 'undefined') {
                 this.parallaxInstance.enable();
             }
 
             next();
-        },
+        }
+
         beforeRouteLeave(to, from, next) {
             this.parallaxInstance.disable();
 
@@ -78,8 +83,8 @@
 </script>
 
 <template>
-    <div id="parallax__container">
-        <VSectionText/>
+    <div id="parallax__container" ref="parallaxContainer">
+        <!--<VSectionText/>-->
 
         <div v-for="(cloud, index) in clouds"
              v-if="!MobileDetect.phone()"
@@ -110,5 +115,5 @@
 </template>
 
 <style lang="scss" scoped>
-    @import "./Home";
+    @import "Home";
 </style>

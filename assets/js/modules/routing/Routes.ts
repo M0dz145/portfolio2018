@@ -1,5 +1,6 @@
-import VHome from '@components/home/VHome';
-import VWorks from '@components/works/VWorks';
+import {RouteConfig} from "vue-router";
+import VHome from "@components/home/VHome.vue";
+import VWorks from "@components/works/VWorks.vue";
 
 export default [
     {
@@ -16,4 +17,4 @@ export default [
         path: '*',
         redirect: '/'
     }
-];
+] as Array<RouteConfig>;

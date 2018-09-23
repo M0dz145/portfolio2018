@@ -2,7 +2,51 @@
 @import '~mixins';
 
 * {
-    cursor: none;
+    // Replace native cursor
+    cursor: none !important;
+}
+
+$dot-size: 40px;
+$button-size: 20px;
+
+.dot {
+    z-index: z(cursor);
+    position: absolute;
+    top: -$dot-size / 2;
+    left: -$dot-size / 2;
+    width: $dot-size;
+    height: $dot-size;
+    pointer-events: none;
+    transform: rotate(-90deg) scale(#{$button-size / ($dot-size/3)});
+    transition: opacity .2s $easeOutQuad;
+
+    &.hide {
+        opacity: 0;
+    }
+
+    &.hover {
+        svg {
+            transform: rotate(-90deg) scale(1.8);
+
+            path {
+                fill: #eee;
+            }
+        }
+    }
+
+    svg {
+        width: 100%;
+        position: absolute;
+        transform: rotate(-90deg);
+        transition: 600ms all cubic-bezier(0.23, 1, 0.32, 1);
+
+        path {
+            width: 20px;
+            height: 20px;
+            fill: #353535;
+            transition: 600ms all cubic-bezier(0.23, 1, 0.32, 1);
+        }
+    }
 }
 
 #cursor {

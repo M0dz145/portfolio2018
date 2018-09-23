@@ -1,28 +1,30 @@
-<script>
-    import Background from '@img/background.svg';
+<script lang="ts">
     import MobileDetect from '@modules/responsive/MobileDetect';
-    import VBirds from '@components/common/birds/VBirds';
-    import VCursor from '@components/common/cursor/VCursor';
+    import Component from "vue-class-component";
+    import Vue from "vue";
+    import Birds from "@components/common/birds/Birds";
+    import VCursor from "@components/common/cursor/VCursor";
+    import VBackground from '@components/background/VBackground';
 
-    export default {
-        data() {
-            return {
-                MobileDetect
-            }
-        },
+    @Component({
         components: {
-            Background,
-            VBirds,
+            VBackground,
+            Birds,
             VCursor
-        }
+        },
+        data: () => ({
+            MobileDetect
+        })
+    })
+    export default class VApp extends Vue {
     }
 </script>
 
 <template>
     <div id="app__container">
-        <Background id="background"/>
+        <VBackground/>
 
-        <VBirds v-if="!MobileDetect.phone()"/>
+        <Birds v-if="!MobileDetect.phone()"/>
 
         <div id="copyright" v-if="!MobileDetect.phone()">
             <span class="copyright__text">© chevalier-xavier.fr</span>
@@ -37,5 +39,5 @@
 </template>
 
 <style lang="scss">
-    @import "./App";
+    @import "App";
 </style>

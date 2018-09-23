@@ -1,8 +1,9 @@
-const path  = require('path'),
-      multi = require('multi-loader');
+const path    = require('path'),
+      multi   = require('multi-loader'),
+      loaders = require('./webpack/loaders');
 
 module.exports = {
-    entry: './assets/js/app.js',
+    entry: './assets/js/app.ts',
     output: {
         path: path.resolve(__dirname, './public/dist'),
         publicPath: '/dist/',
@@ -34,13 +35,28 @@ module.exports = {
                 ],
             },
             {
+                test: /\.html$/,
+                loader: 'html-loader',
+                options: {
+                    minimize: true,
+                    caseSensitive: true
+                }
+            },
+            {
+                test: /\.tsx?$/,
+                ...loaders.typeScriptLoader
+            },
+            {
                 test: /\.vue$/,
                 loader: 'vue-loader',
                 options: {
+                    options: {
+                        esModule: true,
+                    },
                     loaders: {
-                        // Since sass-loader (weirdly) has SCSS as its default parse mode, we map
-                        // the "scss" and "sass" values for the lang attribute to the right configs here.
-                        // other preprocessors should work out of the box, no loader config like this necessary.
+                        'ts': [
+                            loaders.typeScriptLoader
+                        ],
                         'scss': [
                             'vue-style-loader',
                             'css-loader',
@@ -52,7 +68,6 @@ module.exports = {
                             'sass-loader?indentedSyntax'
                         ]
                     }
-                    // other vue-loader options go here
                 }
             },
             {
@@ -64,7 +79,7 @@ module.exports = {
                 test: /\.(ttf|eot|otf|woff2?|svg)$/,
                 loader: 'file-loader',
                 include: [
-                    path.resolve(__dirname, "./assets/fonts"),
+                    path.resolve(__dirname, './assets/fonts'),
                     /node_modules/
                 ],
                 options: {
@@ -75,7 +90,7 @@ module.exports = {
                 test: /\.svg$/,
                 loader: 'vue-svg-loader', // `vue-svg` for webpack 1.x
                 exclude: [
-                    path.resolve(__dirname, "./assets/fonts")
+                    path.resolve(__dirname, './assets/fonts')
                 ],
                 options: {
                     // optional [svgo](https://github.com/svg/svgo) options
@@ -102,7 +117,6 @@ module.exports = {
             'vue$': 'vue/dist/vue.esm.js',
 
             '@components': path.resolve(__dirname, './assets/js/components/'),
-            '@directives': path.resolve(__dirname, './assets/js/directives/'),
             '@modules': path.resolve(__dirname, './assets/js/modules/'),
             '@fonts': path.resolve(__dirname, './assets/fonts/'),
             '@sass': path.resolve(__dirname, './assets/sass/'),
@@ -113,7 +127,7 @@ module.exports = {
             'variables': path.resolve(__dirname, './assets/sass/_variables.scss'),
             'sass': path.resolve(__dirname, './assets/sass/'),
         },
-        extensions: ['*', '.js', '.vue', '.json', '.scss']
+        extensions: ['.vue', '.ts', '.tsx', '.js', '.json', '.scss', '.html']
     },
     devServer: {
         contentBase: path.resolve(__dirname, './public'),

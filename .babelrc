@@ -1,6 +1,9 @@
 {
   "presets": [
-    ["env", { "modules": false }],
-    "stage-3"
+    "babel-preset-env",
+    "babel-preset-stage-1"
+  ],
+  "plugins": [
+    "transform-decorators-legacy"
   ]
 }

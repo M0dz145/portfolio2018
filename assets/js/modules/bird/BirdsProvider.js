@@ -9,9 +9,7 @@ export default class BirdsProvider {
         this.element = element;
         this.SCREEN_WIDTH = window.innerWidth;
         this.SCREEN_HEIGHT = window.innerHeight;
-    }
 
-    init() {
         this.camera = new THREE.PerspectiveCamera(75, this.SCREEN_WIDTH / this.SCREEN_HEIGHT, 1, 10000);
         this.camera.position.z = 450;
 
@@ -20,7 +18,7 @@ export default class BirdsProvider {
         this.birds = [];
         this.boids = [];
 
-        for(var i = 0; i < 9; i++) {
+        for(let i = 0; i < 9; i++) {
             this.boid = this.boids[i] = new Boid();
             this.boid.position.set(Math.random() * 400 - 200, Math.random() * 400 - 200, Math.random() * 400 - 200);
             this.boid.velocity.set(Math.random() * 2 - 1, Math.random() * 2 - 1, Math.random() * 2 - 1);

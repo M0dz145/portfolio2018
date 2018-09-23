@@ -1,6 +1,18 @@
-<script>
-    export default {
-        props: ['alt', 'sizes', 'srcSet', 'src', 'classes', 'styles']
+<script lang="ts">
+    import Vue from "vue";
+    import Component from "vue-class-component";
+
+    @Component({
+        props: {
+            alt: String,
+            sizes: String,
+            srcSet: String,
+            classes: String,
+            styles: String,
+            src: String,
+        }
+    })
+    export default class VImage extends Vue {
     }
 </script>
 
