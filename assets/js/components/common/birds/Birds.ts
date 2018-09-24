@@ -6,7 +6,7 @@ import './Birds.scss'
 @Component({
     template: `<div id="birds" ref="birds"></div>`,
     mounted() {
-        new BirdsProvider(this.$refs.birds);
+        new BirdsProvider(this.$refs.birds, 9);
     }
 })
 export default class Birds extends Vue {

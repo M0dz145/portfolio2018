@@ -32,7 +32,6 @@
 
             return {
                 MobileDetect,
-                parallaxInstance: null,
                 clouds: [
                     {
                         // 1
@@ -66,7 +65,7 @@
     export default class VHome extends Vue {
         private parallaxInstance: Parallax;
 
-        beforeRouteEnter(to, from, next) {
+        public beforeRouteEnter(to, from, next) {
             if (typeof this !== 'undefined') {
                 this.parallaxInstance.enable();
             }
@@ -74,7 +73,7 @@
             next();
         }
 
-        beforeRouteLeave(to, from, next) {
+        public beforeRouteLeave(to, from, next) {
             this.parallaxInstance.disable();
 
             next();
@@ -84,8 +83,6 @@
 
 <template>
     <div id="parallax__container" ref="parallaxContainer">
-        <!--<VSectionText/>-->
-
         <div v-for="(cloud, index) in clouds"
              v-if="!MobileDetect.phone()"
              class="layer cloud"

@@ -30,8 +30,8 @@
             <span class="copyright__text">© chevalier-xavier.fr</span>
         </div>
 
-        <transition mode="out-in" appear>
-            <router-view/>
+        <transition name="app" mode="out-in" appear>
+            <router-view class="applicationTransition"/>
         </transition>
 
         <VCursor/>

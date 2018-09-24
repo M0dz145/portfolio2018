@@ -5,7 +5,7 @@ import three_js from "three-js";
 const THREE = three_js(['Projector', 'CanvasRenderer']);
 
 export default class BirdsProvider {
-    constructor(element) {
+    constructor(element, numberOfBirds) {
         this.element = element;
         this.SCREEN_WIDTH = window.innerWidth;
         this.SCREEN_HEIGHT = window.innerHeight;
@@ -18,7 +18,7 @@ export default class BirdsProvider {
         this.birds = [];
         this.boids = [];
 
-        for(let i = 0; i < 9; i++) {
+        for(let i = 0; i < numberOfBirds; i++) {
             this.boid = this.boids[i] = new Boid();
             this.boid.position.set(Math.random() * 400 - 200, Math.random() * 400 - 200, Math.random() * 400 - 200);
             this.boid.velocity.set(Math.random() * 2 - 1, Math.random() * 2 - 1, Math.random() * 2 - 1);

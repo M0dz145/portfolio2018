@@ -24,12 +24,33 @@ $button-size: 20px;
         opacity: 0;
     }
 
+    svg {
+        path {
+            transform-origin: center;
+        }
+
+        .hoverCirclePath {
+            opacity: 0;
+            stroke: #fff;
+            stroke-width: 2px;
+            transform: scale(0);
+            transform-origin: center;
+            transition: all .2s $easeOutQuad;
+        }
+    }
+
     &.hover {
         svg {
-            transform: rotate(-90deg) scale(1.8);
+            transform: scale(0.8);
 
             path {
                 fill: #eee;
+            }
+
+            .hoverCirclePath {
+                fill: transparent;
+                opacity: 1;
+                transform: scale(1.8);
             }
         }
     }

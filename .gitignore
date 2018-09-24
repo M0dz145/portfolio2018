@@ -11,6 +11,7 @@
 /vendor
 /.idea
 /.env
+/public/dist
 
 /.DS_Store
 /dist/

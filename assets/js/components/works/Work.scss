@@ -1,0 +1,74 @@
+@import "~mixins";
+
+$work-width: 180px;
+$work-height: 245px;
+$overlay-height: 140px;
+$overlay-padding: 20px;
+$work-active-width: 45vh;
+$work-active-height: 75vh;
+
+.work {
+    position: relative;
+    width: $work-width;
+    height: $work-height;
+    overflow: hidden;
+    border-radius: 20px;
+    //noinspection CssOptimizeSimilarProperties
+    background-repeat: no-repeat;
+    //noinspection CssOptimizeSimilarProperties
+    background-position: center center;
+    background-size: cover;
+
+    .work__overlay {
+        position: relative;
+        margin-top: $work-height - $overlay-height;
+        height: $overlay-height;
+        background: linear-gradient(to top, rgba(0, 0, 0, .85), transparent);
+        transition: opacity .2s $easeOutQuad;
+
+        .work__text {
+            position: absolute;
+            bottom: 20px;
+            padding: 0 $overlay-padding;
+            width: calc(100% - #{$overlay-padding * 2});
+            color: #fff;
+            text-align: center;
+            transition: all .2s .2s $easeOutQuad;
+        }
+    }
+
+    &:hover:not(.work--active) {
+        .work__overlay {
+            opacity: .8;
+        }
+    }
+
+    &.work--active {
+        width: $work-active-width;
+        height: $work-active-height;
+
+        .work__overlay {
+            transition: all .4s $easeOutQuad, margin-top .4s $easeOutQuad;
+        }
+
+        &.work--fullscreen {
+            width: 90vw;
+            height: 90vh;
+
+            .work__overlay {
+                margin-top: calc(90vh - #{$overlay-height});
+                transition: all .4s $easeOutQuad, margin-top .2s .4s $easeOutQuad;
+            }
+        }
+
+        .work__overlay {
+            margin-top: calc(#{$work-active-height} - #{$overlay-height});
+
+            .work__text {
+                bottom: 40px;
+                font-size: 32px;
+                text-align: left;
+            }
+        }
+    }
+}

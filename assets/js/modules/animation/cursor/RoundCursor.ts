@@ -1,8 +1,6 @@
 import ClickableElement from "@modules/link/ClickableElement";
 
 export default class RoundCursor {
-    private readonly listenersEvents: Array<string> = ['mouseenter', 'mouseleave'];
-    private clickableElements: Element[];
     private cursorElement: Element;
     private cursorPath: Element;
     private x: number = window.innerWidth / 2;
