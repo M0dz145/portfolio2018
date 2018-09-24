@@ -28,7 +28,7 @@
             position: relative;
             height: $overlay-height;
             background: linear-gradient(to top, rgba(0, 0, 0, .85), transparent);
-            transition: opacity .2s $easeOutQuad;
+            transition: height .2s $easeOutQuad, opacity .2s $easeOutQuad;
 
             .work__text {
                 position: absolute;
@@ -37,7 +37,7 @@
                 width: calc(100% - #{$overlay-padding * 2});
                 text-align: center;
                 color: #fff;
-                transition: all .2s .2s $easeOutQuad;
+                transition: all .2s $easeOutQuad;
             }
         }
     }
@@ -57,6 +57,17 @@
         &.work--fullscreen {
             width: 90vw;
             height: 90vh;
+
+            .workOverlay {
+                .work__overlay {
+                    height: calc(#{$overlay-height} + 50px);
+
+                    .work__text {
+                        bottom: 120px;
+                        transition: all .2s .2s $easeOutQuad;
+                    }
+                }
+            }
         }
 
         .workOverlay {
@@ -65,6 +76,16 @@
                     bottom: 40px;
                     font-size: 32px;
                     text-align: left;
+
+                    .work__textDescription {
+                        position: absolute;
+                        display: block;
+                        opacity: 0;
+                        margin-top: 20px;
+                        padding-right: 10px;
+                        font-weight: 300;
+                        animation: fadeIn .4s .4s $easeOutQuad forwards;
+                    }
                 }
             }
         }

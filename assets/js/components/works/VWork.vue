@@ -15,6 +15,8 @@
             VImage
         },
         mounted(): void {
+            this.buildBackgroundImages();
+
             document.addEventListener('mousemove', (event: MouseEvent) => {
                 if (this.fullscreen) {
                     let backgroundPositionX = ((event.clientX - this.$refs.work.offsetLeft) / this.$refs.work.offsetWidth) * 100,
@@ -43,6 +45,19 @@
         }
     })
     export default class VWork extends Vue {
+        public backgroundImage: string = '';
+
+        public buildBackgroundImages(): void {
+            // noinspection TypeScriptUnresolvedVariable
+            const images = this.$props.image.images.slice(0);
+            images.reverse().forEach((image, index) => {
+                if (index > 0) {
+                    this.backgroundImage += `, `;
+                }
+
+                this.backgroundImage += `url(${image.path})`;
+            });
+        }
     }
 </script>
 
@@ -52,10 +67,13 @@
          :class="{
             'work--fullscreen': fullscreen
          }"
-         :style="{backgroundImage: `url(${image.src})`}">
+         :style="{backgroundImage}">
         <div class="workOverlay">
             <div class="work__overlay">
-                <span class="work__text">{{ category }}</span>
+                <span class="work__text">
+                    {{ category }}
+                    <span v-if="fullscreen" class="work__textDescription"> {{ description }}</span>
+                </span>
             </div>
         </div>
     </div>

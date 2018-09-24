@@ -115,7 +115,7 @@ export default class RoundCursor {
         const speed = this.getSpeed();
 
         let scale = speed / 500 + 1;
-        let tailPos = speed / 10 + 50;
+        let tailPos = speed / 2 + 50;
 
         if (tailPos < 0) {
             tailPos = 0;

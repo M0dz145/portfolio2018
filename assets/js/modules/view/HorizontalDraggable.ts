@@ -8,8 +8,7 @@ export default class HorizontalDraggable {
 
     constructor(viewport: Element, contentElement: HTMLElement) {
         this.contentElement = contentElement;
-        const lastChildrenOfContentElement = this.contentElement.children[this.contentElement.children.length - 1] as HTMLElement;
-        this.contentElement.style.width = `${lastChildrenOfContentElement.offsetLeft + window.innerWidth / 4}px`;
+        this.setWidthOfContentElement();
 
         this.scrollBooster = new ScrollBooster({
             viewport,
@@ -18,7 +17,6 @@ export default class HorizontalDraggable {
             onUpdate: (data: scrollBoosterUpdate) => {
                 if (!this.isPaused) {
                     this.contentElement.style.transform = `translateX(${-data.position.x}px)`;
-
                     this.userCallbacks.forEach(callback => callback(data));
                 }
             }
@@ -32,6 +30,11 @@ export default class HorizontalDraggable {
                 y: 0
             });
         });
+    }
+
+    private setWidthOfContentElement(): void {
+        const lastChildrenOfContentElement = this.contentElement.children[this.contentElement.children.length - 1] as HTMLElement;
+        this.contentElement.style.width = `${lastChildrenOfContentElement.offsetLeft + window.innerWidth / 4}px`;
     }
 
     public pause(): void {

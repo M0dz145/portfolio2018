@@ -11,7 +11,7 @@
     import dragImage from '@img/drag.svg';
     import {scrollBoosterUpdate} from 'scrollbooster'
     import WorksList from './WorksList';
-    import HorizontalDraggable from '../../modules/view/HorizontalDraggable';
+    import HorizontalDraggable from '@modules/view/HorizontalDraggable';
 
     @Component({
         components: {
@@ -50,10 +50,6 @@
             this.horizontalDraggable.goToStart();
         }
 
-        public unselectActiveWork(): void {
-            this.workActive = {} as Work;
-        }
-
         public onWorkClick(work: Work): void {
             if (this.horizontalDraggable.getUpdate().dragOffsetPosition.x !== 0) {
                 return;
@@ -61,9 +57,13 @@
 
             if (work.id === this.workActive.id || this.workActive.fullscreen) {
                 this.aWorkIsOnFullscreen = work.fullscreen = !work.fullscreen;
+
+                const activeWorkDescription = this.$refs.activeWorkDescription as HTMLElement;
                 if (this.aWorkIsOnFullscreen) {
+                    activeWorkDescription.classList.add('hide');
                     this.horizontalDraggable.pause();
                 } else {
+                    activeWorkDescription.classList.remove('hide');
                     this.horizontalDraggable.goToStart();
                     this.horizontalDraggable.resume();
                 }
