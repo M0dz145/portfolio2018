@@ -29,7 +29,7 @@
         }
     })
     export default class VContactIsland extends Vue {
-        private hover: boolean = false;
+        public hover: boolean = false;
         private active: boolean = false;
         private parallaxIsEnabled: boolean;
 
@@ -87,5 +87,5 @@
 </template>
 
 <style lang="scss" scoped>
-    @import "./ContactIsland";
+    @import "ContactIsland";
 </style>

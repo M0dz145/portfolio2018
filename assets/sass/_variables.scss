@@ -35,3 +35,15 @@ $island-width: (
         work: 635px,
         contact: 400px
 );
+
+$work-width: 180px;
+$work-height-max: 245px;
+$work-height: 40vh;
+$overlay-height: 15vh;
+$overlay-padding: 20px;
+$work-active-width: 25vw;
+$work-active-height: 75vh;
+
+$elements: 15;
+$espacementBetweenElements: 4.2;
+$initialLeft: calc(#{$work-active-width} + 100px);

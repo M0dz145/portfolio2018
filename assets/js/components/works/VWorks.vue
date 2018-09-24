@@ -7,6 +7,8 @@
     import Work from '@modules/work/Work';
     // noinspection TypeScriptCheckImport
     import backspaceImage from '@img/backspace.svg';
+    // noinspection TypeScriptCheckImport
+    import dragImage from '@img/drag.svg';
     import {scrollBoosterUpdate} from 'scrollbooster'
     import WorksList from './WorksList';
     import HorizontalDraggable from '../../modules/view/HorizontalDraggable';
@@ -15,21 +17,21 @@
         components: {
             VImage,
             VWork,
-            backspaceImage
+            backspaceImage,
+            dragImage
         },
         mounted(): void {
             this.horizontalDraggable = new HorizontalDraggable(document.getElementById('works'), this.$refs.draggableContainer.$el);
             this.horizontalDraggable.onUpdate((data: scrollBoosterUpdate) => {
-                if(this.$refs.activeWorkDescription) {
+                if (this.$refs.activeWorkDescription) {
                     if (data.position.x < -40 || data.position.x > 60) {
                         this.$refs.activeWorkDescription.classList.add('hide');
+                        this.showHandDragHelper = false;
                     } else {
                         this.$refs.activeWorkDescription.classList.remove('hide');
                     }
                 }
             });
-
-            this.$refs.draggableContainer.$el.style.width = `${this.$refs.draggableContainer.$el.children[this.$refs.draggableContainer.$el.children.length - 1].offsetLeft + window.innerWidth / 4}px`;
         },
         beforeDestroy(): void {
             this.horizontalDraggable.destroy();
@@ -41,6 +43,7 @@
         private removedWorks: Array<Work> = [];
         private horizontalDraggable: HorizontalDraggable;
         private aWorkIsOnFullscreen: boolean = false;
+        public showHandDragHelper: boolean = true;
 
         public selectActiveWork(work: Work): void {
             this.workActive = work;
@@ -89,6 +92,12 @@
         <div class="activeWorkDescription" ref="activeWorkDescription">
             <h2 class="activeWorkDescription__title">{{ workActive.title }}</h2>
             <span class="activeWorkDescription__text">{{ workActive.description }}</span>
+
+            <div class="activeWorkDescription__iconContainer" :class="{'hide': !showHandDragHelper}">
+                <backspaceImage class="activeWorkDescription__icon leftArrow"/>
+                <dragImage class="activeWorkDescription__icon hand"/>
+                <backspaceImage class="activeWorkDescription__icon rightArrow"/>
+            </div>
         </div>
 
         <transition-group name="work"

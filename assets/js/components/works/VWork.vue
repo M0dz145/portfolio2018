@@ -53,8 +53,10 @@
             'work--fullscreen': fullscreen
          }"
          :style="{backgroundImage: `url(${image.src})`}">
-        <div class="work__overlay">
-            <span class="work__text">{{ category }}</span>
+        <div class="workOverlay">
+            <div class="work__overlay">
+                <span class="work__text">{{ category }}</span>
+            </div>
         </div>
     </div>
 </template>

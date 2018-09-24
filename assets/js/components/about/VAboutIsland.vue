@@ -31,7 +31,7 @@
         }
     })
     export default class VAboutIsland extends Vue {
-        private hover: boolean = false;
+        public hover: boolean = false;
         private active: boolean = false;
         private parallaxIsEnabled: boolean;
         public birth: number = Math.abs(new Date().getUTCFullYear() - 1996);
