@@ -63,36 +63,20 @@
         }
     })
     export default class VHome extends Vue {
-        private parallaxInstance: Parallax;
-        private parallaxIsEnabled: boolean = true;
+        public parallaxInstance: Parallax;
+        private noIslandWasOpen: boolean = true;
 
-        public beforeRouteEnter(to, from, next) {
-            if (typeof this !== 'undefined') {
-                this.parallaxInstance.enable();
-            }
-
-            next();
+        public islandClose(): void {
+            this.noIslandWasOpen = true;
         }
 
-        public beforeRouteLeave(to, from, next) {
-            this.parallaxInstance.disable();
-
-            next();
-        }
-
-        public enabledParallax(): void {
-            this.parallaxInstance.enable();
-            this.parallaxIsEnabled = true;
-        }
-
-        public disabledParallax(): void {
-            this.parallaxInstance.disable();
-            this.parallaxIsEnabled = false;
+        public islandOpen(): void {
+            this.noIslandWasOpen = false;
         }
 
         public onBodyClick(): void {
-            if(!this.parallaxIsEnabled) {
-                this.enabledParallax();
+            if(!this.noIslandWasOpen) {
+                this.islandClose();
             }
         }
     }
@@ -100,7 +84,7 @@
 
 <template>
     <div id="parallax__container" ref="parallaxContainer"
-         :class="{'parallaxEnabled': parallaxIsEnabled}"
+         :class="{'parallaxEnabled': noIslandWasOpen}"
          @click="onBodyClick">
         <div v-for="(cloud, index) in clouds"
              v-if="!MobileDetect.phone()"
@@ -118,21 +102,21 @@
         <div class="layer island__container island__container--work"
              :data-depth="!MobileDetect.phone() ? 0.40 : null">
             <VWorkIsland
-                    :parallaxIsEnabled="parallaxIsEnabled"/>
+                    :noIslandWasOpen="noIslandWasOpen"/>
         </div>
         <div class="layer island__container island__container--about"
              :data-depth="!MobileDetect.phone() ? 0.70 : null">
             <VAboutIsland
-                    :parallaxIsEnabled="parallaxIsEnabled"
-                    @enabledParallax="enabledParallax"
-                    @disabledParallax="disabledParallax"/>
+                    :noIslandWasOpen="noIslandWasOpen"
+                    @islandClose="islandClose"
+                    @islandOpen="islandOpen"/>
         </div>
         <div class="layer island__container island__container--contact"
              :data-depth="!MobileDetect.phone() ? 0.25 : null">
             <VContactIsland
-                    :parallaxIsEnabled="parallaxIsEnabled"
-                    @enabledParallax="enabledParallax"
-                    @disabledParallax="disabledParallax"/>
+                    :noIslandWasOpen="noIslandWasOpen"
+                    @islandClose="islandClose"
+                    @islandOpen="islandOpen"/>
         </div>
     </div>
 </template>

@@ -6,7 +6,7 @@
 
     @Component({
         props: {
-            parallaxIsEnabled: Boolean
+            noIslandWasOpen: Boolean
         },
         data() {
             const svgProperties = {
@@ -23,8 +23,8 @@
             }
         },
         watch: {
-            parallaxIsEnabled(parallaxIsEnabled: boolean): void {
-                if(parallaxIsEnabled) {
+            noIslandWasOpen(noIslandWasOpen: boolean): void {
+                if(noIslandWasOpen) {
                     this.active = false;
                 }
             }
@@ -33,20 +33,18 @@
     export default class VAboutIsland extends Vue {
         public hover: boolean = false;
         private active: boolean = false;
-        private parallaxIsEnabled: boolean;
+        private noIslandWasOpen: boolean;
         public birth: number = Math.abs(new Date().getUTCFullYear() - 1996);
 
         public onClickIsland(event): void {
             this.hover = false;
-            if(!this.parallaxIsEnabled) {
+            if(!this.noIslandWasOpen) {
                 return;
             }
             event.stopPropagation();
 
             this.active = !this.active;
-            console.log('onClickIsland');
-
-            this.$emit(this.active ? 'disabledParallax' : 'enabledParallax');
+            this.$emit(this.active ? 'islandOpen' : 'islandClose');
         }
     }
 </script>
