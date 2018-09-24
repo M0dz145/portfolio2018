@@ -7,75 +7,55 @@
     import Work from '@modules/work/Work';
     // noinspection TypeScriptCheckImport
     import backspaceImage from '@img/backspace.svg';
+    import {scrollBoosterUpdate} from 'scrollbooster'
+    import WorksList from './WorksList';
+    import HorizontalDraggable from '../../modules/view/HorizontalDraggable';
 
     @Component({
         components: {
             VImage,
             VWork,
             backspaceImage
+        },
+        mounted(): void {
+            this.horizontalDraggable = new HorizontalDraggable(document.getElementById('works'), this.$refs.draggableContainer.$el);
+            this.horizontalDraggable.onUpdate((data: scrollBoosterUpdate) => {
+                if (data.isDragging) {
+                    this.$refs.activeWorkDescription.classList.add('hide');
+                } else if (data.position.x < 20) {
+                    this.$refs.activeWorkDescription.classList.remove('hide');
+                }
+            });
+
+            this.$refs.draggableContainer.$el.style.width = `${this.$refs.draggableContainer.$el.children[this.$refs.draggableContainer.$el.children.length - 1].offsetLeft + window.innerWidth / 4}px`;
         }
     })
     export default class VWorks extends Vue {
-        public works: Array<Work> = [
-            new Work(1,
-                'Elkyos',
-                'Visual redesign',
-                `Elkyos is an MMORPG project based on a fantastic medieval universe with a slight touch of steampunk. Formerly in charge of all the graphic aspect of the site, I had to leave the project early after my 11th version.`,
-                require('@img/works/elkyos.jpg')
-            ),
-            new Work(2,
-                'Nicolas Chevalier',
-                'Portfolio',
-                `Portfolio of Nicolas Chevalier, a young application developer, but also my older brother. With his ideas, and my desire for a clear/pure design, I was able to develop the graphic aspect of the site.`,
-                require('@img/works/nicolasChevalier.jpg')
-            ),
-            new Work(3,
-                'Immobilis',
-                'Commercial website',
-                `Immobilis is a project designed by 3 people in the school year of high school. This site lists all real estate ads previously created by apartment / house owners... I developed the whole graphic aspect of the site and a very large part of its functionalities.`,
-                require('@img/works/immobilis.jpg')
-            ),
-            new Work(4,
-                'Lowpoly Portrait',
-                'Paint',
-                `My personal portrait in lowpoly created in Photoshop.`,
-                require('@img/works/paint/lowpoly_me.jpg')
-            ),
-            new Work(5,
-                'Lowpoly Lion',
-                'Paint',
-                `A lion in lowpoly created in Photoshop.`,
-                require('@img/works/paint/lowpoly_lion.jpg')
-            ),
-            new Work(6,
-                'Deer',
-                'Paint',
-                `Unfinished drawing of a deer on a hill, hand drawn.`,
-                require('@img/works/paint/cerf1.jpg')
-            ),
-            new Work(7,
-                'Deer',
-                'Paint',
-                `Drawing of a deer, hand drawn.`,
-                require('@img/works/paint/cerf2.jpg')
-            ),
-            new Work(8,
-                'Eye',
-                'Paint',
-                `Unfinished drawing of a deer on a hill, hand drawn.`,
-                require('@img/works/paint/eye.jpg')
-            ),
-        ];
+        public works: Array<Work> = WorksList;
         public workActive: Work = new Collection(this.works).first();
         private removedWorks: Array<Work> = [];
+        private horizontalDraggable: HorizontalDraggable;
+
+        public selectActiveWork(work: Work): void {
+            this.workActive = work;
+            this.horizontalDraggable.goToStart();
+        }
+
+        public unselectActiveWork(): void {
+            this.workActive = {} as Work;
+        }
 
         public onWorkClick(work: Work): void {
+            if (this.horizontalDraggable.getUpdate().dragOffsetPosition.x !== 0) {
+                return;
+            }
+
             if (work.id === this.workActive.id || this.workActive.fullscreen) {
                 work.fullscreen = !work.fullscreen;
                 return;
             }
 
-            this.workActive = work;
+            this.selectActiveWork(work);
             const worksCollection = new Collection(this.works);
             this.removedWorks = worksCollection.getAllBefore(work);
             // Delete all works before the clicked work
@@ -93,16 +73,19 @@
 
 <template>
     <div id="works">
-        <div class="activeWorkDescription">
+        <div class="activeWorkDescription" ref="activeWorkDescription">
             <h2 class="activeWorkDescription__title">{{ workActive.title }}</h2>
             <span class="activeWorkDescription__text">{{ workActive.description }}</span>
         </div>
 
         <transition-group name="work"
                           tag="div"
+                          ref="draggableContainer"
+                          class="worksContainer"
                           @after-leave="onWorkAfterLeave">
             <VWork v-for="work in works"
                    data-clickable
+                   data-draggable
                    :data-index="work.id"
                    @click.native="onWorkClick(work)"
                    :class="{

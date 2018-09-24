@@ -39,6 +39,7 @@
     "raleway-webfont": "^3.0.1",
     "responsive-loader": "^1.1.0",
     "sass-loader": "^6.0.7",
+    "scrollbooster": "^1.1.0",
     "three-js": "^79.0.0",
     "ts-loader": "^5.1.1",
     "typescript": "^3.0.3",

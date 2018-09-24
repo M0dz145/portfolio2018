@@ -30,6 +30,12 @@ $initialLeft: 440;
         position: absolute;
         top: 160px;
         left: #{$initialLeft}px;
+        transition: all .4s $easeOutQuad;
+
+        &.hide {
+            opacity: 0;
+            transition: all .2s $easeOutQuad;
+        }
 
         .activeWorkDescription__title {
             font-size: 60px;
@@ -48,6 +54,10 @@ $initialLeft: 440;
             font-weight: 200;
             text-transform: uppercase;
         }
+    }
+
+    .worksContainer {
+        height: 100%;
     }
 
     .work {
@@ -79,12 +89,13 @@ $initialLeft: 440;
 
         &.work-leave-active {
             opacity: 0;
-            transform: translate3d(0, 50%, 0);
+            transform: translate3d(-50%, 0, 0);
+            transition: opacity .3s $easeOutQuad, transform .4s $easeOutQuad;
         }
 
         &.work-enter-active {
             opacity: 0;
-            transform: translate3d(50%, 0, 0);
+            transform: translate3d(150%, 0, 0);
         }
 
         //&.work-enter-active {
