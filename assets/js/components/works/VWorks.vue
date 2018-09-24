@@ -20,14 +20,19 @@
         mounted(): void {
             this.horizontalDraggable = new HorizontalDraggable(document.getElementById('works'), this.$refs.draggableContainer.$el);
             this.horizontalDraggable.onUpdate((data: scrollBoosterUpdate) => {
-                if (data.position.x < -40 || data.position.x > 60) {
-                    this.$refs.activeWorkDescription.classList.add('hide');
-                } else {
-                    this.$refs.activeWorkDescription.classList.remove('hide');
+                if(this.$refs.activeWorkDescription) {
+                    if (data.position.x < -40 || data.position.x > 60) {
+                        this.$refs.activeWorkDescription.classList.add('hide');
+                    } else {
+                        this.$refs.activeWorkDescription.classList.remove('hide');
+                    }
                 }
             });
 
             this.$refs.draggableContainer.$el.style.width = `${this.$refs.draggableContainer.$el.children[this.$refs.draggableContainer.$el.children.length - 1].offsetLeft + window.innerWidth / 4}px`;
+        },
+        beforeDestroy(): void {
+            this.horizontalDraggable.destroy();
         }
     })
     export default class VWorks extends Vue {

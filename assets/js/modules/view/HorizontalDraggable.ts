@@ -14,7 +14,7 @@ export default class HorizontalDraggable {
             content: contentElement,
             emulateScroll: true,
             onUpdate: (data: scrollBoosterUpdate) => {
-                if(!this.isPaused) {
+                if (!this.isPaused) {
                     contentElement.style.transform = `translateX(${-data.position.x}px)`;
 
                     this.userCallbacks.forEach(callback => callback(data));
@@ -39,10 +39,14 @@ export default class HorizontalDraggable {
         this.userCallbacks.push(callback);
     }
 
-    public goToStart():void {
+    public goToStart(): void {
         this.scrollBooster.setPosition({
             x: 0,
             y: 0
         });
+    }
+
+    public destroy(): void {
+        this.scrollBooster.destroy();
     }
 }

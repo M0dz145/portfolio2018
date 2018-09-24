@@ -4,10 +4,20 @@
     width: 100%;
     height: 100%;
     background: transparent radial-gradient(ellipse at center center, transparent 59%, rgba(0, 0, 0, 0.25) 100%) no-repeat scroll 0 0;
+
+    &:not(.parallaxEnabled) {
+        .layer > * {
+            opacity: .2;
+        }
+    }
 }
 
 .layer {
     @include no-user-select();
+
+    > * {
+        transition: opacity .4s $easeOutQuad;
+    }
 }
 
 .island__container {

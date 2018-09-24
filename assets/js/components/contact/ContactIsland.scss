@@ -4,6 +4,22 @@
     width: get-island-width(contact);
     animation: upAndDownMoveCenter 14s infinite;
 
+    .island__section {
+        left: 100%;
+        padding-left: 25px;
+        width: 300px;
+        transform: translateX(-25%);
+    }
+
+    &.active {
+        opacity: 1 !important;
+
+        .island__section {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
     .island__info::before {
         border: 1px solid #408d39;
         background-color: #07680b;

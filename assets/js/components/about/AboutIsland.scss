@@ -6,6 +6,23 @@
     width: get-island-width(about);
     animation: upAndDownMoveCenter 10s infinite;
 
+    .island__section {
+        bottom: 100%;
+        padding-bottom: 25px;
+        width: 100%;
+        text-align: center;
+        transform: translateY(25%);
+    }
+
+    &.active {
+        opacity: 1 !important;
+
+        .island__section {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
     .island__info::before {
         border: 1px solid #47667d;
         background-color: #34495e;

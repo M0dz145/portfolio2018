@@ -64,6 +64,7 @@
     })
     export default class VHome extends Vue {
         private parallaxInstance: Parallax;
+        private parallaxIsEnabled: boolean = true;
 
         public beforeRouteEnter(to, from, next) {
             if (typeof this !== 'undefined') {
@@ -78,11 +79,29 @@
 
             next();
         }
+
+        public enabledParallax(): void {
+            this.parallaxInstance.enable();
+            this.parallaxIsEnabled = true;
+        }
+
+        public disabledParallax(): void {
+            this.parallaxInstance.disable();
+            this.parallaxIsEnabled = false;
+        }
+
+        public onBodyClick(): void {
+            if(!this.parallaxIsEnabled) {
+                this.enabledParallax();
+            }
+        }
     }
 </script>
 
 <template>
-    <div id="parallax__container" ref="parallaxContainer">
+    <div id="parallax__container" ref="parallaxContainer"
+         :class="{'parallaxEnabled': parallaxIsEnabled}"
+         @click="onBodyClick">
         <div v-for="(cloud, index) in clouds"
              v-if="!MobileDetect.phone()"
              class="layer cloud"
@@ -98,15 +117,22 @@
 
         <div class="layer island__container island__container--work"
              :data-depth="!MobileDetect.phone() ? 0.40 : null">
-            <VWorkIsland/>
+            <VWorkIsland
+                    :parallaxIsEnabled="parallaxIsEnabled"/>
         </div>
         <div class="layer island__container island__container--about"
              :data-depth="!MobileDetect.phone() ? 0.70 : null">
-            <VAboutIsland/>
+            <VAboutIsland
+                    :parallaxIsEnabled="parallaxIsEnabled"
+                    @enabledParallax="enabledParallax"
+                    @disabledParallax="disabledParallax"/>
         </div>
         <div class="layer island__container island__container--contact"
              :data-depth="!MobileDetect.phone() ? 0.25 : null">
-            <VContactIsland/>
+            <VContactIsland
+                    :parallaxIsEnabled="parallaxIsEnabled"
+                    @enabledParallax="enabledParallax"
+                    @disabledParallax="disabledParallax"/>
         </div>
     </div>
 </template>
