@@ -6,8 +6,8 @@ export default class Work {
     public image: object;
     public fullscreen: boolean = false;
 
-    constructor(id: number, title: string, category: string, description: string, image: object) {
-        this.id = id;
+    constructor(title: string, category: string, description: string, image: object) {
+        this.id = Math.floor(Math.random() * 100000000 + 1);
         this.title = title;
         this.category = category;
         this.description = description;

@@ -31,10 +31,20 @@ export default class RoundCursor {
             }
         });
 
+        document.addEventListener('mousedown', this.onMouseDown.bind(this));
+        document.addEventListener('mouseup', this.onMouseUp.bind(this));
         document.addEventListener('mouseleave', this.hideCursor.bind(this));
         document.addEventListener('mouseenter', this.showCursor.bind(this));
 
         this.run();
+    }
+
+    private onMouseDown(): void {
+        this.cursorElement.classList.add('click');
+    }
+
+    private onMouseUp(): void {
+        this.cursorElement.classList.remove('click');
     }
 
     private hoverCursor(): void {

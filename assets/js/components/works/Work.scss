@@ -19,6 +19,11 @@ $work-active-height: 75vh;
     background-position: center center;
     background-size: cover;
 
+    &:active {
+        transform: scale(.97);
+        transition: transform .1s $easeOutQuad;
+    }
+
     .work__overlay {
         position: relative;
         margin-top: $work-height - $overlay-height;

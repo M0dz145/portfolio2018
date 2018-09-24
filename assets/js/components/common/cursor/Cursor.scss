@@ -1,13 +1,13 @@
 @import '~variables';
 @import '~mixins';
 
+$dot-size: 40px;
+$button-size: 20px;
+
 * {
     // Replace native cursor
     cursor: none !important;
 }
-
-$dot-size: 40px;
-$button-size: 20px;
 
 .dot {
     z-index: z(cursor);
@@ -41,7 +41,7 @@ $button-size: 20px;
 
     &.hover {
         svg {
-            transform: scale(0.8);
+            transform: scale(0.7);
 
             path {
                 fill: #eee;
@@ -52,6 +52,12 @@ $button-size: 20px;
                 opacity: 1;
                 transform: scale(1.8);
             }
+        }
+    }
+
+    &.click {
+        svg {
+            transform: scale(.5);
         }
     }
 
