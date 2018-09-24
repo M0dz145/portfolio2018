@@ -21,32 +21,56 @@ export default [
     ),
     new Work(4,
         'Lowpoly Portrait',
-        'Paint',
+        'Art',
         `My personal portrait in lowpoly created in Photoshop.`,
         require('@img/works/paint/lowpoly_me.jpg')
     ),
     new Work(5,
         'Lowpoly Lion',
-        'Paint',
+        'Art',
         `A lion in lowpoly created in Photoshop.`,
         require('@img/works/paint/lowpoly_lion.jpg')
     ),
     new Work(6,
         'Deer',
-        'Paint',
+        'Art',
         `Unfinished drawing of a deer on a hill, hand drawn.`,
         require('@img/works/paint/cerf1.jpg')
     ),
     new Work(7,
         'Deer',
-        'Paint',
+        'Art',
         `Drawing of a deer, hand drawn.`,
         require('@img/works/paint/cerf2.jpg')
     ),
     new Work(8,
         'Eye',
-        'Paint',
+        'Art',
         `Unfinished drawing of a deer on a hill, hand drawn.`,
         require('@img/works/paint/eye.jpg')
     ),
+    new Work(9,
+        'Fox',
+        'Art',
+        ``,
+        require('@img/works/paint/fox.jpg')
+    ),
+    new Work(10,
+        'Deer',
+        'Art',
+        ``,
+        require('@img/works/paint/cerf3.jpg')
+    ),
+    new Work(11,
+        'Deer',
+        'Art',
+        ``,
+        require('@img/works/paint/cerf4.jpg')
+    ),
+    new Work(12,
+        'Berry Banks',
+        'Application website',
+        `Berry Banks is a tool that allows you to easily manage your bank accounts thanks to numerous features and statistics that provide a broad overview of your expenses and savings.`,
+        require('@img/works/berry-banks.png')
+    )
 ];

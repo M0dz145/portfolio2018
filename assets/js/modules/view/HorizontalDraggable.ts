@@ -3,6 +3,7 @@ import ScrollBooster, {scrollBoosterUpdate} from "scrollbooster";
 export default class HorizontalDraggable {
     private scrollBooster: ScrollBooster;
     private userCallbacks: Array<Function> = [];
+    private isPaused: boolean = false;
 
     constructor(viewport: Element, contentElement: HTMLElement) {
         const lastChildrenOfContentElement = contentElement.children[contentElement.children.length - 1] as HTMLElement;
@@ -13,11 +14,21 @@ export default class HorizontalDraggable {
             content: contentElement,
             emulateScroll: true,
             onUpdate: (data: scrollBoosterUpdate) => {
-                contentElement.style.transform = `translateX(${-data.position.x}px)`;
+                if(!this.isPaused) {
+                    contentElement.style.transform = `translateX(${-data.position.x}px)`;
 
-                this.userCallbacks.forEach(callback => callback(data));
+                    this.userCallbacks.forEach(callback => callback(data));
+                }
             }
         });
+    }
+
+    public pause(): void {
+        this.isPaused = true;
+    }
+
+    public resume(): void {
+        this.isPaused = false;
     }
 
     public getUpdate(): scrollBoosterUpdate {

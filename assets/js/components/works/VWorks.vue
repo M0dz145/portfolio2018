@@ -20,9 +20,9 @@
         mounted(): void {
             this.horizontalDraggable = new HorizontalDraggable(document.getElementById('works'), this.$refs.draggableContainer.$el);
             this.horizontalDraggable.onUpdate((data: scrollBoosterUpdate) => {
-                if (data.isDragging) {
+                if (data.position.x < -40 || data.position.x > 60) {
                     this.$refs.activeWorkDescription.classList.add('hide');
-                } else if (data.position.x < 20) {
+                } else {
                     this.$refs.activeWorkDescription.classList.remove('hide');
                 }
             });
@@ -35,6 +35,7 @@
         public workActive: Work = new Collection(this.works).first();
         private removedWorks: Array<Work> = [];
         private horizontalDraggable: HorizontalDraggable;
+        private aWorkIsOnFullscreen: boolean = false;
 
         public selectActiveWork(work: Work): void {
             this.workActive = work;
@@ -51,7 +52,14 @@
             }
 
             if (work.id === this.workActive.id || this.workActive.fullscreen) {
-                work.fullscreen = !work.fullscreen;
+                this.aWorkIsOnFullscreen = work.fullscreen = !work.fullscreen;
+                if (this.aWorkIsOnFullscreen) {
+                    this.horizontalDraggable.pause();
+                } else {
+                    this.horizontalDraggable.goToStart();
+                    this.horizontalDraggable.resume();
+                }
+
                 return;
             }
 
@@ -89,9 +97,9 @@
                    :data-index="work.id"
                    @click.native="onWorkClick(work)"
                    :class="{
-                       'work--active': workActive.id === work.id,
-                       'work--fullscreen': workActive.fullscreen
+                       'work--active': workActive.id === work.id
                    }"
+                   :fullscreen="work.fullscreen"
                    :key="work.id"
                    :title="work.title"
                    :category="work.category"

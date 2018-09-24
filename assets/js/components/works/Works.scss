@@ -62,7 +62,7 @@ $initialLeft: 440;
 
     .work {
         position: absolute;
-        bottom: 150px;
+        bottom: 135px;
         transition: all .4s $easeOutQuad;
 
         @for $i from 0 to $elements {
