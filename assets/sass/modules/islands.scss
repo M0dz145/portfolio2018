@@ -1,9 +1,21 @@
 @import "~variables";
 @import "~mixins";
 
-#parallax__container:not(.parallaxEnabled) {
-    .island__info {
-        display: none;
+#parallax__container:not(.noIslandWasOpen) {
+    .island {
+        .island__info {
+            display: none;
+        }
+    }
+
+    .island:not(.active) {
+        .island__svg {
+            path {
+                &:hover {
+                    stroke-width: 0;
+                }
+            }
+        }
     }
 }
 

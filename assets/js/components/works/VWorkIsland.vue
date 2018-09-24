@@ -7,7 +7,7 @@
 
     @Component({
         props: {
-            parallaxIsEnabled: Boolean
+            noIslandWasOpen: Boolean
         },
         components: {
             VImage
@@ -29,10 +29,10 @@
     })
     export default class VWorkIsland extends Vue {
         public hover: boolean = false;
-        private parallaxIsEnabled: boolean;
+        private noIslandWasOpen: boolean;
 
         public onClickIsland(): void {
-            if (this.parallaxIsEnabled) {
+            if (this.noIslandWasOpen) {
                 this.$router.push({name: 'works'});
             }
         }
@@ -42,7 +42,7 @@
 <template>
     <div class="island" :class="{'hover': hover}">
         <div class="island__info">
-            <span class="island__info__text">Projects</span>
+            <span class="island__info__text">My projects</span>
         </div>
 
         <VImage class="island__littleIsland" :src="littleIslandImage.src" :srcSet="littleIslandImage.srcSet"
