@@ -1,0 +1,10 @@
+{
+  "short_name": "Portfolio",
+  "name": "Xavier Chevalier Portfolio",
+  "start_url": "/",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "orientation": "portrait",
+  "scope": "/",
+  "theme_color": "#ffffff"
+}

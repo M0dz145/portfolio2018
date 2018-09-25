@@ -1,13 +1,16 @@
-const path    = require('path'),
-      multi   = require('multi-loader'),
-      loaders = require('./webpack/loaders');
+const path                     = require('path'),
+      multi                    = require('multi-loader'),
+      loaders                  = require('./webpack/loaders'),
+      ServiceWorkerCachePlugin = require('./webpack/ServiceWorkerCachePlugin');
 
 module.exports = {
-    entry: './assets/js/app.ts',
+    entry: {
+        app: './assets/js/app.ts'
+    },
     output: {
-        path: path.resolve(__dirname, './public/dist'),
-        publicPath: '/dist/',
-        filename: 'build.js?[hash]'
+        path: path.resolve(__dirname, './public'),
+        publicPath: '/',
+        filename: '[name].js?[hash]'
     },
     module: {
         rules: [
@@ -138,6 +141,12 @@ module.exports = {
         }
     },
     performance: {
-        hints: false
-    }
+        hints: false,
+    },
+    stats: {
+        colors: true
+    },
+    plugins: [
+        ServiceWorkerCachePlugin
+    ]
 };
