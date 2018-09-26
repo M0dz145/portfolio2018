@@ -12,6 +12,7 @@
     import {scrollBoosterUpdate} from 'scrollbooster'
     import WorksList from './WorksList';
     import HorizontalDraggable from '@modules/view/HorizontalDraggable';
+    import MobileDetect from "@modules/responsive/MobileDetect";
 
     @Component({
         components: {
@@ -22,16 +23,19 @@
         },
         mounted(): void {
             this.horizontalDraggable = new HorizontalDraggable(document.getElementById('works'), this.$refs.draggableContainer.$el);
-            this.horizontalDraggable.onUpdate((data: scrollBoosterUpdate) => {
-                if (this.$refs.activeWorkDescription) {
-                    if (data.position.x < -40 || data.position.x > 60) {
-                        this.$refs.activeWorkDescription.classList.add('hide');
-                        this.showHandDragHelper = false;
-                    } else {
-                        this.$refs.activeWorkDescription.classList.remove('hide');
+
+            if (!MobileDetect.phone()) {
+                this.horizontalDraggable.onUpdate((data: scrollBoosterUpdate) => {
+                    if (this.$refs.activeWorkDescription) {
+                        if (data.position.x < -40 || data.position.x > 60) {
+                            this.$refs.activeWorkDescription.classList.add('hide');
+                            this.showHandDragHelper = false;
+                        } else {
+                            this.$refs.activeWorkDescription.classList.remove('hide');
+                        }
                     }
-                }
-            });
+                });
+            }
         },
         beforeDestroy(): void {
             this.horizontalDraggable.destroy();
@@ -42,12 +46,16 @@
         public workActive: Work = new Collection(this.works).first();
         private removedWorks: Array<Work> = [];
         private horizontalDraggable: HorizontalDraggable;
-        private aWorkIsOnFullscreen: boolean = false;
         public showHandDragHelper: boolean = true;
+        public MobileDetect: MobileDetect = MobileDetect;
 
         public selectActiveWork(work: Work): void {
             this.workActive = work;
             this.horizontalDraggable.goToStart();
+        }
+
+        private fullscreenMode(work: Work): void {
+            work.fullscreen = !work.fullscreen;
         }
 
         public onWorkClick(work: Work): void {
@@ -55,11 +63,20 @@
                 return;
             }
 
-            if (work.id === this.workActive.id || this.workActive.fullscreen) {
-                this.aWorkIsOnFullscreen = work.fullscreen = !work.fullscreen;
+            if (this.MobileDetect.phone()) {
+                this.fullscreenMode(work);
 
+                // Close all other works fullscreen
+                this.works
+                    .filter(filterWork => filterWork.id !== work.id)
+                    .forEach(work => work.fullscreen = false);
+
+                return;
+            }
+
+            if (work.id === this.workActive.id || this.workActive.fullscreen) {
                 const activeWorkDescription = this.$refs.activeWorkDescription as HTMLElement;
-                if (this.aWorkIsOnFullscreen) {
+                if (this.fullscreenMode(work)) {
                     activeWorkDescription.classList.add('hide');
                     this.horizontalDraggable.pause();
                 } else {
@@ -111,7 +128,7 @@
                    :data-index="work.id"
                    @click.native="onWorkClick(work)"
                    :class="{
-                       'work--active': workActive.id === work.id
+                       'work--active': workActive.id === work.id && !MobileDetect.phone()
                    }"
                    :fullscreen="work.fullscreen"
                    :key="work.id"

@@ -1,4 +1,5 @@
 import ScrollBooster, {scrollBoosterUpdate} from "scrollbooster";
+import MobileDetect from "@modules/responsive/MobileDetect";
 
 export default class HorizontalDraggable {
     private scrollBooster: ScrollBooster;
@@ -9,7 +10,12 @@ export default class HorizontalDraggable {
 
     constructor(viewport: Element, contentElement: HTMLElement) {
         this.contentElement = contentElement;
-        this.setWidthOfContentElement();
+
+        if (MobileDetect.phone()) {
+            this.setHeightOfContentElement();
+        } else {
+            this.setWidthOfContentElement();
+        }
 
         this.scrollBooster = new ScrollBooster({
             viewport,
@@ -17,7 +23,12 @@ export default class HorizontalDraggable {
             emulateScroll: false,
             onUpdate: (data: scrollBoosterUpdate) => {
                 if (!this.isPaused) {
-                    this.contentElement.style.transform = `translateX(${-data.position.x}px)`;
+                    if (MobileDetect.phone()) {
+                        this.contentElement.style.transform = `translateY(${-data.position.y}px)`;
+                    } else {
+                        this.contentElement.style.transform = `translateX(${-data.position.x}px)`;
+                    }
+
                     this.userCallbacks.forEach(callback => callback(data));
                 }
             }
@@ -40,17 +51,25 @@ export default class HorizontalDraggable {
             scrollAmount = -this.maxScrollForce;
         }
 
-        const finalPositionX = this.scrollBooster.getUpdate().position.x + scrollAmount;
-
-        this.scrollBooster.setPosition({
-            x: finalPositionX,
+        const position = MobileDetect.phone() ? {
+            x: 0,
+            y: this.scrollBooster.getUpdate().position.y + scrollAmount
+        } : {
+            x: this.scrollBooster.getUpdate().position.x + scrollAmount,
             y: 0
-        });
+        };
+
+        this.scrollBooster.setPosition(position);
     }
 
     private setWidthOfContentElement(): void {
         const lastChildrenOfContentElement = this.contentElement.children[this.contentElement.children.length - 1] as HTMLElement;
         this.contentElement.style.width = `${lastChildrenOfContentElement.offsetLeft + window.innerWidth / 4}px`;
+    }
+
+    private setHeightOfContentElement(): void {
+        const lastChildrenOfContentElement = this.contentElement.children[this.contentElement.children.length - 1] as HTMLElement;
+        this.contentElement.style.height = `${lastChildrenOfContentElement.offsetTop + window.innerHeight / 2}px`;
     }
 
     public pause(): void {

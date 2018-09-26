@@ -50,6 +50,10 @@
         left: $initialLeft;
         transition: all .4s $easeOutQuad;
 
+        @include media('<=mobile-l') {
+            display: none;
+        }
+
         &.hide {
             opacity: 0;
             transition: all .2s $easeOutQuad;
@@ -118,6 +122,16 @@
             &:nth-child(#{$i + 2}) {
                 $calc: #{$initialLeft} + ((#{$i} * (#{$espacementBetweenElements} * 50)) + px);
                 left: calc(#{$calc});
+            }
+        }
+
+        @include media('<=mobile-l') {
+            @for $i from 0 to $elements {
+                &:nth-child(#{$i + 1}) {
+                    $calc: 100px + ((#{$i} * (#{$espacementBetweenElements} * 50)) + px);
+                    top: calc(#{$calc});
+                    left: 5vw;
+                }
             }
         }
 
