@@ -53,7 +53,7 @@
             <p>A site project in mind, and you want to make it a reality?</p>
             <p>
                 You can contact me at the following address
-                <a data-clickable href="mailto:webmaster@chevalier-xavier.fr">webmaster@chevalier-xavier.fr</a> !
+                <a data-clickable href="mailto:webmaster@chevalier-xavier.fr">webmaster@chevalier-xavier.fr</a>
             </p>
         </div>
 

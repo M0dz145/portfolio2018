@@ -24,7 +24,7 @@
     <div id="app__container">
         <VBackground/>
 
-        <Birds v-if="!MobileDetect.phone()"/>
+        <Birds/>
 
         <div id="copyright" v-if="!MobileDetect.phone()">
             <span class="copyright__text">© chevalier-xavier.fr</span>
@@ -34,7 +34,7 @@
             <router-view class="applicationTransition"/>
         </transition>
 
-        <VCursor/>
+        <VCursor v-if="!MobileDetect.phone()"/>
     </div>
 </template>
 

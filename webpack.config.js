@@ -1,4 +1,5 @@
-const path                     = require('path'),
+const webpack                  = require('webpack'),
+      path                     = require('path'),
       multi                    = require('multi-loader'),
       loaders                  = require('./webpack/loaders'),
       ServiceWorkerCachePlugin = require('./webpack/ServiceWorkerCachePlugin');
@@ -147,6 +148,9 @@ module.exports = {
         colors: true
     },
     plugins: [
+        new webpack.DefinePlugin({
+            'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+        }),
         ServiceWorkerCachePlugin
     ]
 };

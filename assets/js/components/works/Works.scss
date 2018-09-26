@@ -6,6 +6,27 @@
     height: 100vh;
     @include no-user-select();
 
+    &.app-enter-active {
+        .work {
+            @for $i from 1 to $elements {
+                &:nth-child(#{$i}) {
+                    transition: all .4s #{$i / 10}s $easeOutQuad;
+                }
+            }
+
+            &:nth-child(1) {
+                transition: all .4s $easeOutQuad;
+            }
+        }
+    }
+
+    &.app-enter {
+        .work {
+            opacity: 0;
+            transform: translateY(50%);
+        }
+    }
+
     .backspace__button {
         position: absolute;
         top: 50px;
@@ -67,7 +88,7 @@
                 &.hand {
                     margin-left: 20px;
                     margin-right: -10px;
-                    animation: dragHand 2.5s $easeOutQuad infinite;
+                    animation: dragHandHorizontal 2.5s $easeOutQuad infinite;
                 }
 
                 &.leftArrow {

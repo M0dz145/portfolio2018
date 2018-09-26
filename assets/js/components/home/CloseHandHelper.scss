@@ -1,0 +1,22 @@
+@import "~mixins";
+
+.closeHandHelper {
+    position: fixed;
+    bottom: 20px;
+    width: 100vw;
+    opacity: 0;
+    transition: all .4s $easeOutQuad;
+
+    .icon {
+        width: 20px;
+
+        &.hand {
+            animation: dragHandVertical 2.5s $easeOutQuad infinite;
+        }
+
+        &.downArrow {
+            width: 15px;
+            animation: dragHandDownArrow 2.5s 1.25s $easeOutQuad infinite;
+        }
+    }
+}

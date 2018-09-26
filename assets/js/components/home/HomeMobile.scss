@@ -1,0 +1,77 @@
+@import "~mixins";
+
+#mobileMenu {
+    height: 100vh;
+    width: 100vw;
+
+    font-size: 2.8em;
+    text-align: center;
+
+    &.itemActive {
+        .mobileMenu__item:not(.active) {
+            opacity: 0;
+        }
+    }
+
+    .mobileMenu__item {
+        position: absolute;
+        width: 100vw;
+        color: #393939;
+        transition: all .2s $easeOutQuad;
+
+        &:nth-child(1) {
+            top: calc(25% - 40px);
+        }
+
+        &:nth-child(2) {
+            top: calc(50% - 40px);
+        }
+
+        &:nth-child(3) {
+            top: calc(75% - 40px);
+        }
+
+        &:active,
+        &:hover {
+            color: #000;
+        }
+
+        &.active {
+            top: 10%;
+
+            .section {
+                opacity: 1;
+                transition: all .4s .4s $easeOutQuad;
+
+                .closeHandHelper {
+                    opacity: 1;
+                    transition: all .6s 2.25s $easeOutQuad;
+                }
+            }
+        }
+
+        .section {
+            position: absolute;
+            opacity: 0;
+            font-size: 1.2rem;
+            line-height: 1.3rem;
+            transition: all .2s $easeOutQuad;
+
+            p {
+                margin-top: 20px;
+                padding: 0 10vw;
+                width: 80vw;
+                line-height: 1.2em;
+
+                &:first-child {
+                    margin-top: 30px;
+                }
+            }
+
+            .emailAddress {
+                display: block;
+                margin-top: 25px;
+            }
+        }
+    }
+}

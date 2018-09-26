@@ -5,6 +5,7 @@ export default class HorizontalDraggable {
     private userCallbacks: Array<Function> = [];
     private isPaused: boolean = false;
     private readonly contentElement: HTMLElement;
+    private readonly maxScrollForce: number = 80;
 
     constructor(viewport: Element, contentElement: HTMLElement) {
         this.contentElement = contentElement;
@@ -22,13 +23,28 @@ export default class HorizontalDraggable {
             }
         });
 
-        this.contentElement.addEventListener('mousewheel', event => {
-            const finalPositionX = this.scrollBooster.getUpdate().position.x + event.deltaY;
+        this.contentElement.addEventListener('mousewheel', this.onMouseWheel.bind(this));
+    }
 
-            this.scrollBooster.setPosition({
-                x: finalPositionX,
-                y: 0
-            });
+    private onMouseWheel(event: WheelEvent): void {
+        let scrollAmount: number;
+        if (event.deltaY !== -0) {
+            scrollAmount = event.deltaY;
+        } else {
+            scrollAmount = event.deltaX;
+        }
+
+        if (scrollAmount > this.maxScrollForce) {
+            scrollAmount = this.maxScrollForce;
+        } else if (scrollAmount < -this.maxScrollForce) {
+            scrollAmount = -this.maxScrollForce;
+        }
+
+        const finalPositionX = this.scrollBooster.getUpdate().position.x + scrollAmount;
+
+        this.scrollBooster.setPosition({
+            x: finalPositionX,
+            y: 0
         });
     }
 

@@ -53,7 +53,8 @@
     <div class="island" :class="{'hover': hover, 'active': active}">
         <div class="island__section">
             <h2>About me</h2>
-            <p>My name is Xavier Chevalier, a young web developer of {{ birth }} years old.
+            <p>
+                My name is Xavier Chevalier, a young web developer of {{ birth }} years old.
                I have been developing applications, interfaces and websites for several years now...
             </p>
             <p>

@@ -31,7 +31,7 @@
     }
 }
 
-@keyframes dragHand {
+@keyframes dragHandHorizontal {
     0% {
         transform: translateX(0);
     }
@@ -43,6 +43,21 @@
     }
     80%, 100% {
         transform: translateX(0);
+    }
+}
+
+@keyframes dragHandVertical {
+    0% {
+        transform: translateY(0);
+    }
+    20% {
+        transform: translateY(-150%);
+    }
+    50% {
+        transform: translateY(-150%);
+    }
+    80%, 100% {
+        transform: translateY(0);
     }
 }
 
@@ -81,6 +96,25 @@
     80%, 100% {
         opacity: 1;
         transform: translateX(-150%);
+    }
+}
+
+@keyframes dragHandDownArrow {
+    0% {
+        opacity: 1;
+        transform: translateY(-150%) rotate(-90deg);
+    }
+    20% {
+        opacity: 0;
+        transform: translateY(0) rotate(-90deg);
+    }
+    50% {
+        opacity: 0;
+        transform: translateY(0) rotate(-90deg);
+    }
+    80%, 100% {
+        opacity: 1;
+        transform: translateY(-150%) rotate(-90deg);
     }
 }
 

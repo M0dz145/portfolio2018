@@ -1,4 +1,4 @@
-import ClickableElement from "@modules/link/ClickableElement";
+import ClickableElement from "../link/ClickableElement";
 
 export default class RoundCursor {
     private cursorElement: Element;

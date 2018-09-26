@@ -1,5 +1,5 @@
 <script lang="ts">
-    import RoundCursor from "@modules/animation/cursor/RoundCursor";
+    import RoundCursor from "@modules/cursor/RoundCursor";
     import Component from "vue-class-component";
     import Vue from "vue";
 

@@ -1,6 +1,7 @@
 <script lang="ts">
     import MobileDetect from '@modules/responsive/MobileDetect';
     import VAboutIsland from '@components/about/VAboutIsland.vue';
+    import VHomeMobile from '@components/home/VHomeMobile.vue';
     import VWorkIsland from '@components/works/VWorkIsland.vue';
     import VContactIsland from '@components/contact/VContactIsland.vue';
     import VImage from '@components/common/image/VImage.vue';
@@ -14,14 +15,13 @@
             VAboutIsland,
             VWorkIsland,
             VImage,
+            VHomeMobile
         },
-        mounted() {
-            this.parallaxInstance = new Parallax(this.$refs.parallaxContainer, {
-                pointerEvents: true
-            });
-
-            if (MobileDetect.phone()) {
-                this.parallaxInstance.disable();
+        mounted(): void {
+            if (!MobileDetect.phone()) {
+                this.parallaxInstance = new Parallax(this.$refs.parallaxContainer, {
+                    pointerEvents: true
+                });
             }
         },
         data() {
@@ -75,7 +75,7 @@
         }
 
         public onBodyClick(): void {
-            if(!this.noIslandWasOpen) {
+            if (!this.noIslandWasOpen) {
                 this.islandClose();
             }
         }
@@ -83,11 +83,14 @@
 </script>
 
 <template>
-    <div id="parallax__container" ref="parallaxContainer"
+    <VHomeMobile v-if="MobileDetect.phone()"/>
+
+    <div v-else
+         id="parallax__container"
+         ref="parallaxContainer"
          :class="{'noIslandWasOpen': noIslandWasOpen}"
          @click="onBodyClick">
         <div v-for="(cloud, index) in clouds"
-             v-if="!MobileDetect.phone()"
              class="layer cloud"
              :class="`cloud-${index + 1}`"
              :data-depth="cloud.depth">
@@ -100,19 +103,19 @@
         </div>
 
         <div class="layer island__container island__container--work"
-             :data-depth="!MobileDetect.phone() ? 0.40 : null">
+             :data-depth="0.40">
             <VWorkIsland
                     :noIslandWasOpen="noIslandWasOpen"/>
         </div>
         <div class="layer island__container island__container--about"
-             :data-depth="!MobileDetect.phone() ? 0.70 : null">
+             :data-depth="0.70">
             <VAboutIsland
                     :noIslandWasOpen="noIslandWasOpen"
                     @islandClose="islandClose"
                     @islandOpen="islandOpen"/>
         </div>
         <div class="layer island__container island__container--contact"
-             :data-depth="!MobileDetect.phone() ? 0.25 : null">
+             :data-depth="0.25">
             <VContactIsland
                     :noIslandWasOpen="noIslandWasOpen"
                     @islandClose="islandClose"
