@@ -1,6 +1,5 @@
 <script lang="ts">
     import workIslandImage from '@img/workIsland.jpg';
-    import littleIslandImage from '@img/little_island.png';
     import Component from "vue-class-component";
     import Vue from "vue";
     import VImage from "@components/common/image/VImage.vue";
@@ -18,12 +17,18 @@
                 height: 636
             };
 
+            // noinspection TypeScriptUnresolvedFunction
             return {
                 workIslandImage,
                 svgProperties,
                 svgViewBox: `0 0 ${svgProperties.width} ${svgProperties.height}`,
                 svgEnableBackground: `new 0 0 ${svgProperties.width} ${svgProperties.height}`,
-                littleIslandImage
+                littleIslandImage: require('@img/little_island.png?sizes[]=50,sizes[]=100,sizes[]=300')
+            }
+        },
+        computed: {
+            littleIslandSize(): string {
+                return window.innerWidth < 770 ? '30px' : '45px';
             }
         }
     })
@@ -45,8 +50,9 @@
             <span class="island__info__text">My projects</span>
         </div>
 
-        <VImage class="island__littleIsland" :src="littleIslandImage.src" :srcSet="littleIslandImage.srcSet"
-                sizes="45px"
+        <VImage class="island__littleIsland" :src="littleIslandImage.src"
+                :srcSet="littleIslandImage.srcSet"
+                :sizes="littleIslandSize"
                 alt="little island"/>
 
         <svg class="island__svg" xmlns="http://www.w3.org/2000/svg"

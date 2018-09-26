@@ -12,6 +12,11 @@
         width: 100%;
         text-align: center;
         transform: translateY(25%);
+
+        @include media('>mobile-l', '<=tablet') {
+            width: 150%;
+            left: -25%;
+        }
     }
 
     &.active {
