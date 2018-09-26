@@ -5,10 +5,13 @@ export default class SwipeDetection {
     private swipeDownCallbacks: Array<Function> = [];
     private swipeLeftCallbacks: Array<Function> = [];
     private swipeRightCallbacks: Array<Function> = [];
+    private element: HTMLElement | Document;
 
     constructor(element: HTMLElement | Document) {
-        element.addEventListener('touchstart', this.handleTouchStart.bind(this), false);
-        element.addEventListener('touchmove', this.handleTouchMove.bind(this), false);
+        this.element = element;
+
+        this.element.ontouchstart = this.handleTouchStart.bind(this);
+        this.element.ontouchmove = this.handleTouchMove.bind(this);
     }
 
     private handleTouchStart(event: TouchEvent): void {
@@ -29,18 +32,18 @@ export default class SwipeDetection {
         // noinspection JSSuspiciousNameCombination
         if (Math.abs(xDiff) > Math.abs(yDiff)) {
             if (xDiff > 0) {
-                /* left swipe */
+                // Left Swipe
                 this.swipeLeftCallbacks.forEach(callback => callback());
             } else {
-                /* right swipe */
+                // Right Swipe
                 this.swipeRightCallbacks.forEach(callback => callback());
             }
         } else {
             if (yDiff > 0) {
-                /* up swipe */
+                // Up Swipe
                 this.swipeUpCallbacks.forEach(callback => callback());
             } else {
-                /* down swipe */
+                // Down Swipe
                 this.swipeDownCallbacks.forEach(callback => callback());
             }
         }
@@ -72,5 +75,10 @@ export default class SwipeDetection {
         this.swipeRightCallbacks.push(callback);
 
         return this;
+    }
+
+    public destroyEvents(): void {
+        this.element.ontouchstart = null;
+        this.element.ontouchmove = null;
     }
 }

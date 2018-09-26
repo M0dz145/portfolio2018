@@ -2,6 +2,7 @@ const webpack                  = require('webpack'),
       path                     = require('path'),
       multi                    = require('multi-loader'),
       loaders                  = require('./webpack/loaders'),
+      fs                       = require('fs'),
       ServiceWorkerCachePlugin = require('./webpack/ServiceWorkerCachePlugin');
 
 module.exports = {
@@ -139,6 +140,12 @@ module.exports = {
         historyApiFallback: true,
         stats: {
             modules: false
+        },
+        setup: app => {
+            app.get('/service-worker.js', (req, res) => {
+                res.set({'Content-Type': 'application/javascript; charset=utf-8'});
+                res.send(fs.readFileSync('public/service-worker.js'));
+            });
         }
     },
     performance: {

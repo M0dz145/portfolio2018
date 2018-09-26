@@ -14,9 +14,17 @@
         },
         data: () => ({
             MobileDetect
-        })
+        }),
+        mounted(): void {
+            window.addEventListener('resize', () => {
+                if((this.actualDeviceIsPhone && !MobileDetect.phone()) || (!this.actualDeviceIsPhone && MobileDetect.phone())) {
+                    location.reload();
+                }
+            })
+        }
     })
     export default class VApp extends Vue {
+        public actualDeviceIsPhone: boolean = !!MobileDetect.phone();
     }
 </script>
 

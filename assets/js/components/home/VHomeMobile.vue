@@ -12,11 +12,16 @@
             active: null
         }),
         mounted(): void {
-            new SwipeDetection(document)
-                .onSwipeDown(() => this.active = null);
+            const swipeDetection = this.swipeDetection as SwipeDetection;
+            swipeDetection.onSwipeDown(() => this.active = null);
+        },
+        beforeDestroy(): void {
+            const swipeDetection = this.swipeDetection as SwipeDetection;
+            swipeDetection.destroyEvents();
         }
     })
     export default class VHomeMobile extends Vue {
+        private swipeDetection: SwipeDetection = new SwipeDetection(document);
         public birth: number = Math.abs(new Date().getUTCFullYear() - 1996);
     }
 </script>

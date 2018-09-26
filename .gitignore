@@ -12,6 +12,8 @@
 /.idea
 /.env
 
+/.htaccess
+
 /public/**/*
 !/public/index.html
 !/public/robots.txt

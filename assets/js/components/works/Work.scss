@@ -13,6 +13,10 @@
     background-position: center center;
     background-size: cover;
 
+    @include media('<=mobile-l') {
+        height: 185px;
+    }
+
     &:active {
         transform: scale(.97);
         transition: transform .1s $easeOutQuad;
@@ -38,6 +42,13 @@
                 text-align: center;
                 color: #fff;
                 transition: all .2s $easeOutQuad;
+
+                @include media('<=mobile-l') {
+                    .work__textCategory {
+                        opacity: 0;
+                        animation: fadeIn .6s .8s $easeOutQuad forwards;
+                    }
+                }
             }
         }
     }
@@ -61,6 +72,13 @@
             .workOverlay {
                 .work__overlay {
                     height: 30vh;
+
+                    .work__text {
+                        .work__textDescription {
+                            opacity: 0;
+                            animation: fadeIn .6s .2s $easeOutQuad forwards;
+                        }
+                    }
                 }
             }
         }

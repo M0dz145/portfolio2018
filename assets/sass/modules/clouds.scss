@@ -6,10 +6,6 @@
     @for $i from 1 through 5 {
         &.cloud-#{$i} {
 
-            @include media('<=mobile-l') {
-                display: none !important; // Important to override parallax
-            }
-
             @if ($i == 1) {
                 top: 60% !important; // Important to override parallax
                 left: 13% !important; // Important to override parallax
