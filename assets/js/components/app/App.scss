@@ -6,6 +6,7 @@
 
     #copyright {
         z-index: z(copyright);
+        @include no-user-select();
 
         .copyright__text {
             position: absolute;

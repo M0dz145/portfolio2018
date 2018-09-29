@@ -8,8 +8,7 @@ import ServiceWorkerRegister from "@modules/serviceWorker/ServiceWorkerRegister"
 import LogoImage from '@img/logo.png';
 import '@img/logo-192x163.png';
 import '@img/logo-512x435.png';
-
-// new ComponentsLoader(Vue);
+import WelcomeConsole from "@modules/console/WelcomeConsole";
 
 // Register applications routes
 const routeRegister = new RoutesRegister(Vue);
@@ -19,6 +18,11 @@ new Icon(LogoImage);
 
 // Register service worker
 new ServiceWorkerRegister();
+
+if (process.env.NODE_ENV === 'production') {
+    // Welcome message in console for developers
+    new WelcomeConsole();
+}
 
 // Run instance app
 new Vue({
