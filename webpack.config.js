@@ -111,8 +111,8 @@ module.exports = {
             {
                 test: /\.(png|jpe?g|gif)$/,
                 loader: multi(
-                    'responsive-loader?name=img/[name].[hash].webp!webp-loader?{quality: 80}',
-                    'responsive-loader?name=img/[name].[hash].[ext]'
+                    'responsive-loader?name=img/[name].webp?[hash]!webp-loader?{quality: 80}',
+                    'responsive-loader?name=img/[name].[ext]?[hash]'
                 )
             }
         ]
@@ -140,12 +140,6 @@ module.exports = {
         historyApiFallback: true,
         stats: {
             modules: false
-        },
-        setup: app => {
-            app.get('/service-worker.js', (req, res) => {
-                res.set({'Content-Type': 'application/javascript; charset=utf-8'});
-                res.send(fs.readFileSync('public/service-worker.js'));
-            });
         }
     },
     performance: {

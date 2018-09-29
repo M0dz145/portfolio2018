@@ -4,8 +4,10 @@ import '@sass/app.scss';
 import '@img/logo.png';
 import RoutesRegister from "@modules/routing/RoutesRegister";
 import Icon from "@modules/icon/Icon";
-import LogoImage from '@img/logo.png';
 import ServiceWorkerRegister from "@modules/serviceWorker/ServiceWorkerRegister";
+import LogoImage from '@img/logo.png';
+import '@img/logo-192x163.png';
+import '@img/logo-512x435.png';
 
 // new ComponentsLoader(Vue);
 
