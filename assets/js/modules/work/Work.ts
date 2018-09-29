@@ -1,5 +1,7 @@
+import Uuid from "@modules/generator/Uuid";
+
 export default class Work {
-    public id: number;
+    public id: string;
     public title: string;
     public category: string;
     public description: string;
@@ -7,7 +9,7 @@ export default class Work {
     public fullscreen: boolean = false;
 
     constructor(title: string, category: string, description: string, image: object) {
-        this.id = Math.floor(Math.random() * 100000000 + 1);
+        this.id = Uuid.generate();
         this.title = title;
         this.category = category;
         this.description = description;
