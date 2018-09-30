@@ -1,12 +1,17 @@
 import ClickableElement from "../link/ClickableElement";
+import Position2D from "@modules/position/Position2D";
 
 export default class RoundCursor {
     private cursorElement: Element;
     private cursorPath: Element;
-    private x: number = window.innerWidth / 2;
-    private y: number = window.innerHeight / 2;
-    private currentX: number = window.innerWidth / 2;
-    private currentY: number = window.innerHeight / 2;
+    private cursorPosition: Position2D = new Position2D(
+        window.innerWidth / 2,
+        window.innerHeight / 2
+    );
+    private currentCursorPosition: Position2D = new Position2D(
+        window.innerWidth / 2,
+        window.innerHeight / 2
+    );
     private animationSpeed: number = 3;
     private hovered: boolean = false;
     private hide: boolean = false;
@@ -17,13 +22,15 @@ export default class RoundCursor {
         this.cursorElement = cursorElement;
         this.cursorPath = this.getCursorPath();
 
-        document.addEventListener('mousemove', (event: MouseEvent) => {
-            this.x = event.clientX;
-            this.y = event.clientY;
+        document.addEventListener('mousemove', event => {
+            this.cursorPosition = new Position2D(
+                event.clientX,
+                event.clientY
+            );
 
             // @ts-ignore
             // Know if an clickable element was hovered
-            const hovered = !!event.path.find((path: Element) => new ClickableElement(path).isClickable());
+            const hovered: boolean = !!event.path.find(path => new ClickableElement(path).isClickable());
             if (hovered) {
                 this.hoverCursor();
             } else {
@@ -37,6 +44,52 @@ export default class RoundCursor {
         document.addEventListener('mouseenter', this.showCursor.bind(this));
 
         this.run();
+    }
+
+    private run(): void {
+        this.move();
+
+        window.requestAnimationFrame(this.run.bind(this));
+    }
+
+    private move(): void {
+        let angle: number,
+            scale: number,
+            tailPos: number;
+
+        if (this.hovered) {
+            angle = 0;
+            scale = 1;
+            tailPos = 50;
+        } else {
+            const speed = this.getSpeed();
+            angle = this.getAngle();
+            scale = speed / 500 + 1;
+            tailPos = speed / 2 + 50;
+
+            if (tailPos < 0) {
+                tailPos = 0;
+            } else if (tailPos > 40) {
+                tailPos = 50;
+            }
+
+            if (scale < .2) {
+                scale = .2;
+            }
+        }
+
+        this.currentCursorPosition = new Position2D(
+            this.currentCursorPosition.x + ((this.cursorPosition.x - this.currentCursorPosition.x) / this.animationSpeed),
+            this.currentCursorPosition.y + ((this.cursorPosition.y - this.currentCursorPosition.y) / this.animationSpeed)
+        );
+
+        // @ts-ignore
+        this.cursorElement.style.transform = `
+            translate(${this.currentCursorPosition.x}px, ${this.currentCursorPosition.y}px)
+            rotate(${angle}deg)
+            scaleX(${scale})
+        `;
+        this.cursorPath.setAttribute('d', `M75,100 C88.8071187,100 100,88.8071187 100,75 C100,61.1928813 88.8071187,50 75,50 C61.1928813,50 50,61.1928813 ${tailPos},75 C50,88.8071187 61.1928813,100 75,100 Z`);
     }
 
     private onMouseDown(): void {
@@ -79,29 +132,23 @@ export default class RoundCursor {
         return this.cursorElement.children[0].children[0];
     }
 
-    private run() {
-        this.move();
-
-        window.requestAnimationFrame(this.run.bind(this));
-    }
-
     private getAngle(): number {
         if (this.hovered) {
             return 0;
         }
 
         const cursorElementClientRect = this.cursorElement.getBoundingClientRect();
-        const boxCenter = {
-            x: cursorElementClientRect.left + cursorElementClientRect.width / 2,
-            y: cursorElementClientRect.top + cursorElementClientRect.height / 2
-        };
+        const boxCenter = new Position2D(
+            cursorElementClientRect.left + cursorElementClientRect.width / 2,
+            cursorElementClientRect.top + cursorElementClientRect.height / 2
+        );
 
-        return Math.atan2(this.x - boxCenter.x, -(this.y - boxCenter.y)) * (180 / Math.PI);
+        return Math.atan2(this.cursorPosition.x - boxCenter.x, -(this.cursorPosition.y - boxCenter.y)) * (180 / Math.PI);
     }
 
     private getSpeed(): number {
-        let speedX = Math.abs(this.x - this.currentX),
-            speedY = Math.abs(this.y - this.currentY),
+        let speedX = Math.abs(this.cursorPosition.x - this.currentCursorPosition.x),
+            speedY = Math.abs(this.cursorPosition.y - this.currentCursorPosition.y),
             speed = Math.sqrt(speedX * speedX + speedY * speedY) * -1;
 
         if (speed > -1) {
@@ -109,36 +156,5 @@ export default class RoundCursor {
         }
 
         return speed;
-    }
-
-    private move(): void {
-        const speed = this.getSpeed();
-
-        let scale = speed / 500 + 1;
-        let tailPos = speed / 2 + 50;
-
-        if (tailPos < 0) {
-            tailPos = 0;
-        } else if (tailPos > 40) {
-            tailPos = 50;
-        }
-
-        if (scale < .2) {
-            scale = .2;
-        }
-
-        this.currentX += (this.x - this.currentX) / this.animationSpeed;
-        this.currentY += (this.y - this.currentY) / this.animationSpeed;
-
-        let angle = this.getAngle();
-        if (this.hovered) {
-            angle = 0;
-            scale = 1;
-            tailPos = 50;
-        }
-
-        // @ts-ignore
-        this.cursorElement.style.transform = `translate(${this.currentX}px, ${this.currentY}px) rotate(${angle}deg) scaleX(${scale})`;
-        this.cursorPath.setAttribute('d', `M75,100 C88.8071187,100 100,88.8071187 100,75 C100,61.1928813 88.8071187,50 75,50 C61.1928813,50 50,61.1928813 ${tailPos},75 C50,88.8071187 61.1928813,100 75,100 Z`);
     }
 }

@@ -22,6 +22,8 @@
             dragImage
         },
         mounted(): void {
+            // this.snapBackLink = new Snap(this.$refs.backLink.$el);
+
             this.horizontalDraggable = new HorizontalDraggable(document.getElementById('works'), this.$refs.draggableContainer.$el);
 
             if (!MobileDetect.phone()) {
@@ -39,6 +41,7 @@
         },
         beforeDestroy(): void {
             this.horizontalDraggable.destroy();
+            // this.snapBackLink.destroy();
         }
     })
     export default class VWorks extends Vue {
@@ -46,6 +49,7 @@
         public workActive: Work = new Collection(this.works).first();
         private removedWorks: Array<Work> = [];
         private horizontalDraggable: HorizontalDraggable;
+        // private snapBackLink: Snap;
         public showHandDragHelper: boolean = true;
         public MobileDetect: MobileDetect = MobileDetect;
 
@@ -143,6 +147,7 @@
 
         <router-link tag="div"
                      :to="{name: 'home'}"
+                     ref="backLink"
                      data-clickable
                      class="backspace__button">
             <backspaceImage class="backspace__arrow"/>

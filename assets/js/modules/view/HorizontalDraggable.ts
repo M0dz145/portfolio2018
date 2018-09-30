@@ -1,5 +1,6 @@
 import ScrollBooster, {scrollBoosterUpdate} from "scrollbooster";
 import MobileDetect from "@modules/responsive/MobileDetect";
+import Position2D from "@modules/position/Position2D";
 
 export default class HorizontalDraggable {
     private scrollBooster: ScrollBooster;
@@ -51,13 +52,12 @@ export default class HorizontalDraggable {
             scrollAmount = -this.maxScrollForce;
         }
 
-        const position = MobileDetect.phone() ? {
-            x: 0,
-            y: this.scrollBooster.getUpdate().position.y + scrollAmount
-        } : {
-            x: this.scrollBooster.getUpdate().position.x + scrollAmount,
-            y: 0
-        };
+        let position: Position2D;
+        if (MobileDetect.phone()) {
+            position = new Position2D(0, this.scrollBooster.getUpdate().position.y + scrollAmount);
+        } else {
+            position = new Position2D(this.scrollBooster.getUpdate().position.x + scrollAmount, 0);
+        }
 
         this.scrollBooster.setPosition(position);
     }
@@ -89,10 +89,7 @@ export default class HorizontalDraggable {
     }
 
     public goToStart(): void {
-        this.scrollBooster.setPosition({
-            x: 0,
-            y: 0
-        });
+        this.scrollBooster.setPosition(new Position2D(0, 0));
     }
 
     public destroy(): void {
