@@ -54,7 +54,7 @@
             this.horizontalDraggable.goToStart();
         }
 
-        private fullscreenMode(work: Work): void {
+        private toggleFullscreenMode(work: Work): void {
             work.fullscreen = !work.fullscreen;
         }
 
@@ -64,7 +64,7 @@
             }
 
             if (this.MobileDetect.phone()) {
-                this.fullscreenMode(work);
+                this.toggleFullscreenMode(work);
 
                 // Close all other works fullscreen
                 this.works
@@ -76,7 +76,9 @@
 
             if (work.id === this.workActive.id || this.workActive.fullscreen) {
                 const activeWorkDescription = this.$refs.activeWorkDescription as HTMLElement;
-                if (this.fullscreenMode(work)) {
+                this.toggleFullscreenMode(work);
+
+                if (work.fullscreen) {
                     activeWorkDescription.classList.add('hide');
                     this.horizontalDraggable.pause();
                 } else {
