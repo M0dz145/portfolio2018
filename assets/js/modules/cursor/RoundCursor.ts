@@ -14,7 +14,8 @@ export default class RoundCursor {
     );
     private animationSpeed: number = 3;
     private hovered: boolean = false;
-    private hide: boolean = false;
+    // By default, the cursor is hidden because we don't know where is it
+    private hide: boolean = true;
     private readonly hoveredClass = 'hover';
     private readonly hideClass = 'hide';
 
@@ -43,15 +44,21 @@ export default class RoundCursor {
         document.addEventListener('mouseleave', this.hideCursor.bind(this));
         document.addEventListener('mouseenter', this.showCursor.bind(this));
 
-        this.run();
+        this.animate();
     }
 
-    private run(): void {
+    /**
+     * Run cursor animation for each frames
+     */
+    private animate(): void {
         this.move();
 
-        window.requestAnimationFrame(this.run.bind(this));
+        window.requestAnimationFrame(this.animate.bind(this));
     }
 
+    /**
+     * Calculate and move cursor on new position
+     */
     private move(): void {
         let angle: number,
             scale: number,
@@ -92,14 +99,23 @@ export default class RoundCursor {
         this.cursorPath.setAttribute('d', `M75,100 C88.8071187,100 100,88.8071187 100,75 C100,61.1928813 88.8071187,50 75,50 C61.1928813,50 50,61.1928813 ${tailPos},75 C50,88.8071187 61.1928813,100 75,100 Z`);
     }
 
+    /**
+     * When mouse down
+     */
     private onMouseDown(): void {
         this.cursorElement.classList.add('click');
     }
 
+    /**
+     * When mouse up
+     */
     private onMouseUp(): void {
         this.cursorElement.classList.remove('click');
     }
 
+    /**
+     * When cursor hover a hoverable element
+     */
     private hoverCursor(): void {
         if (!this.hovered) {
             this.hovered = true;
@@ -107,6 +123,9 @@ export default class RoundCursor {
         }
     }
 
+    /**
+     * When cursor unhover a hoverable element
+     */
     private unhoverCursor(): void {
         if (this.hovered) {
             this.hovered = false;
@@ -114,6 +133,9 @@ export default class RoundCursor {
         }
     }
 
+    /**
+     * Hide cursor
+     */
     private hideCursor(): void {
         if (!this.hide) {
             this.hide = true;
@@ -121,6 +143,9 @@ export default class RoundCursor {
         }
     }
 
+    /**
+     * Show cursor
+     */
     private showCursor(): void {
         if (this.hide) {
             this.hide = false;
@@ -128,10 +153,16 @@ export default class RoundCursor {
         }
     }
 
+    /**
+     * Get the cursor's path (SVG)
+     */
     private getCursorPath(): Element {
         return this.cursorElement.children[0].children[0];
     }
 
+    /**
+     * Get angle of cursor
+     */
     private getAngle(): number {
         if (this.hovered) {
             return 0;
@@ -146,8 +177,11 @@ export default class RoundCursor {
         return Math.atan2(this.cursorPosition.x - boxCenter.x, -(this.cursorPosition.y - boxCenter.y)) * (180 / Math.PI);
     }
 
+    /**
+     * Get speed of cursor
+     */
     private getSpeed(): number {
-        let speedX = Math.abs(this.cursorPosition.x - this.currentCursorPosition.x),
+        const speedX = Math.abs(this.cursorPosition.x - this.currentCursorPosition.x),
             speedY = Math.abs(this.cursorPosition.y - this.currentCursorPosition.y),
             speed = Math.sqrt(speedX * speedX + speedY * speedY) * -1;
 

@@ -54,10 +54,17 @@ export default class ServiceWorkerRegister {
         }
     }
 
+    /**
+     * Register the service worker
+     */
     private register(): Promise<ServiceWorkerRegistration> {
         return navigator.serviceWorker.register(this.filePath);
     }
 
+    /**
+     * On service worker registration failed
+     * @param error
+     */
     private onRegistrationFailed(error: any): void {
         console.error(`Service Worker Registration failed with ${error}`);
     }

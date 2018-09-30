@@ -5,6 +5,9 @@ export default class ClickableElement {
         this.element = element;
     }
 
+    /**
+     * Know if element is an clickable element
+     */
     public isClickable(): boolean {
         if (!this.element.getAttribute) {
             return false;

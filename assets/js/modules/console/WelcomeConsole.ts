@@ -8,15 +8,19 @@ export default class WelcomeConsole {
         this.sayHello();
     }
 
+    /**
+     * Get string styles
+     */
     private getStyles(): string {
         let styles = ``;
-        Object.keys(this.styles).forEach((key) => {
-            styles += `${key}: ${this.styles[key]};`
-        });
+        Object.keys(this.styles).forEach(key => styles += `${key}: ${this.styles[key]};`);
 
         return styles;
     }
 
+    /**
+     * Show message in console
+     */
     private sayHello(): void {
         console.log(`%c${this.message}`, this.getStyles());
     }

@@ -1,6 +1,7 @@
+import Position2D from "@modules/position/Position2D";
+
 export default class SwipeDetection {
-    private xDown: number = null;
-    private yDown: number = null;
+    private downPosition: Position2D;
     private swipeUpCallbacks: Array<Function> = [];
     private swipeDownCallbacks: Array<Function> = [];
     private swipeLeftCallbacks: Array<Function> = [];
@@ -14,24 +15,41 @@ export default class SwipeDetection {
         this.element.ontouchmove = this.handleTouchMove.bind(this);
     }
 
+    /**
+     * On touch start on element
+     * @param event
+     */
     private handleTouchStart(event: TouchEvent): void {
-        this.xDown = event.touches[0].clientX;
-        this.yDown = event.touches[0].clientY;
+        this.downPosition = new Position2D(
+            event.touches[0].clientX,
+            event.touches[0].clientY
+        );
+        // this.xDown = event.touches[0].clientX;
+        // this.yDown = event.touches[0].clientY;
     }
 
+    /**
+     * On touch move on element
+     * @param event
+     */
     private handleTouchMove(event: TouchEvent): void {
-        if (!this.xDown || !this.yDown) {
+        if (!this.downPosition.x || !this.downPosition.y) {
             return;
         }
 
-        const xUp = event.touches[0].clientX,
-            yUp = event.touches[0].clientY,
-            xDiff = this.xDown - xUp,
-            yDiff = this.yDown - yUp;
+        const upPosition = new Position2D(
+            event.touches[0].clientX,
+            event.touches[0].clientY
+        );
+
+        const differencePosition = new Position2D(
+            this.downPosition.x - upPosition.x,
+            this.downPosition.y - upPosition.y
+        );
 
         // noinspection JSSuspiciousNameCombination
-        if (Math.abs(xDiff) > Math.abs(yDiff)) {
-            if (xDiff > 0) {
+        if (Math.abs(differencePosition.x) > Math.abs(differencePosition.y)) {
+            if (differencePosition.x > 0) {
                 // Left Swipe
                 this.swipeLeftCallbacks.forEach(callback => callback());
             } else {
@@ -39,7 +57,7 @@ export default class SwipeDetection {
                 this.swipeRightCallbacks.forEach(callback => callback());
             }
         } else {
-            if (yDiff > 0) {
+            if (differencePosition.y > 0) {
                 // Up Swipe
                 this.swipeUpCallbacks.forEach(callback => callback());
             } else {
@@ -49,34 +67,55 @@ export default class SwipeDetection {
         }
 
         /* reset values */
-        this.xDown = null;
-        this.yDown = null;
+        this.downPosition = new Position2D(
+            0,
+            0
+        );
     }
 
+    /**
+     * Add function executed when swipe up
+     * @param callback
+     */
     public onSwipeUp(callback: Function): SwipeDetection {
         this.swipeUpCallbacks.push(callback);
 
         return this;
     }
 
+    /**
+     * Add function executed when swipe down
+     * @param callback
+     */
     public onSwipeDown(callback: Function): SwipeDetection {
         this.swipeDownCallbacks.push(callback);
 
         return this;
     }
 
+    /**
+     * Add function executed when swipe left
+     * @param callback
+     */
     public onSwipeLeft(callback: Function): SwipeDetection {
         this.swipeLeftCallbacks.push(callback);
 
         return this;
     }
 
+    /**
+     * Add function executed when swipe right
+     * @param callback
+     */
     public onSwipeRight(callback: Function): SwipeDetection {
         this.swipeRightCallbacks.push(callback);
 
         return this;
     }
 
+    /**
+     * Destroy all events listeners
+     */
     public destroyEvents(): void {
         this.element.ontouchstart = null;
         this.element.ontouchmove = null;

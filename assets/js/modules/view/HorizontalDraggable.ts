@@ -38,6 +38,10 @@ export default class HorizontalDraggable {
         this.contentElement.addEventListener('mousewheel', this.onMouseWheel.bind(this));
     }
 
+    /**
+     * When mouse wheel
+     * @param event
+     */
     private onMouseWheel(event: WheelEvent): void {
         let scrollAmount: number;
         if (event.deltaY !== -0) {
@@ -62,36 +66,61 @@ export default class HorizontalDraggable {
         this.scrollBooster.setPosition(position);
     }
 
+    /**
+     * Set width of absolute element
+     */
     private setWidthOfContentElement(): void {
         const lastChildrenOfContentElement = this.contentElement.children[this.contentElement.children.length - 1] as HTMLElement;
         this.contentElement.style.width = `${lastChildrenOfContentElement.offsetLeft + window.innerWidth / 4}px`;
     }
 
+    /**
+     * Set height of absolute element
+     */
     private setHeightOfContentElement(): void {
         const lastChildrenOfContentElement = this.contentElement.children[this.contentElement.children.length - 1] as HTMLElement;
         this.contentElement.style.height = `${lastChildrenOfContentElement.offsetTop + window.innerHeight / 2}px`;
     }
 
+    /**
+     * Disabled the draggable system
+     */
     public pause(): void {
         this.isPaused = true;
     }
 
+    /**
+     * Continue the draggable system
+     */
     public resume(): void {
         this.isPaused = false;
     }
 
+    /**
+     * Get update scroll booster object
+     */
     public getUpdate(): scrollBoosterUpdate {
         return this.scrollBooster.getUpdate();
     }
 
+    /**
+     * On draggable update
+     * @param callback
+     */
     public onUpdate(callback: Function): void {
         this.userCallbacks.push(callback);
     }
 
+    /**
+     * Scroll to start
+     */
     public goToStart(): void {
         this.scrollBooster.setPosition(new Position2D(0, 0));
     }
 
+    /**
+     * Destroy all events listeners
+     */
     public destroy(): void {
         this.scrollBooster.destroy();
     }

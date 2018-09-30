@@ -15,12 +15,19 @@ export default class RoutesRegister {
         Routes.forEach(route => this.addRoutes([route]));
     }
 
+    /**
+     * Register new routes
+     * @param routes
+     */
     addRoutes(routes: RouteConfig[]): RoutesRegister {
         this.router.addRoutes(routes);
 
         return this;
     }
 
+    /**
+     * Get router instance
+     */
     getRouter(): VueRouter {
         return this.router;
     }
