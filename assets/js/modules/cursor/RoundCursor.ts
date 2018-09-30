@@ -18,7 +18,7 @@ export default class RoundCursor {
     private readonly hoveredClass = 'hover';
     private readonly hideClass = 'hide';
 
-    constructor(cursorElement?: Element) {
+    constructor(cursorElement: Element) {
         this.cursorElement = cursorElement;
         this.cursorPath = this.getCursorPath();
 
