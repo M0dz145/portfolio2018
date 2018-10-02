@@ -24,8 +24,6 @@ export default class SwipeDetection {
             event.touches[0].clientX,
             event.touches[0].clientY
         );
-        // this.xDown = event.touches[0].clientX;
-        // this.yDown = event.touches[0].clientY;
     }
 
     /**
