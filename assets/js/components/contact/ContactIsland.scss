@@ -1,0 +1,46 @@
+@import "~mixins";
+
+.island {
+    width: get-island-width(contact);
+    animation: upAndDownMoveCenter 14s infinite;
+
+    .island__section {
+        left: 100%;
+        padding-left: 25px;
+        width: 300px;
+        transform: translateX(-25%);
+    }
+
+    &.active {
+        opacity: 1 !important;
+
+        .island__section {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    .island__info::before {
+        border: 1px solid #806e5e;
+        background-color: #806e5e;
+    }
+
+    .island__svg {
+        pattern, image {
+            width: 742px;
+            height: 745px;
+        }
+    }
+
+    @include media('>laptop', '<=laptop-l') {
+        width: get-island-width(contact) / 1.2;
+    }
+
+    @include media('>tablet', '<=laptop') {
+        width: get-island-width(contact) / 1.5;
+    }
+
+    @include media('>mobile-l', '<=tablet') {
+        width: get-island-width(contact) / 2;
+    }
+}

@@ -1,0 +1,146 @@
+@import "~variables";
+@import "~mixins";
+
+#parallax__container:not(.noIslandWasOpen) {
+    .island {
+        .island__info {
+            display: none;
+        }
+    }
+
+    .island:not(.active) {
+        .island__svg {
+            path {
+                &:hover {
+                    stroke-width: 0;
+                }
+            }
+        }
+    }
+}
+
+.island {
+    position: absolute;
+    transform: translate3d(-50%, 0, 0);
+    transition: transform 1s $easeOutQuart;
+
+    .island__section {
+        position: absolute;
+        opacity: 0;
+        @include no-pointer-events();
+        transition: opacity .3s $easeOutQuad, transform .4s $easeOutQuad;
+
+        h2 {
+            font-size: 2.8em;
+            margin-bottom: 35px;
+        }
+
+        p {
+            margin-bottom: 20px;
+            font-weight: 300;
+            font-size: 1.2em;
+        }
+    }
+
+    &.hover {
+        &::before {
+            opacity: 1;
+            transition: opacity .5s;
+        }
+
+        .island__info {
+            .island__info__text, &::before, &::after {
+                opacity: 1;
+            }
+
+            // Section text
+            .island__info__text {
+                transform: translate3d(0, 0, 0);
+                transition: opacity .3s $easeOutCubic .2s, transform .3s $easeOutCubic .2s;
+            }
+
+            // Point
+            &::before {
+                transform: translate3d(-50%, 0, 0);
+                transition: opacity .3s $easeOutCubic .2s, transform .3s $easeOutCubic .2s;
+            }
+
+            // Barre
+            &::after {
+                transform: translate3d(50%, 0, 0);
+                transition: opacity .3s $easeOutCubic, transform .3s $easeOutCubic;
+            }
+        }
+    }
+
+    .island__info {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        font-size: 1.4em;
+        font-family: font-family(Roboto);
+        font-weight: bolder;
+        text-transform: uppercase;
+
+        @include media('<=mobile-s') {
+            font-size: 1em;
+        }
+
+        // Section text
+        .island__info__text {
+            @include no-pointer-events();
+            position: absolute;
+            top: -150px;
+            left: 15px;
+            opacity: 0;
+            transform: translate3d(0, 25px, 0);
+            transition: opacity .25s $easeOutCubic, transform .25s $easeOutCubic;
+        }
+
+        // Point
+        &::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            opacity: 0;
+            border-radius: 100px;
+            transform: translate3d(-50%, 100%, 0);
+            transition: opacity .2s $easeOutCubic, transform .2s $easeOutCubic;
+        }
+
+        // Barre
+        &::after {
+            content: '';
+            position: absolute;
+            top: -155px;
+            right: 50%;
+            height: 125px;
+            opacity: 0;
+            border-left: 2px solid rgba(0, 0, 0, 0.4);
+            transform: translate3d(50%, 100%, 0);
+            transition: opacity .2s $easeOutCubic, transform .6s $easeOutSine;
+        }
+    }
+
+    .island__svg {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        stroke-dasharray: 100;
+        stroke-dashoffset: 1000;
+        animation: dash 5s linear infinite;
+
+        path {
+            stroke-width: 0;
+            transition: fill 1s, opacity .8s, stroke-width .4s;
+
+            &:hover {
+                stroke-width: 4;
+                transition: fill 1s, opacity .4s, stroke-width .7s;
+            }
+        }
+    }
+}

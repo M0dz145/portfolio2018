@@ -1,0 +1,54 @@
+@import "~variables";
+@import "~mixins";
+
+.island {
+    z-index: 20;
+    width: get-island-width(about);
+    animation: upAndDownMoveCenter 10s infinite;
+
+    .island__section {
+        bottom: 100%;
+        padding-bottom: 25px;
+        width: 100%;
+        text-align: center;
+        transform: translateY(25%);
+
+        @include media('>mobile-l', '<=tablet') {
+            width: 150%;
+            left: -25%;
+        }
+    }
+
+    &.active {
+        opacity: 1 !important;
+
+        .island__section {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .island__info::before {
+        border: 1px solid #b1103c;
+        background-color: #b1103c;
+    }
+
+    .island__svg {
+        pattern, image {
+            width: 828px;
+            height: 1053px;
+        }
+    }
+
+    @include media('>laptop', '<=laptop-l') {
+        width: get-island-width(about) / 1.2;
+    }
+
+    @include media('>tablet', '<=laptop') {
+        width: get-island-width(about) / 1.5;
+    }
+
+    @include media('>mobile-l', '<=tablet') {
+        width: get-island-width(about) / 2;
+    }
+}

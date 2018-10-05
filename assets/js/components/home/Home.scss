@@ -1,0 +1,49 @@
+@import "~mixins";
+
+#parallax__container {
+    width: 100%;
+    height: 100%;
+    background: transparent radial-gradient(ellipse at center center, transparent 59%, rgba(0, 0, 0, 0.25) 100%) no-repeat scroll 0 0;
+
+    &:not(.noIslandWasOpen) {
+        .layer > * {
+            opacity: .2;
+        }
+    }
+}
+
+.layer {
+    @include no-user-select();
+
+    > * {
+        transition: opacity .4s $easeOutQuad;
+    }
+}
+
+.island__container {
+    z-index: z(island);
+
+    &.island__container--work {
+        top: 45% !important; // Important to override parallax
+        left: 70% !important; // Important to override parallax
+
+        @include media('>mobile-l', '<=tablet') {
+            top: 50% !important; // Important to override parallax
+        }
+    }
+
+    &.island__container--about {
+        top: 63% !important; // Important to override parallax
+        left: 50% !important; // Important to override parallax
+
+        @include media('>mobile-l', '<=tablet') {
+            top: 74% !important; // Important to override parallax
+        }
+    }
+
+    &.island__container--contact {
+        z-index: z(birds);
+        top: 24% !important; // Important to override parallax
+        left: 33% !important; // Important to override parallax
+    }
+}

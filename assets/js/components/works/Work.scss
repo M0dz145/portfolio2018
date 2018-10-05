@@ -1,0 +1,129 @@
+@import "~mixins";
+
+.work {
+    position: relative;
+    width: $work-width;
+    max-height: $work-height-max;
+    height: $work-height;
+    overflow: hidden;
+    border-radius: 20px;
+    //noinspection CssOptimizeSimilarProperties
+    background-repeat: no-repeat;
+    //noinspection CssOptimizeSimilarProperties
+    background-position: center center;
+    background-size: cover;
+
+    @include media('<=mobile-l') {
+        height: 185px;
+    }
+
+    &:active {
+        transform: scale(.97);
+        transition: transform .1s $easeOutQuad;
+    }
+
+    .workOverlay {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+
+        .work__overlay {
+            position: relative;
+            height: $overlay-height;
+            background: linear-gradient(to top, rgba(0, 0, 0, .85), transparent);
+            transition: height .2s $easeOutQuad, opacity .2s $easeOutQuad;
+
+            .work__text {
+                position: absolute;
+                bottom: 20px;
+                padding: 0 $overlay-padding;
+                width: calc(100% - #{$overlay-padding * 2});
+                text-align: center;
+                color: #fff;
+                transition: all .2s $easeOutQuad;
+
+                @include media('<=mobile-l') {
+                    .work__textCategory {
+                        opacity: 0;
+                        animation: fadeIn .6s .8s $easeOutQuad forwards;
+                    }
+                }
+            }
+        }
+    }
+
+    &:hover:not(.work--active) {
+        .work__overlay {
+            opacity: .8;
+        }
+    }
+
+    @include media('<=mobile-l') {
+        &:hover:not(.work--active) {
+            .work__overlay {
+                opacity: 1;
+            }
+        }
+
+        &.work--fullscreen {
+            width: 90vw;
+
+            .workOverlay {
+                .work__overlay {
+                    height: 30vh;
+
+                    .work__text {
+                        .work__textDescription {
+                            opacity: 0;
+                            animation: fadeIn .6s .2s $easeOutQuad forwards;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    &.work--active {
+        width: $work-active-width;
+        min-width: $work-active-width;
+        height: $work-active-height;
+        max-height: inherit;
+
+        &.work--fullscreen {
+            width: 90vw;
+            height: 90vh;
+
+            .workOverlay {
+                .work__overlay {
+                    height: calc(#{$overlay-height} + 50px);
+
+                    .work__text {
+                        bottom: 120px;
+                        transition: all .2s .2s $easeOutQuad;
+                    }
+                }
+            }
+        }
+
+        .workOverlay {
+            .work__overlay {
+                .work__text {
+                    bottom: 40px;
+                    font-size: 32px;
+                    text-align: left;
+
+                    .work__textDescription {
+                        position: absolute;
+                        display: block;
+                        opacity: 0;
+                        margin-top: 20px;
+                        padding-right: 10px;
+                        font-weight: 300;
+                        animation: fadeIn .4s .4s $easeOutQuad forwards;
+                    }
+                }
+            }
+        }
+    }
+}

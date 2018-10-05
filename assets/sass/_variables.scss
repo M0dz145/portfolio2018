@@ -1,0 +1,46 @@
+@import "~awesome-sass-easing/sass-easing";
+
+$body-bg: #fff;
+$fonts: (
+        Base: Roboto,
+        Roboto: Roboto
+);
+
+$breakpoints: (
+        mobile-s: 320px,
+        mobile-m: 375px,
+        mobile-l: 425px,
+        tablet: 768px,
+        laptop: 1024px,
+        laptop-l: 1440px,
+        '4k': 2560px
+);
+
+$z-layers: (
+        bottom: -1,
+        default: 1,
+        cloud: -1,
+        birds: -1,
+        slidePanelContent: 1,
+        island: 3,
+        copyright: 10,
+        cursor: 50
+);
+
+$island-width: (
+        about: 425px,
+        work: 635px,
+        contact: 400px
+);
+
+$work-width: 180px;
+$work-height-max: 245px;
+$work-height: 40vh;
+$overlay-height: 15vh;
+$overlay-padding: 20px;
+$work-active-width: 25vw;
+$work-active-height: 75vh;
+
+$elements: 15;
+$espacementBetweenElements: 4.2;
+$initialLeft: calc(#{$work-active-width} + 100px);

@@ -1,0 +1,165 @@
+@import "~mixins";
+
+#works {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    @include no-user-select();
+
+    &.app-enter-active {
+        .work {
+            @for $i from 1 to $elements {
+                &:nth-child(#{$i}) {
+                    transition: all .4s #{$i / 10}s $easeOutQuad;
+                }
+            }
+
+            &:nth-child(1) {
+                transition: all .4s $easeOutQuad;
+            }
+        }
+    }
+
+    &.app-enter {
+        .work {
+            opacity: 0;
+            transform: translateY(50%);
+        }
+    }
+
+    .backspace__button {
+        position: absolute;
+        top: 50px;
+        right: 50px;
+
+        .backspace__arrow {
+            height: 18px;
+            transition: all .4s $easeOutBack;
+        }
+
+        &:hover {
+            .backspace__arrow {
+                transform: translateX(-5px);
+            }
+        }
+    }
+
+    .activeWorkDescription {
+        position: absolute;
+        top: 25vh;
+        left: $initialLeft;
+        transition: all .4s $easeOutQuad;
+
+        @include media('<=mobile-l') {
+            display: none;
+        }
+
+        &.hide {
+            opacity: 0;
+            transition: all .2s $easeOutQuad;
+        }
+
+        .activeWorkDescription__title {
+            font-size: 60px;
+            font-weight: 600;
+            color: #393939;
+            letter-spacing: 6px;
+        }
+
+        .activeWorkDescription__text {
+            display: block;
+            margin-top: 20px;
+            max-width: 50vw;
+            width: 800px;
+            line-height: 1.2em;
+            font-size: 20px;
+            font-weight: 200;
+            text-transform: uppercase;
+        }
+
+        .activeWorkDescription__iconContainer {
+            margin-top: 50px;
+            opacity: 0;
+            animation: fadeIn 1s 3s $easeOutQuad forwards;
+
+            &.hide {
+                animation: fadeIn 1s $easeOutQuad reverse;
+            }
+
+            .activeWorkDescription__icon {
+                width: 20px;
+
+                &.hand {
+                    margin-left: 20px;
+                    margin-right: -10px;
+                    animation: dragHandHorizontal 2.5s $easeOutQuad infinite;
+                }
+
+                &.leftArrow {
+                    width: 15px;
+                    margin-left: 100px;
+                    animation: dragHandLeftArrow 2.5s 1.25s $easeOutQuad infinite;
+                }
+
+                &.rightArrow {
+                    width: 15px;
+                    animation: dragHandRightArrow 2.5s $easeOutQuad infinite;
+                }
+            }
+        }
+    }
+
+    .worksContainer {
+        height: 100%;
+    }
+
+    .work {
+        position: absolute;
+        bottom: 10%;
+        transition: all .4s $easeOutQuad;
+
+        @for $i from 0 to $elements {
+            &:nth-child(#{$i + 2}) {
+                $calc: #{$initialLeft} + ((#{$i} * (#{$espacementBetweenElements} * 50)) + px);
+                left: calc(#{$calc});
+            }
+        }
+
+        @include media('<=mobile-l') {
+            @for $i from 0 to $elements {
+                &:nth-child(#{$i + 1}) {
+                    $calc: 100px + ((#{$i} * (#{$espacementBetweenElements} * 50)) + px);
+                    top: calc(#{$calc});
+                    left: 5vw;
+                }
+            }
+        }
+
+        &.work--active {
+            z-index: 30;
+            left: 60px;
+            bottom: 5%;
+            transition: all .4s $easeOutQuad, bottom .2s;
+
+            &.work--fullscreen {
+                bottom: 20px;
+                transition: all .4s $easeOutQuad, bottom .2s .4s, height .2s .4s;
+            }
+        }
+
+        &.work-move {
+            z-index: 31;
+        }
+
+        &.work-leave-active {
+            opacity: 0;
+            transform: translate3d(-50%, 0, 0);
+            transition: opacity .3s $easeOutQuad, transform .4s $easeOutQuad;
+        }
+
+        &.work-enter-active {
+            opacity: 0;
+            transform: translate3d(150%, 0, 0);
+        }
+    }
+}

@@ -1,0 +1,37 @@
+@import "~mixins";
+
+.island {
+    width: get-island-width(work);
+    animation: upAndDownMoveCenter 17s infinite;
+
+    .island__littleIsland {
+        position: absolute;
+        top: -70px;
+        right: -20px;
+        animation: upAndDownMoveCenter 4s infinite;
+    }
+
+    .island__info::before {
+        border: 1px solid #408d39;
+        background-color: #408d39;
+    }
+
+    .island__svg {
+        pattern, image {
+            width: 1663px;
+            height: 636px;
+        }
+    }
+
+    @include media('>laptop', '<=laptop-l') {
+        width: get-island-width(work) / 1.2;
+    }
+
+    @include media('>tablet', '<=laptop') {
+        width: get-island-width(work) / 1.5;
+    }
+
+    @include media('>mobile-l', '<=tablet') {
+        width: get-island-width(work) / 2;
+    }
+}
