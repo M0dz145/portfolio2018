@@ -1,5 +1,5 @@
 <script lang="ts">
-    import MobileDetect from '@modules/responsive/MobileDetect';
+    import Responsive from '@modules/responsive/Responsive';
     import Component from "vue-class-component";
     import Vue from "vue";
     import Birds from "@components/common/birds/Birds";
@@ -13,18 +13,18 @@
             VCursor
         },
         data: () => ({
-            MobileDetect
+            Responsive
         }),
         mounted(): void {
             window.addEventListener('resize', () => {
-                if((this.actualDeviceIsPhone && !MobileDetect.phone()) || (!this.actualDeviceIsPhone && MobileDetect.phone())) {
+                if((this.actualDeviceIsPhone && !Responsive.isPhone()) || (!this.actualDeviceIsPhone && Responsive.isPhone())) {
                     location.reload();
                 }
             })
         }
     })
     export default class VApp extends Vue {
-        public actualDeviceIsPhone: boolean = !!MobileDetect.phone();
+        public actualDeviceIsPhone: boolean = !!Responsive.isPhone();
     }
 </script>
 
@@ -34,7 +34,7 @@
 
         <Birds/>
 
-        <div id="copyright" v-if="!MobileDetect.phone()">
+        <div id="copyright" v-if="!Responsive.isPhone()">
             <span class="copyright__text">© chevalier-xavier.fr</span>
         </div>
 
@@ -42,7 +42,7 @@
             <router-view class="applicationTransition"/>
         </transition>
 
-        <VCursor v-if="!MobileDetect.phone()"/>
+        <VCursor v-if="!Responsive.isPhone()"/>
     </div>
 </template>
 

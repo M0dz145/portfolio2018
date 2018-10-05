@@ -1,5 +1,5 @@
 import ScrollBooster, {scrollBoosterUpdate} from "scrollbooster";
-import MobileDetect from "@modules/responsive/MobileDetect";
+import Responsive from "@modules/responsive/Responsive";
 import Position2D from "@modules/position/Position2D";
 
 export default class HorizontalDraggable {
@@ -12,7 +12,7 @@ export default class HorizontalDraggable {
     constructor(viewport: Element, contentElement: HTMLElement) {
         this.contentElement = contentElement;
 
-        if (MobileDetect.phone()) {
+        if (Responsive.isPhone()) {
             this.setHeightOfContentElement();
         } else {
             this.setWidthOfContentElement();
@@ -24,7 +24,7 @@ export default class HorizontalDraggable {
             emulateScroll: false,
             onUpdate: (data: scrollBoosterUpdate) => {
                 if (!this.isPaused) {
-                    if (MobileDetect.phone()) {
+                    if (Responsive.isPhone()) {
                         this.contentElement.style.transform = `translateY(${-data.position.y}px)`;
                     } else {
                         this.contentElement.style.transform = `translateX(${-data.position.x}px)`;
@@ -57,7 +57,7 @@ export default class HorizontalDraggable {
         }
 
         let position: Position2D;
-        if (MobileDetect.phone()) {
+        if (Responsive.isPhone()) {
             position = new Position2D(0, this.scrollBooster.getUpdate().position.y + scrollAmount);
         } else {
             position = new Position2D(this.scrollBooster.getUpdate().position.x + scrollAmount, 0);

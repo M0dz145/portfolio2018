@@ -1,5 +1,5 @@
 <script lang="ts">
-    import MobileDetect from '@modules/responsive/MobileDetect';
+    import Responsive from '@modules/responsive/Responsive';
     import VAboutIsland from '@components/about/VAboutIsland.vue';
     import VHomeMobile from '@components/home/VHomeMobile.vue';
     import VWorkIsland from '@components/works/VWorkIsland.vue';
@@ -18,7 +18,7 @@
             VHomeMobile
         },
         mounted(): void {
-            if (!MobileDetect.phone()) {
+            if (!Responsive.isPhone()) {
                 this.parallaxInstance = new Parallax(this.$refs.parallaxContainer, {
                     pointerEvents: true
                 });
@@ -31,7 +31,7 @@
                 cloud5 = require('@img/lowCloud5.png');
 
             return {
-                MobileDetect,
+                Responsive,
                 clouds: [
                     {
                         // 1
@@ -83,7 +83,7 @@
 </script>
 
 <template>
-    <VHomeMobile v-if="MobileDetect.phone()"/>
+    <VHomeMobile v-if="Responsive.isPhone()"/>
 
     <div v-else
          id="parallax__container"

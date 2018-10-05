@@ -1,6 +1,5 @@
 <script lang="ts">
     import imageUrl from '@img/aboutIsland.jpg';
-    import MobileDetect from '@modules/responsive/MobileDetect';
     import Component from "vue-class-component";
     import Vue from 'vue';
 
@@ -15,7 +14,6 @@
             };
 
             return {
-                MobileDetect,
                 imageUrl,
                 svgProperties,
                 svgViewBox: `0 0 ${svgProperties.width} ${svgProperties.height}`,

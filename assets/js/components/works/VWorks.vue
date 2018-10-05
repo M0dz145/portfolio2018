@@ -12,9 +12,14 @@
     import {scrollBoosterUpdate} from 'scrollbooster'
     import WorksList from './WorksList';
     import HorizontalDraggable from '@modules/view/HorizontalDraggable';
-    import MobileDetect from "@modules/responsive/MobileDetect";
+    import Responsive from "@modules/responsive/Responsive";
 
     @Component({
+        data() {
+            return {
+                Responsive
+            }
+        },
         components: {
             VImage,
             VWork,
@@ -22,11 +27,9 @@
             dragImage
         },
         mounted(): void {
-            // this.snapBackLink = new Snap(this.$refs.backLink.$el);
-
             this.horizontalDraggable = new HorizontalDraggable(document.getElementById('works'), this.$refs.draggableContainer.$el);
 
-            if (!MobileDetect.phone()) {
+            if (!Responsive.isPhone()) {
                 this.horizontalDraggable.onUpdate((data: scrollBoosterUpdate) => {
                     if (this.$refs.activeWorkDescription) {
                         if (data.position.x < -40 || data.position.x > 60) {
@@ -41,7 +44,6 @@
         },
         beforeDestroy(): void {
             this.horizontalDraggable.destroy();
-            // this.snapBackLink.destroy();
         }
     })
     export default class VWorks extends Vue {
@@ -49,9 +51,7 @@
         public workActive: Work = new Collection(this.works).first();
         private removedWorks: Array<Work> = [];
         private horizontalDraggable: HorizontalDraggable;
-        // private snapBackLink: Snap;
         public showHandDragHelper: boolean = true;
-        public MobileDetect: MobileDetect = MobileDetect;
 
         public selectActiveWork(work: Work): void {
             this.workActive = work;
@@ -67,7 +67,7 @@
                 return;
             }
 
-            if (this.MobileDetect.phone()) {
+            if (Responsive.isPhone()) {
                 this.toggleFullscreenMode(work);
 
                 // Close all other works fullscreen
@@ -134,7 +134,7 @@
                    :data-index="work.id"
                    @click.native="onWorkClick(work)"
                    :class="{
-                       'work--active': workActive.id === work.id && !MobileDetect.phone()
+                       'work--active': workActive.id === work.id && !Responsive.isPhone()
                    }"
                    :fullscreen="work.fullscreen"
                    :key="work.id"

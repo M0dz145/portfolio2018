@@ -2,7 +2,7 @@ import Vue from "vue";
 import BirdsProvider from "@modules/bird/BirdsProvider";
 import Component from "vue-class-component";
 import './Birds.scss'
-import MobileDetect from "@modules/responsive/MobileDetect";
+import Responsive from "@modules/responsive/Responsive";
 
 @Component({
     template: `<div id="birds" ref="birds"></div>`,
@@ -12,6 +12,6 @@ import MobileDetect from "@modules/responsive/MobileDetect";
 })
 export default class Birds extends Vue {
     public getBirdsNumber(): number {
-        return MobileDetect.phone() ? 3 : 9;
+        return Responsive.isPhone() ? 3 : 9;
     }
 }

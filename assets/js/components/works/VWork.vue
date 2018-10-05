@@ -2,7 +2,7 @@
     import VImage from '@components/common/image/VImage';
     import Component from "vue-class-component";
     import Vue from 'vue';
-    import MobileDetect from "../../modules/responsive/MobileDetect";
+    import Responsive from "../../modules/responsive/Responsive";
 
     @Component({
         props: {
@@ -19,7 +19,7 @@
             this.buildBackgroundImages();
 
             document.addEventListener('mousemove', (event: MouseEvent) => {
-                if (!MobileDetect.phone()) {
+                if (!Responsive.isPhone()) {
                     if (this.fullscreen) {
                         let backgroundPositionX = ((event.clientX - this.$refs.work.offsetLeft) / this.$refs.work.offsetWidth) * 100,
                             backgroundPositionY = ((event.clientY - this.$refs.work.offsetTop) / this.$refs.work.offsetHeight) * 100;
@@ -49,7 +49,7 @@
     })
     export default class VWork extends Vue {
         public backgroundImage: string = '';
-        public readonly MobileDetect: MobileDetect = MobileDetect;
+        public readonly Responsive = Responsive;
 
         public buildBackgroundImages(): void {
             // noinspection TypeScriptUnresolvedVariable
@@ -75,7 +75,7 @@
         <div class="workOverlay">
             <div class="work__overlay">
                 <span class="work__text">
-                    <span v-if="!(fullscreen && MobileDetect.phone()) || (fullscreen && !description)" class="work__textCategory">{{ category }}</span>
+                    <span v-if="!(fullscreen && Responsive.isPhone()) || (fullscreen && !description)" class="work__textCategory">{{ category }}</span>
                     <span v-if="fullscreen" class="work__textDescription"> {{ description }}</span>
                 </span>
             </div>
