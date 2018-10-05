@@ -12,6 +12,7 @@
 /.idea
 /.env
 
+/deploy.sh
 /.htaccess
 
 /public/**/*
