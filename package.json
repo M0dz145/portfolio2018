@@ -16,7 +16,7 @@
     "@types/three": "^0.92.23",
     "@types/webpack": "^4.4.12",
     "@types/webpack-env": "^1.13.6",
-    "webpack-dev-server": "^3.1.1"
+    "webpack-dev-server": "^3.1.11"
   },
   "dependencies": {
     "@kickoff/utils.scss": "^3.0.2",
