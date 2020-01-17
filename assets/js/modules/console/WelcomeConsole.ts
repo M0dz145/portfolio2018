@@ -1,6 +1,6 @@
 export default class WelcomeConsole {
     private styles: Array<string> = [];
-    private message: string = `ヾ(-_- )ゞ I feel that you are a developer...\nIf you have any questions about the creation of this site, you can contact me at the following address webmaster@chevalier-xavier.fr`;
+    private message: string = `ヾ(-_- )ゞ I feel that you are a developer...\nIf you have any questions about the creation of this site, you can contact me at the following address contact@xavierchevalier.com`;
 
     constructor() {
         this.styles['font-size'] = '18px';

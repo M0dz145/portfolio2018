@@ -35,7 +35,7 @@
         <Birds/>
 
         <div id="copyright" v-if="!Responsive.isPhone()">
-            <span class="copyright__text">© chevalier-xavier.fr</span>
+            <span class="copyright__text">© xavierchevalier.com</span>
         </div>
 
         <transition name="app" mode="out-in" appear>
