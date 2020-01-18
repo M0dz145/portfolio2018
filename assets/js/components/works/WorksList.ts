@@ -1,79 +1,77 @@
 import Work from "@modules/work/Work";
+import Translation from "@modules/translation/Translation";
 
 export default [
     new Work(
-        'Lowpoly Portrait',
-        'Art',
-        `My personal portrait in lowpoly created in Photoshop.`,
+        Translation.t('works.contents.portrait.title') as string,
+        Translation.t('works.categories.art') as string,
+        Translation.t('works.contents.portrait.description') as string,
         require('@img/works/paint/lowpoly_me.jpg?placeholder=true&sizes[]=200,sizes[]=1200')
     ),
     new Work(
-        'Elkyos',
-        'Visual redesign',
-        `Elkyos is an MMORPG project based on a fantastic medieval universe with a slight touch of steampunk.`,
+        Translation.t('works.contents.elkyos.title') as string,
+        Translation.t('works.categories.visualRework') as string,
+        Translation.t('works.contents.elkyos.description') as string,
         require('@img/works/elkyos2.jpg?placeholder=true&sizes[]=200,sizes[]=1200')
     ),
     new Work(
-        'Nicolas Chevalier',
-        'Portfolio',
-        `Portfolio of Nicolas Chevalier, a young application developer, but also my older brother.
-            With his ideas, and my desire for a clear/pure design, I was able to develop the graphic aspect of the site.`,
+        Translation.t('works.contents.nicolas.title') as string,
+        Translation.t('works.categories.portfolio') as string,
+        Translation.t('works.contents.nicolas.description') as string,
         require('@img/works/nicolasChevalier2.jpg?placeholder=true&sizes[]=200,sizes[]=1200')
     ),
     new Work(
-        'Immobilis',
-        'Commercial website',
-        `Immobilis is a project designed by 3 people in the school year of high school.
-            This site lists all real estate ads previously created by apartment / house owners.`,
+        Translation.t('works.contents.immobilis.title') as string,
+        Translation.t('works.categories.ecommerce') as string,
+        Translation.t('works.contents.immobilis.description') as string,
         require('@img/works/immobilis2.jpg?placeholder=true&sizes[]=200,sizes[]=1200')
     ),
     new Work(
-        'Lowpoly Lion',
-        'Art',
-        `A lion in lowpoly created in Photoshop.`,
+        Translation.t('works.contents.lion.title') as string,
+        Translation.t('works.categories.art') as string,
+        Translation.t('works.contents.lion.description') as string,
         require('@img/works/paint/lowpoly_lion.jpg?placeholder=true&sizes[]=200,sizes[]=1200')
     ),
     new Work(
-        'Deer',
-        'Art',
-        `Unfinished drawing of a deer on a hill, hand drawn.`,
+        Translation.t('works.contents.deer1.title') as string,
+        Translation.t('works.categories.art') as string,
+        Translation.t('works.contents.deer1.description') as string,
         require('@img/works/paint/cerf1.jpg?placeholder=true&sizes[]=200,sizes[]=1200')
     ),
     new Work(
-        'Deer',
-        'Art',
-        `Drawing of a deer, hand drawn.`,
+        Translation.t('works.contents.deer2.title') as string,
+        Translation.t('works.categories.art') as string,
+        Translation.t('works.contents.deer2.description') as string,
         require('@img/works/paint/cerf2.jpg?placeholder=true&sizes[]=200,sizes[]=1200')
     ),
     new Work(
-        'Eye',
-        'Art',
-        `Unfinished drawing of a deer on a hill, hand drawn.`,
+        Translation.t('works.contents.eye.title') as string,
+        Translation.t('works.categories.art') as string,
+        Translation.t('works.contents.eye.description') as string,
         require('@img/works/paint/eye.jpg?placeholder=true&sizes[]=200,sizes[]=1200')
     ),
     new Work(
-        'Berry Banks',
-        'Application website',
-        `Berry Banks is a tool that allows you to easily manage your bank
-            accounts thanks to numerous features and statistics that provide a broad overview of your expenses and savings.`,
+        Translation.t('works.contents.berrybanks.title') as string,
+        Translation.t('works.categories.application') as string,
+        Translation.t('works.contents.berrybanks.description') as string,
         require('@img/works/berry-banks.png')
     ),
     new Work(
-        'Fox',
-        'Art',
-        `Digital painting of a fox on Photoshop.`,
+        Translation.t('works.contents.fox.title') as string,
+        Translation.t('works.categories.art') as string,
+        Translation.t('works.contents.fox.description') as string,
         require('@img/works/paint/fox.jpg?placeholder=true&sizes[]=200,sizes[]=1200')
     ),
     new Work(
-        'Deer',
-        'Art',
-        ``,
+        Translation.t('works.contents.deer3.title') as string,
+        Translation.t('works.categories.art') as string,
+        Translation.t('works.contents.deer3.description') as string,
         require('@img/works/paint/cerf3.jpg?placeholder=true&sizes[]=200,sizes[]=1200')
     ),
     new Work(
-        'Deer',
-        'Art',
-        ``,
+        Translation.t('works.contents.deer4.title') as string,
+        Translation.t('works.categories.art') as string,
+        Translation.t('works.contents.deer4.description') as string,
         require('@img/works/paint/cerf4.jpg?placeholder=true&sizes[]=200,sizes[]=1200')
     ),
 ];

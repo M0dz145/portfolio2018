@@ -1,6 +1,8 @@
+import Translation from "@modules/translation/Translation";
+
 export default class WelcomeConsole {
     private styles: Array<string> = [];
-    private message: string = `ヾ(-_- )ゞ I feel that you are a developer...\nIf you have any questions about the creation of this site, you can contact me at the following address contact@xavierchevalier.com`;
+    private message: string = Translation.t('console.welcome') as string;
 
     constructor() {
         this.styles['font-size'] = '18px';

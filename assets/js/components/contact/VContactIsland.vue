@@ -49,16 +49,16 @@
 <template>
     <div class="island" :class="{'hover': hover, 'active': active}">
         <div class="island__section">
-            <h2>Contact me</h2>
-            <p>A site project in mind, and you want to make it a reality?</p>
+            <h2>{{ $t('contact.title') }}</h2>
+            <p>{{ $t('contact.punchline') }}</p>
             <p>
-                You can contact me at the following address
+                {{ $t('contact.contact') }}
                 <a data-clickable href="mailto:contact@xavierchevalier.com">contact@xavierchevalier.com</a>
             </p>
         </div>
 
         <div class="island__info">
-            <span class="island__info__text">Contact me</span>
+            <span class="island__info__text">{{ $t('contact.title') }}</span>
         </div>
         <svg class="island__svg" xmlns="http://www.w3.org/2000/svg"
              x="0px" y="0px" :viewBox="svgViewBox"

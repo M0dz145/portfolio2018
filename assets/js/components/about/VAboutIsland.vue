@@ -50,18 +50,16 @@
 <template>
     <div class="island" :class="{'hover': hover, 'active': active}">
         <div class="island__section">
-            <h2>About me</h2>
+            <h2>{{ $t('about.title') }}</h2>
+            <p>{{ $t('about.presentation', {birth}) }}</p>
             <p>
-                My name is Xavier Chevalier, a young web developer of {{ birth }} years old.
-               I have been developing applications, interfaces and websites for several years now...
-            </p>
-            <p>
-                If you have any questions or suggestions about this site and its creation you can of course contact me :)
+                {{ $t('about.contact') }}
+                <a data-clickable href="mailto:contact@xavierchevalier.com">contact@xavierchevalier.com</a>
             </p>
         </div>
 
         <div class="island__info">
-            <span class="island__info__text">About me</span>
+            <span class="island__info__text">{{ $t('about.title') }}</span>
         </div>
         <svg class="island__svg" xmlns="http://www.w3.org/2000/svg"
              x="0px" y="0px" :viewBox="svgViewBox"

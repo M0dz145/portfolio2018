@@ -1,9 +1,8 @@
-const webpack                  = require('webpack'),
-      path                     = require('path'),
-      multi                    = require('multi-loader'),
-      loaders                  = require('./webpack/loaders'),
-      fs                       = require('fs'),
-      ServiceWorkerCachePlugin = require('./webpack/ServiceWorkerCachePlugin');
+const webpack = require('webpack'),
+    path = require('path'),
+    multi = require('multi-loader'),
+    loaders = require('./webpack/loaders'),
+    ServiceWorkerCachePlugin = require('./webpack/ServiceWorkerCachePlugin');
 
 module.exports = {
     entry: {
@@ -153,5 +152,8 @@ module.exports = {
             'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
         }),
         ServiceWorkerCachePlugin
-    ]
+    ],
+    node: {
+        fs: 'empty',
+    },
 };

@@ -14,8 +14,7 @@ export default class RoundCursor {
     );
     private animationSpeed: number = 3;
     private hovered: boolean = false;
-    // By default, the cursor is hidden because we don't know where is it
-    private hide: boolean = true;
+    private hide: boolean = false;
     private readonly hoveredClass = 'hover';
     private readonly hideClass = 'hide';
 

@@ -47,7 +47,7 @@
 <template>
     <div class="island" :class="{'hover': hover}">
         <div class="island__info">
-            <span class="island__info__text">My projects</span>
+            <span class="island__info__text">{{ $t('works.title') }}</span>
         </div>
 
         <VImage class="island__littleIsland" :src="littleIslandImage.src"

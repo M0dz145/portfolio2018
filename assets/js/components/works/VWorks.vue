@@ -151,7 +151,7 @@
                      data-clickable
                      class="backspace__button">
             <backspaceImage class="backspace__arrow"/>
-            Back
+            {{ $t('navigation.back') }}
         </router-link>
     </div>
 </template>
